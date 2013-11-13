@@ -9,10 +9,26 @@
 #import "XYZAddToDoItemViewController.h"
 
 @interface XYZAddToDoItemViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
 @implementation XYZAddToDoItemViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    /* If the done button wasn't pressed, then just skip straight
+     to the unwind function */
+    if (sender != self.doneButton) return;
+    
+    /* Otherwise, get the text in the text field */
+    if (self.textField.text.length > 0) {
+        self.toDoItem = [[XYZToDoItem alloc] init];
+        self.toDoItem.itemName = self.textField.text;
+        self.toDoItem.completed = NO;
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
