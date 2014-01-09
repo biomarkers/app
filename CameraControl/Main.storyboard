@@ -33,23 +33,23 @@
                                     </barButtonItem>
                                     <barButtonItem systemItem="camera" id="a3r-gt-wdp">
                                         <connections>
-                                            <action selector="takePicture:" destination="oTE-aX-RgC" id="NEE-WQ-w0H"/>
+                                            <action selector="actionStart:" destination="oTE-aX-RgC" id="pRh-gk-z79"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <view contentMode="scaleToFill" id="XgK-9w-joK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4qk-ue-c7i">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="button" destination="a3r-gt-wdp" id="5z8-DR-ki5"/>
                         <outlet property="expButton" destination="IIC-nK-h68" id="iJE-Bq-EPL"/>
                         <outlet property="focButton" destination="jlt-1c-MNU" id="N6A-95-Hyy"/>
-                        <outlet property="previewView" destination="XgK-9w-joK" id="HMf-O5-D7l"/>
+                        <outlet property="imageView" destination="4qk-ue-c7i" id="6sL-We-LNt"/>
                         <outlet property="wbButton" destination="YBe-Hv-cz7" id="VSM-3M-tjk"/>
                     </connections>
                 </viewController>
