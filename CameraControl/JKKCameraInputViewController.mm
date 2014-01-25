@@ -41,7 +41,7 @@
     self.expButton.tintColor = [UIColor blueColor];
     self.focButton.tintColor = [UIColor blueColor];
     
-    self.videoCamera = [[CvVideoCamera alloc] initWithParentView:_imageView];
+    self.videoCamera = [[JKKCvVideoCamera alloc] initWithParentView:_imageView];
     self.videoCamera.delegate = self;
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
@@ -78,7 +78,7 @@
 }
 
 - (IBAction)wbPress:(id)sender {
-    [self.captureManager toggleAutoWB];
+    [self.videoCamera toggleWhiteBalance];
     
     if (self.wbButton.tintColor != [UIColor redColor])
         self.wbButton.tintColor = [UIColor redColor];
@@ -88,7 +88,7 @@
 }
 
 - (IBAction)expPress:(id)sender {
-    [self.captureManager toggleAutoExposure];
+    [self.videoCamera toggleExposure];
     
     if (self.expButton.tintColor != [UIColor redColor])
         self.expButton.tintColor = [UIColor redColor];
@@ -98,7 +98,7 @@
 }
 
 - (IBAction)focPress:(id)sender {
-    [self.captureManager toggleAutoFocus];
+    [self.videoCamera toggleFocus];
     
     if (self.focButton.tintColor != [UIColor redColor])
         self.focButton.tintColor = [UIColor redColor];
@@ -123,14 +123,28 @@
 #ifdef __cplusplus
 - (void)processImage:(Mat&)image;
 {
-    // Do some OpenCV stuff with the image
-    // Do some OpenCV stuff with the image
-    Mat image_copy;
-    cvtColor(image, image_copy, CV_BGRA2BGR);
+    dispatch_sync( dispatch_get_main_queue(),
+                  ^{
+                      /*
+                      // Do some OpenCV stuff with the image
+                      Mat image_copy;
+                      cvtColor(image, image_copy, CV_BGRA2BGR);
     
-    // invert image
-    bitwise_not(image_copy, image_copy);
-    cvtColor(image_copy, image, CV_BGR2BGRA);
+                      // invert image
+                      bitwise_not(image_copy, image_copy);
+                      cvtColor(image_copy, image, CV_BGR2BGRA);
+                    */
+                      cv::Scalar rgb = self.processor.process(image);
+                      std::stringstream ss;
+                      
+                      ss << rgb;
+                      
+                      UIColor *newColor = [UIColor colorWithRed:rgb[2]/255.0 green:rgb[1]/255.0 blue:rgb[0]/255.0 alpha:rgb[3]/255.0];
+                    
+                      self.colorLabel.textColor = newColor;
+                      self.colorLabel.text = [NSString stringWithCString:ss.str().c_str()];
+                    });
 }
+
 #endif
 @end

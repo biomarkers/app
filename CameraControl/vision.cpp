@@ -1,7 +1,8 @@
-#include <cstdio>
 #include <iostream>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+
+#include "vision.hpp"
 
 #define DEBUG_MODE
 #define FRAME_SKIP 10
@@ -9,24 +10,19 @@
 #define HOUGH_HIGH 218
 #define HOUGH_LOW 100
 
-/*
- * Skip n frames returning the n+1 frame. Returns NULL if no frames are
- * available.
- */
-bool skipNFrames(cv::VideoCapture capture, int n, cv::Mat *image) {
-  for(int i = 0; i < n + 1; i++) {
-    if(!capture.read(*image)) {
-      return false;
-    }
-  }
+cv::Scalar BiomarkerImageProcessor::process(cv::Mat frame) {
+  cv::Vec3f sampleCircle = this->findSampleCircle(frame);
+  cv::Scalar sample = this->sampleSlide(frame, sampleCircle);
 
-  return true;
+  samples.push_back(sample);
+
+  return sample;
 }
 
 /*
  * Find the circle containing the assay.
  */
-cv::Vec3f findSampleCircle(cv::Mat frame) {
+cv::Vec3f BiomarkerImageProcessor::findSampleCircle(cv::Mat frame) {
   cv::Mat frame_gray;
   cv::cvtColor(frame, frame_gray, CV_BGR2GRAY);
 
@@ -55,14 +51,14 @@ cv::Vec3f findSampleCircle(cv::Mat frame) {
  * Take a color average of a slide, masking out the area we are not interested
  * in.
  */
-cv::Scalar sampleSlide(cv::Mat frame, cv::Vec3f sampleCircle) {
-  cv::Mat roi(frame.size(), CV_8U);
+cv::Scalar BiomarkerImageProcessor::sampleSlide(cv::Mat frame, cv::Vec3f sampleCircle) {
+  cv::Mat roi(frame.size(), CV_8U, cv::Scalar(0));
   cv::Point center(cvRound(sampleCircle[0]), cvRound(sampleCircle[1]));
 
-  cv::Scalar avg = cv::mean(frame, roi);
-
   int radius = cvRound(sampleCircle[2]);
-  cv::circle(roi, center, radius, cv::Scalar(255), -1, 8, 0);
+  cv::circle(roi, center, radius, cv::Scalar(1), -1, 8, 0);
+
+  cv::Scalar avg = cv::mean(frame, roi);
 
 #ifdef DEBUG_MODE
   cv::circle(frame, center, radius, cv::Scalar(255, 0, 0), 1, 8, 0);
@@ -72,36 +68,43 @@ cv::Scalar sampleSlide(cv::Mat frame, cv::Vec3f sampleCircle) {
 }
 
 /*
+ * Skip n frames returning the n+1 frame. Returns NULL if no frames are
+ * available.
+ */
+bool skipNFrames(cv::VideoCapture capture, int n, cv::Mat *image) {
+  for(int i = 0; i < n + 1; i++) {
+    if(!capture.read(*image)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/*
 int main(int argc, char **argv) {
   if(argc < 2) {
     std::cerr << "Usage: " << argv[0] << " [file_name]" << std::endl;
     return 0;
   }
 
-  cv::namedWindow("img_win", CV_WINDOW_AUTOSIZE);
+  BiomarkerImageProcessor processor;
 
+  cv::namedWindow("img_win", CV_WINDOW_AUTOSIZE);
   cv::VideoCapture cap(argv[1]);
 
-  std::vector<cv::Scalar> avgs;
-
   cv::Mat frame;
+  skipNFrames(cap, 8730, &frame);
   while(true) {
     bool got_frame = skipNFrames(cap, FRAME_SKIP, &frame);
 
     if(got_frame) {
-      cv::Vec3f sampleCircle = findSampleCircle(frame);
-      cv::Scalar avg = sampleSlide(frame, sampleCircle);
-
-      avgs.push_back(avg);
-
-#ifdef DEBUG_MODE
-      double sec = cap.get(CV_CAP_PROP_POS_MSEC) / 1000;
-      printf("%f,%f,%f,%f\n", sec, avg.val[0], avg.val[1], avg.val[2]);
-#endif
+      cv::Scalar sample = processor.process(frame);
+      std::cout << sample << std::endl;
 
       cv::imshow("img_win", frame);
     } else {
-      fprintf(stderr, "No frame...\n");
+      std::cerr << "No frame..." << std::endl;
       break;
     }
 
