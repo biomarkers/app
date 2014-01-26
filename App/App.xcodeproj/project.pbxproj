@@ -20,14 +20,9 @@
 		0A503B8A18909C7C009BF78F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A503B8818909C7C009BF78F /* InfoPlist.strings */; };
 		0A503B8C18909C7C009BF78F /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A503B8B18909C7C009BF78F /* AppTests.m */; };
 		0A503BBC18909F95009BF78F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0A503BAC18909F95009BF78F /* .gitignore */; };
-		0A503BBD18909F95009BF78F /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB218909F95009BF78F /* Makefile */; };
 		0A503BBE18909F95009BF78F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0A503BB318909F95009BF78F /* README.md */; };
 		0A503BBF18909F95009BF78F /* plot.py in Resources */ = {isa = PBXBuildFile; fileRef = 0A503BB518909F95009BF78F /* plot.py */; };
 		0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */; };
-		0A503BC118909F95009BF78F /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
-		0A503BC218909F95009BF78F /* regression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB918909F95009BF78F /* regression.cpp */; };
-		0A503BC318909F95009BF78F /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; };
-		0A503BC418909F95009BF78F /* RegressionModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBB18909F95009BF78F /* RegressionModel.cpp */; };
 		0A503BC61890A2A8009BF78F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC51890A2A8009BF78F /* opencv2.framework */; };
 		0A503BC81890A402009BF78F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC71890A402009BF78F /* Accelerate.framework */; };
 		0A503BCF1890A43D009BF78F /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC91890A43D009BF78F /* AssetsLibrary.framework */; };
@@ -36,6 +31,10 @@
 		0A503BD21890A43D009BF78F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCC1890A43D009BF78F /* CoreMedia.framework */; };
 		0A503BD31890A43D009BF78F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCD1890A43D009BF78F /* CoreVideo.framework */; };
 		0A503BD41890A43D009BF78F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCE1890A43D009BF78F /* QuartzCore.framework */; };
+		0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9CC7DE1894897E0035959E /* Main.storyboard */; };
+		0A9CC7E21894919D0035959E /* JKKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E11894919D0035959E /* JKKHomeViewController.m */; };
+		0A9CC7E5189576560035959E /* JKKResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E4189576560035959E /* JKKResult.m */; };
+		0A9CC7EB189577530035959E /* JKKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7EA189577530035959E /* JKKTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +85,13 @@
 		0A503BCC1890A43D009BF78F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0A503BCD1890A43D009BF78F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0A503BCE1890A43D009BF78F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0A9CC7DE1894897E0035959E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		0A9CC7E01894919D0035959E /* JKKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKHomeViewController.h; sourceTree = "<group>"; };
+		0A9CC7E11894919D0035959E /* JKKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKHomeViewController.m; sourceTree = "<group>"; };
+		0A9CC7E3189576560035959E /* JKKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResult.h; sourceTree = "<group>"; };
+		0A9CC7E4189576560035959E /* JKKResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKResult.m; sourceTree = "<group>"; };
+		0A9CC7E9189577530035959E /* JKKTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTest.h; sourceTree = "<group>"; };
+		0A9CC7EA189577530035959E /* JKKTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,9 +129,10 @@
 		0A503B5A18909C7C009BF78F = {
 			isa = PBXGroup;
 			children = (
-				0A503BAB18909F95009BF78F /* vision */,
+				0A9CC7DE1894897E0035959E /* Main.storyboard */,
 				0A503B6C18909C7C009BF78F /* App */,
 				0A503B8518909C7C009BF78F /* AppTests */,
+				0A503BAB18909F95009BF78F /* vision */,
 				0A503B6518909C7C009BF78F /* Frameworks */,
 				0A503B6418909C7C009BF78F /* Products */,
 			);
@@ -164,8 +171,10 @@
 			children = (
 				0A503B7518909C7C009BF78F /* JKKAppDelegate.h */,
 				0A503B7618909C7C009BF78F /* JKKAppDelegate.mm */,
-				0A503B7818909C7C009BF78F /* Images.xcassets */,
+				0A9CC7E8189576B30035959E /* Controllers */,
+				0A9CC7E7189576A80035959E /* Models */,
 				0A503B6D18909C7C009BF78F /* Supporting Files */,
+				0A503B7818909C7C009BF78F /* Images.xcassets */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -242,6 +251,26 @@
 				0A503BBB18909F95009BF78F /* RegressionModel.cpp */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		0A9CC7E7189576A80035959E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0A9CC7E3189576560035959E /* JKKResult.h */,
+				0A9CC7E4189576560035959E /* JKKResult.m */,
+				0A9CC7E9189577530035959E /* JKKTest.h */,
+				0A9CC7EA189577530035959E /* JKKTest.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0A9CC7E8189576B30035959E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A9CC7E01894919D0035959E /* JKKHomeViewController.h */,
+				0A9CC7E11894919D0035959E /* JKKHomeViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +355,7 @@
 				0A503B7118909C7C009BF78F /* InfoPlist.strings in Resources */,
 				0A503BBC18909F95009BF78F /* .gitignore in Resources */,
 				0A503BBE18909F95009BF78F /* README.md in Resources */,
+				0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */,
 				0A503BBF18909F95009BF78F /* plot.py in Resources */,
 				0A503B7918909C7C009BF78F /* Images.xcassets in Resources */,
 			);
@@ -346,13 +376,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A503BC318909F95009BF78F /* RegressionFactory.cpp in Sources */,
-				0A503BBD18909F95009BF78F /* Makefile in Sources */,
-				0A503BC118909F95009BF78F /* ModelComponent.cpp in Sources */,
 				0A503B7318909C7C009BF78F /* main.m in Sources */,
+				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
+				0A9CC7EB189577530035959E /* JKKTest.m in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,
-				0A503BC218909F95009BF78F /* regression.cpp in Sources */,
-				0A503BC418909F95009BF78F /* RegressionModel.cpp in Sources */,
+				0A9CC7E21894919D0035959E /* JKKHomeViewController.m in Sources */,
 				0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -564,6 +592,7 @@
 				0A503B9118909C7C009BF78F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A503B9218909C7C009BF78F /* Build configuration list for PBXNativeTarget "AppTests" */ = {
 			isa = XCConfigurationList;
@@ -572,6 +601,7 @@
 				0A503B9418909C7C009BF78F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
