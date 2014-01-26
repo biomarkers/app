@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "JKKResultsViewController.h"
+
+#import "JKKResult.h"
+#import "JKKTest.h"
+
 @interface JKKHomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 /* hessk: consider making these weak connections - does this cause strong reference loop? */

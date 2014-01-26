@@ -35,6 +35,7 @@
 		0A9CC7E21894919D0035959E /* JKKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E11894919D0035959E /* JKKHomeViewController.m */; };
 		0A9CC7E5189576560035959E /* JKKResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E4189576560035959E /* JKKResult.m */; };
 		0A9CC7EB189577530035959E /* JKKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7EA189577530035959E /* JKKTest.m */; };
+		0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		0A9CC7E4189576560035959E /* JKKResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKResult.m; sourceTree = "<group>"; };
 		0A9CC7E9189577530035959E /* JKKTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTest.h; sourceTree = "<group>"; };
 		0A9CC7EA189577530035959E /* JKKTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKTest.m; sourceTree = "<group>"; };
+		0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResultsViewController.h; sourceTree = "<group>"; };
+		0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKResultsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +272,8 @@
 			children = (
 				0A9CC7E01894919D0035959E /* JKKHomeViewController.h */,
 				0A9CC7E11894919D0035959E /* JKKHomeViewController.m */,
+				0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */,
+				0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */,
 				0A503B7318909C7C009BF78F /* main.m in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
 				0A9CC7EB189577530035959E /* JKKTest.m in Sources */,

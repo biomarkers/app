@@ -14,6 +14,9 @@
 @property JKKTest* test;
 @property NSDate* date;
 
+// hessk: placeholder member
+@property NSNumber* value;
+
 // hessk: TODO: continue adding result properties here
 
 - (id)initWithTest:(JKKTest *)test;

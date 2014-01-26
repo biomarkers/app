@@ -7,8 +7,6 @@
 //
 
 #import "JKKHomeViewController.h"
-#import "JKKResult.h"
-#import "JKKTest.h"
 
 @interface JKKHomeViewController ()
 
@@ -46,6 +44,7 @@
     
     JKKTest* test1 = [[JKKTest alloc] initWithName:@"Glucose test"];
     JKKResult* result1 = [[JKKResult alloc] initWithTest:test1];
+    result1.value = @42;
     
     [self.testItems addObject:test1];
     [self.historyItems addObject:result1];
@@ -106,10 +105,17 @@
     } else if (tableView == self.historyTable) {
 
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@" mm/dd/yyyy"];
+        [formatter setDateFormat:@"mm/dd/yyyy"];
         
         JKKResult* historyItem = [self.historyItems objectAtIndex:indexPath.row];
-        cell.textLabel.text = [historyItem.test.name stringByAppendingString:[formatter stringFromDate:historyItem.date]];
+        
+        // hessk: Get references to the prototype cells subviews by their tags (defined in IB)
+        // But using literals like this is awkward. Consider alternatives.
+        UILabel* title = (UILabel *)[cell.contentView viewWithTag:10];
+        UILabel* subtitle = (UILabel *)[cell.contentView viewWithTag:11];
+        
+        title.text = historyItem.test.name;
+        subtitle.text = [formatter stringFromDate:historyItem.date];
 
     } else {
         //error
@@ -131,6 +137,19 @@
 
     }
     
+}
+
+/* hessk: this method overrides the UIViewController implementation, which does nothing.
+    This is called whenever the view controller 'segues'. */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showResults"]) {
+        
+        NSIndexPath* selectedHistoryItemPath = [self.historyTable indexPathForSelectedRow];
+        JKKResult* selectedResult = [self.historyItems objectAtIndex:selectedHistoryItemPath.row];
+        
+        [[segue destinationViewController] setResult:selectedResult];
+    }
 }
 
 @end
