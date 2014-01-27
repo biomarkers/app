@@ -7,6 +7,7 @@
 //
 
 #import "JKKHomeViewController.h"
+#import "JKKTestViewController.h"
 
 @interface JKKHomeViewController ()
 
@@ -127,7 +128,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // hessk: row was selected - do something here
+    // hessk: row was selected - do something here?
     
     if (tableView == self.testsTable) {
 
@@ -144,12 +145,37 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showResults"]) {
-        
+        // hessk: pass on the selected history item to the history view controller instance
         NSIndexPath* selectedHistoryItemPath = [self.historyTable indexPathForSelectedRow];
         JKKResult* selectedResult = [self.historyItems objectAtIndex:selectedHistoryItemPath.row];
         
         [[segue destinationViewController] setResult:selectedResult];
+        
+    } else if ([[segue identifier] isEqualToString:@"showTest"]) {
+        // hessk: pass on the selected test to the test view controller instance
+        NSIndexPath* selectedTestItemPath = [self.testsTable indexPathForSelectedRow];
+        JKKTest* selectedTest = [self.testItems objectAtIndex:selectedTestItemPath.row];
+        
+        [[segue destinationViewController] setTest:selectedTest];
+        
     }
+}
+
+- (IBAction)unwindToHome:(UIStoryboardSegue *)segue {
+    
+    UIViewController* source = segue.sourceViewController;
+    
+    if ([source isKindOfClass:[JKKTestViewController class]]) {
+        JKKTestViewController* testViewSource = (JKKTestViewController *)source;
+        JKKTest* newTest = testViewSource.test;
+        
+        if (![self.testItems containsObject:newTest]) {
+            [self.testItems addObject:newTest];
+        }
+        
+        [self.testsTable reloadData];
+    }
+    
 }
 
 @end
