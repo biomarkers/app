@@ -18,3 +18,16 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+/* hessk: not sure if this is the best place for this */
+typedef enum {
+    LINEAR = 0,
+    LOGARITHMIC = 1,
+    ABSOLUTE = 2
+} ModelType;
+
+typedef enum {
+    POSITIONING,
+    RUNNING,
+    DONE
+} CameraState;

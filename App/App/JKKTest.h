@@ -11,9 +11,12 @@
 @interface JKKTest : NSObject
 
 @property NSString* name;
+@property ModelType type;
+@property NSTimeInterval runtime;
 
 // hessk: TODO: continue adding test properties here
 
+- (id)initWithName:(NSString *)name Runtime:(NSTimeInterval)time ModelType:(ModelType)type;
 - (id)initWithName:(NSString *)name;
 
 @end

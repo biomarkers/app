@@ -12,8 +12,15 @@
 @interface JKKTestViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
+
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
-@property (strong, nonatomic) IBOutlet UITextField *equationField;
+
+@property (strong, nonatomic) IBOutlet UILabel *minuteLabel;
+@property (strong, nonatomic) IBOutlet UIStepper *minuteStepper;
+@property (strong, nonatomic) IBOutlet UILabel *secondLabel;
+@property (strong, nonatomic) IBOutlet UIStepper *secondStepper;
+
+@property (strong, nonatomic) IBOutlet UISegmentedControl *typeSelector;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @property JKKTest* test;

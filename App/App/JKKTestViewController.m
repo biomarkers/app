@@ -10,6 +10,9 @@
 
 @interface JKKTestViewController ()
 
+@property NSInteger currentRuntimeMinutes;
+@property NSInteger currentRuntimeSeconds;
+
 @end
 
 @implementation JKKTestViewController
@@ -28,13 +31,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    if (self.test != nil) {
-        self.navBar.title = self.test.name;
-        self.nameField.text = self.test.name;
-    } else {
-        self.navBar.title = @"New Test";
-    }
     
+    
+    [self populateControls];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,18 +42,82 @@
     // Dispose of any resources that can be recreated.
 }
 
+/* hessk: called initially to match interface to current JKKTest */
+- (void)populateControls {
+    if (self.test != nil) {
+        self.navBar.title = self.test.name;
+        self.nameField.text = self.test.name;
+        
+        self.currentRuntimeMinutes = floor(self.test.runtime / 60);
+        self.currentRuntimeSeconds = trunc(self.test.runtime - self.currentRuntimeMinutes * 60);
+        
+        self.minuteStepper.value = self.currentRuntimeMinutes;
+        self.secondStepper.value = self.currentRuntimeSeconds;
+        
+        [self updateRuntimeControls];
+        
+        [self.typeSelector setSelectedSegmentIndex:self.test.type];
+    } else {
+        self.navBar.title = @"New Test";
+    }
+}
+
+- (IBAction)updateRuntime:(id)sender {
+    /* hessk: mixing UI elements and processing here. volatile...? */
+    if (self.currentRuntimeSeconds == 59 && [self.secondStepper value] == 0) {
+        // positive wrap must've occurred...
+        self.minuteStepper.value++;
+    }
+    
+    if (self.currentRuntimeSeconds == 0 && [self.secondStepper value] == 59) {
+        // negative wrap must've occurred...
+        self.minuteStepper.value--;
+    }
+    
+    self.currentRuntimeMinutes = [self.minuteStepper value];
+    self.currentRuntimeSeconds = [self.secondStepper value];
+    
+    [self updateRuntimeControls];
+}
+
+- (void)updateRuntimeControls {
+    self.minuteLabel.text = [[@(self.currentRuntimeMinutes) stringValue] stringByAppendingString:@" min"];
+    self.secondLabel.text = [[@(self.currentRuntimeSeconds) stringValue] stringByAppendingString:@" sec"];
+    
+    if (self.currentRuntimeMinutes >= 1) {
+        [self.secondStepper setWraps:YES];
+    } else {
+        [self.secondStepper setWraps:NO];
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSTimeInterval runtime = self.currentRuntimeMinutes * 60 + self.currentRuntimeSeconds;
+    
     // hessk: initialize a test if there isn't one already using the name in the text field
     // otherwise, just update the one that's there
     if (sender == self.saveButton && self.nameField.text.length > 0) {
         if (!self.test) {
-            self.test = [[JKKTest alloc] initWithName:self.nameField.text];
+            self.test = [[JKKTest alloc] initWithName:self.nameField.text Runtime:runtime ModelType:self.typeSelector.selectedSegmentIndex];
         } else {
             [self.test setName:self.nameField.text];
+            [self.test setType:self.typeSelector.selectedSegmentIndex];
+            [self.test setRuntime:runtime];
         }
     }
 }
 
+/* hessk: hides the keyboard if the user touches anywhere other than the specified views
+ by "resigning" them as "first responders" */
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *) event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([self.nameField isFirstResponder] && [touch view] != self.nameField) {
+        [self.nameField resignFirstResponder];
+    }
+    
+    [super touchesBegan:touches withEvent:event];
+}
 
 @end
