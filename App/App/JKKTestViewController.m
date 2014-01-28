@@ -64,12 +64,12 @@
 
 - (IBAction)updateRuntime:(id)sender {
     /* hessk: mixing UI elements and processing here. volatile...? */
-    if (self.currentRuntimeSeconds == 59 && [self.secondStepper value] == 0) {
+    if (self.currentRuntimeSeconds == [self.secondStepper maximumValue] && [self.secondStepper value] == [self.secondStepper minimumValue]) {
         // positive wrap must've occurred...
         self.minuteStepper.value++;
     }
     
-    if (self.currentRuntimeSeconds == 0 && [self.secondStepper value] == 59) {
+    if (self.currentRuntimeSeconds == [self.secondStepper minimumValue] && [self.secondStepper value] == [self.secondStepper maximumValue]) {
         // negative wrap must've occurred...
         self.minuteStepper.value--;
     }
@@ -84,7 +84,8 @@
     self.minuteLabel.text = [[@(self.currentRuntimeMinutes) stringValue] stringByAppendingString:@" min"];
     self.secondLabel.text = [[@(self.currentRuntimeSeconds) stringValue] stringByAppendingString:@" sec"];
     
-    if (self.currentRuntimeMinutes >= 1) {
+    // second stepper wrapping dictated by max and min values of minute stepper
+    if ((self.currentRuntimeMinutes > [self.minuteStepper minimumValue] || self.currentRuntimeSeconds > [self.secondStepper minimumValue]) && (self.currentRuntimeMinutes < [self.minuteStepper maximumValue] || self.currentRuntimeSeconds < [self.secondStepper maximumValue])) {
         [self.secondStepper setWraps:YES];
     } else {
         [self.secondStepper setWraps:NO];
