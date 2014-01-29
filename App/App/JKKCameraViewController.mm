@@ -8,8 +8,18 @@
 
 #import "JKKCameraViewController.h"
 
-#ifdef __cplusplus
+#import "BiomarkerImageProcessor.h"
+#import "RegressionFactory.h"
+
 @interface JKKCameraViewController ()
+
+@property BiomarkerImageProcessor processor;
+
+//@property RegressionFactory factory;
+//@property RegressionModel* model;
+@property NSTimer* timer;
+
+@property float timeElapsed;
 
 @end
 
@@ -30,6 +40,8 @@
 	// Do any additional setup after loading the view.
     [self setState: POSITIONING];
     
+    if (!self.test) NSLog(@"No test loaded.");
+    
     /* hessk: Regression model setup */
     
     /*
@@ -39,6 +51,9 @@
     self.model->setIndices(3, 2, 1, 0, -1);
     */
     
+    /* hessk: Timer setup */
+    self.timeElapsed = 0.0;
+    
     /* hessk: Camera setup */
     self.cvCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraView];
     self.cvCamera.delegate = self;
@@ -47,6 +62,7 @@
     self.cvCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.cvCamera.defaultFPS = 30;
     self.cvCamera.grayscaleMode = NO;
+    
     
     [self.cvCamera start];
     NSLog(@"Camera started");
@@ -70,18 +86,52 @@
     [self.statusLabel setText:@"Running..."];
     [self setState:RUNNING];
     
+    /* adds delay before calling endProcessing */
+    [self performSelector:@selector(endProcessing) withObject:nil afterDelay:self.test.runtime];
+    
     NSLog(@"Camera state set to RUNNING");
 }
 
+- (void)endProcessing {
+    /* Camera shutdown */
+    [self setState:DONE];
+    [self.cvCamera stop];
+    
+    // hessk: why are these maintained?
+    [self.cvCamera unlockBalance];
+    [self.cvCamera unlockExposure];
+    [self.cvCamera unlockFocus];
+    
+    /* Do stuff with processor results here */
+    
+    
+    
+    
+    
+    NSLog(@"Camera state set to DONE");
+    [self.statusLabel setText:@"Done."];
+    
+    if ([self isTakingCalibrationPoint]) {
+        [self performSegueWithIdentifier:@"returnToTestView" sender:self];
+    } else /* if (there are results) */ {
+        [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
+    }
+}
+
 #pragma mark - Protocol CvVideoCameraDelegate
-
-
+#ifdef __cplusplus
 - (void)processImage:(cv::Mat&)image;
 {
     /* Do stuff with the image */
     if ([self state] == RUNNING) {
+        
         dispatch_sync(dispatch_get_main_queue(),
                       ^{
+                          //NSInteger timeRemaining = self.test.runtime - self.timeElapsed;
+                          self.timeElapsed = self.timeElapsed + (1.0 / (float)self.cvCamera.defaultFPS);
+                          [self.progressBar setProgress:self.timeElapsed / self.test.runtime animated:YES];
+                          
+                          /*
                           // Do some OpenCV stuff with the image
                           cv::Mat image_copy;
                           cvtColor(image, image_copy, CV_BGRA2BGR);
@@ -89,6 +139,7 @@
                           // invert image
                           bitwise_not(image_copy, image_copy);
                           cvtColor(image_copy, image, CV_BGR2BGRA);
+                           */
                           
                           cv::Scalar rgb = self.processor.process(image);
                       });

@@ -7,7 +7,6 @@
 //
 
 #import "JKKHomeViewController.h"
-#import "JKKTestViewController.h"
 
 @interface JKKHomeViewController ()
 
@@ -174,8 +173,16 @@
         }
         
         [self.testsTable reloadData];
-    }
-    
+    } /*else if ([source isKindOfClass:[JKKResultsViewController class]]) {
+        JKKResultsViewController* resultsViewSource = (JKKResultsViewController *)source;
+        JKKResult* newResult = resultsViewSource.result;
+        
+        if (![self.historyItems containsObject:newResult]) {
+            [self.historyItems addObject:newResult];
+        }
+        
+        [self.historyTable reloadData];
+    }*/
 }
 
 @end

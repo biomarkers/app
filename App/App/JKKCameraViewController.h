@@ -8,22 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import <opencv2/highgui/cap_ios.h>
-#import "BiomarkerImageProcessor.h"
-#import "RegressionFactory.h"
+
+#import "JKKTest.h"
+
+
+
 
 @interface JKKCameraViewController : UIViewController <CvVideoCameraDelegate>
 
-
-
+@property JKKTest* test;
 @property CameraState state;
-@property BiomarkerImageProcessor processor;
-@property (nonatomic, retain) CvVideoCamera* cvCamera;
-@property RegressionFactory factory;
-@property RegressionModel* model;
+@property (getter=isTakingCalibrationPoint) BOOL takingCalibrationPoint;
 
 @property (strong, nonatomic) IBOutlet UIImageView *cameraView;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (strong, nonatomic) IBOutlet UIProgressView *progressBar;
 
-
+@property (nonatomic, retain) CvVideoCamera* cvCamera;
 @end

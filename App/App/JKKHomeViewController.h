@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "JKKResultsViewController.h"
+#import "JKKTestViewController.h"
 
 #import "JKKResult.h"
 #import "JKKTest.h"

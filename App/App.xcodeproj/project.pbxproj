@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A066FD4189978BD0097A0B5 /* JKKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A066FD2189978BD0097A0B5 /* JKKHomeViewController.m */; };
+		0A066FD5189978BD0097A0B5 /* JKKTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A066FD3189978BD0097A0B5 /* JKKTestViewController.m */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
 		0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
 		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; };
@@ -36,11 +38,9 @@
 		0A503BD31890A43D009BF78F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCD1890A43D009BF78F /* CoreVideo.framework */; };
 		0A503BD41890A43D009BF78F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCE1890A43D009BF78F /* QuartzCore.framework */; };
 		0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9CC7DE1894897E0035959E /* Main.storyboard */; };
-		0A9CC7E21894919D0035959E /* JKKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E11894919D0035959E /* JKKHomeViewController.m */; };
 		0A9CC7E5189576560035959E /* JKKResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E4189576560035959E /* JKKResult.m */; };
 		0A9CC7EB189577530035959E /* JKKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7EA189577530035959E /* JKKTest.m */; };
 		0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */; };
-		0A9CC7F11895D67C0035959E /* JKKTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7F01895D67C0035959E /* JKKTestViewController.m */; };
 		0A9CC7F4189732560035959E /* JKKSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7F3189732560035959E /* JKKSetupViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A066FD2189978BD0097A0B5 /* JKKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKHomeViewController.m; sourceTree = "<group>"; };
+		0A066FD3189978BD0097A0B5 /* JKKTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKTestViewController.m; sourceTree = "<group>"; };
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
 		0A503B6318909C7C009BF78F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +98,6 @@
 		0A503BCE1890A43D009BF78F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A9CC7DE1894897E0035959E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0A9CC7E01894919D0035959E /* JKKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKHomeViewController.h; sourceTree = "<group>"; };
-		0A9CC7E11894919D0035959E /* JKKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKHomeViewController.m; sourceTree = "<group>"; };
 		0A9CC7E3189576560035959E /* JKKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResult.h; sourceTree = "<group>"; };
 		0A9CC7E4189576560035959E /* JKKResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKResult.m; sourceTree = "<group>"; };
 		0A9CC7E9189577530035959E /* JKKTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTest.h; sourceTree = "<group>"; };
@@ -104,7 +105,6 @@
 		0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResultsViewController.h; sourceTree = "<group>"; };
 		0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKResultsViewController.m; sourceTree = "<group>"; };
 		0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTestViewController.h; sourceTree = "<group>"; };
-		0A9CC7F01895D67C0035959E /* JKKTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKTestViewController.m; sourceTree = "<group>"; };
 		0A9CC7F2189732560035959E /* JKKSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKSetupViewController.h; sourceTree = "<group>"; };
 		0A9CC7F3189732560035959E /* JKKSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKSetupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -285,11 +285,11 @@
 				0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */,
 				0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */,
 				0A9CC7E01894919D0035959E /* JKKHomeViewController.h */,
-				0A9CC7E11894919D0035959E /* JKKHomeViewController.m */,
+				0A066FD2189978BD0097A0B5 /* JKKHomeViewController.m */,
 				0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */,
 				0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */,
 				0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */,
-				0A9CC7F01895D67C0035959E /* JKKTestViewController.m */,
+				0A066FD3189978BD0097A0B5 /* JKKTestViewController.m */,
 				0A9CC7F2189732560035959E /* JKKSetupViewController.h */,
 				0A9CC7F3189732560035959E /* JKKSetupViewController.m */,
 			);
@@ -400,17 +400,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */,
+				0A066FD5189978BD0097A0B5 /* JKKTestViewController.m in Sources */,
 				0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */,
+				0A066FD4189978BD0097A0B5 /* JKKHomeViewController.m in Sources */,
 				0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */,
 				0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */,
-				0A9CC7F11895D67C0035959E /* JKKTestViewController.m in Sources */,
 				0A503B7318909C7C009BF78F /* main.m in Sources */,
 				0A9CC7F4189732560035959E /* JKKSetupViewController.m in Sources */,
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
 				0A9CC7EB189577530035959E /* JKKTest.m in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,
-				0A9CC7E21894919D0035959E /* JKKHomeViewController.m in Sources */,
 				0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -98,15 +98,25 @@
     
     // hessk: initialize a test if there isn't one already using the name in the text field
     // otherwise, just update the one that's there
-    if (sender == self.saveButton && self.nameField.text.length > 0) {
+    if (sender != self.deleteButton && self.nameField.text.length > 0) {
         if (!self.test) {
-            self.test = [[JKKTest alloc] initWithName:self.nameField.text Runtime:runtime ModelType:self.typeSelector.selectedSegmentIndex];
+            self.test = [[JKKTest alloc] initWithName:self.nameField.text Runtime:runtime ModelType:(ModelType)self.typeSelector.selectedSegmentIndex];
         } else {
             [self.test setName:self.nameField.text];
-            [self.test setType:self.typeSelector.selectedSegmentIndex];
+            [self.test setType:(ModelType)self.typeSelector.selectedSegmentIndex];
             [self.test setRuntime:runtime];
         }
     }
+    
+    // hessk: pass pointers on
+    if ([[segue identifier] isEqualToString:@"showCameraFromTest"]) {
+        [[segue destinationViewController] setTest:self.test];
+        [[segue destinationViewController] setTakingCalibrationPoint:YES];
+    }
+}
+
+- (IBAction)unwindToTestView:(UIStoryboardSegue *)segue {
+    /* hessk: add calibration data to model? */
 }
 
 /* hessk: hides the keyboard if the user touches anywhere other than the specified views
