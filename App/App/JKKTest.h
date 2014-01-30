@@ -12,6 +12,7 @@
 
 @property NSString* name;
 @property ModelType type;
+@property NSMutableSet* rgbChannels;
 @property NSTimeInterval runtime;
 
 // hessk: TODO: continue adding test properties here

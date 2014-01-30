@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JKKTest.h"
-#import "JKKCameraViewController.h"
+
 
 @interface JKKTestViewController : UIViewController
 
@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIStepper *secondStepper;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *typeSelector;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *channelSelector;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 

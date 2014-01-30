@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <opencv2/highgui/cap_ios.h>
 
 #import "JKKTest.h"
+#import "JKKCaptureManager.h"
 
-
-
-
-@interface JKKCameraViewController : UIViewController <CvVideoCameraDelegate>
+@interface JKKCameraViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property JKKTest* test;
 @property CameraState state;
@@ -25,5 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UIProgressView *progressBar;
 
-@property (nonatomic, retain) CvVideoCamera* cvCamera;
+@property (nonatomic,retain) AVCaptureVideoPreviewLayer *captureVideoPreviewLayer;
+
+
 @end

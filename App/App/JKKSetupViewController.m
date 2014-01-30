@@ -49,4 +49,14 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    // hessk: pass pointers on
+    if ([[segue identifier] isEqualToString:@"showCameraFromSetup"]) {
+        [[segue destinationViewController] setTest:self.test];
+        [[segue destinationViewController] setTakingCalibrationPoint:NO];
+    }
+}
+
 @end

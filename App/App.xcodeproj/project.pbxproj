@@ -42,6 +42,7 @@
 		0A9CC7EB189577530035959E /* JKKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7EA189577530035959E /* JKKTest.m */; };
 		0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */; };
 		0A9CC7F4189732560035959E /* JKKSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7F3189732560035959E /* JKKSetupViewController.m */; };
+		0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,8 @@
 		0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTestViewController.h; sourceTree = "<group>"; };
 		0A9CC7F2189732560035959E /* JKKSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKSetupViewController.h; sourceTree = "<group>"; };
 		0A9CC7F3189732560035959E /* JKKSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKSetupViewController.m; sourceTree = "<group>"; };
+		0AFAC4431899EBF40029D0F2 /* JKKCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCaptureManager.h; sourceTree = "<group>"; };
+		0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKCaptureManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +189,9 @@
 			children = (
 				0A503B7518909C7C009BF78F /* JKKAppDelegate.h */,
 				0A503B7618909C7C009BF78F /* JKKAppDelegate.mm */,
-				0A9CC7E8189576B30035959E /* Controllers */,
 				0A9CC7E7189576A80035959E /* Models */,
+				0A9CC7E8189576B30035959E /* Controllers */,
+				0AFAC4421899EBB50029D0F2 /* Utilities */,
 				0A503B6D18909C7C009BF78F /* Supporting Files */,
 				0A503B7818909C7C009BF78F /* Images.xcassets */,
 			);
@@ -294,6 +298,15 @@
 				0A9CC7F3189732560035959E /* JKKSetupViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0AFAC4421899EBB50029D0F2 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0AFAC4431899EBF40029D0F2 /* JKKCaptureManager.h */,
+				0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +421,7 @@
 				0A503B7318909C7C009BF78F /* main.m in Sources */,
 				0A9CC7F4189732560035959E /* JKKSetupViewController.m in Sources */,
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
+				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
 				0A9CC7EB189577530035959E /* JKKTest.m in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,

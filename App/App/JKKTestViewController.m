@@ -7,6 +7,7 @@
 //
 
 #import "JKKTestViewController.h"
+#import "JKKCameraViewController.h"
 
 @interface JKKTestViewController ()
 
@@ -42,7 +43,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/* hessk: called initially to match interface to current JKKTest */
+/* hessk: called initially to match interface to current JKKTest and do other UI config */
 - (void)populateControls {
     if (self.test != nil) {
         self.navBar.title = self.test.name;
@@ -60,6 +61,11 @@
     } else {
         self.navBar.title = @"New Test";
     }
+    
+    NSArray *colorSelectorSubviews = [self.channelSelector subviews];
+    [[colorSelectorSubviews objectAtIndex:0] setTintColor:[UIColor redColor]];
+    [[colorSelectorSubviews objectAtIndex:2] setTintColor:[UIColor greenColor]];
+    [[colorSelectorSubviews objectAtIndex:1] setTintColor:[UIColor blueColor]];
 }
 
 - (IBAction)updateRuntime:(id)sender {
@@ -92,6 +98,10 @@
     }
 }
 
+- (IBAction)updateTitle:(id)sender {
+    self.navBar.title = [(UITextField *)sender text];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSTimeInterval runtime = self.currentRuntimeMinutes * 60 + self.currentRuntimeSeconds;
@@ -112,6 +122,8 @@
     if ([[segue identifier] isEqualToString:@"showCameraFromTest"]) {
         [[segue destinationViewController] setTest:self.test];
         [[segue destinationViewController] setTakingCalibrationPoint:YES];
+    } else if ([[segue identifier] isEqualToString:@"showSetup"]) {
+        [[segue destinationViewController] setTest:self.test];
     }
 }
 

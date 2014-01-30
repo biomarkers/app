@@ -17,11 +17,17 @@
 
 //@property RegressionFactory factory;
 //@property RegressionModel* model;
-@property NSTimer* timer;
 
 @property float timeElapsed;
+@property (strong, nonatomic) JKKCaptureManager* captureManager;
+
+@property NSTimer* timer;
+@property int timerCount;
 
 @end
+
+const int FPS = 30;
+const float TIMER_STEP = 0.1;
 
 @implementation JKKCameraViewController
 
@@ -38,12 +44,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self setState: POSITIONING];
     
     if (!self.test) NSLog(@"No test loaded.");
+
+    [self setState: POSITIONING];
     
     /* hessk: Regression model setup */
-    
     /*
     self.factory.addNewComponent(ModelComponent::EXPONENTIAL, 1, 400, ModelComponent::HUE);
     self.model = self.factory.getCreatedModel();
@@ -53,21 +59,41 @@
     
     /* hessk: Timer setup */
     self.timeElapsed = 0.0;
+    self.timer = [NSTimer timerWithTimeInterval:TIMER_STEP target:self selector:@selector(updateProgress:) userInfo:NULL repeats:YES];
+    self.timerCount = 0;
     
-    /* hessk: Camera setup */
-    self.cvCamera = [[CvVideoCamera alloc] initWithParentView:self.cameraView];
-    self.cvCamera.delegate = self;
-    self.cvCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
-    self.cvCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
-    self.cvCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
-    self.cvCamera.defaultFPS = 30;
-    self.cvCamera.grayscaleMode = NO;
+    /* hessk: AVFoundation camera setup */
+    self.captureManager = [JKKCaptureManager new];
+    [self.captureManager initializeSession];
+    [self.captureManager initializeDevice];
     
+    /* init video out *******************************************************************************************/
+    NSLog(@"Initializing session video output...");
+    //hessk: apple code stuffs
+    AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
+    [self.captureManager.session addOutput:videoOut];
+    videoOut.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
+    videoOut.minFrameDuration = CMTimeMake(1, FPS);
     
-    [self.cvCamera start];
+    dispatch_queue_t queue = dispatch_queue_create("VideoOutQueue", NULL);
+    [videoOut setSampleBufferDelegate:self queue:queue];
+    /* finish video out init ************************************************************************************/
+    
+    /* init preview layer ***************************************************************************************/
+    AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureManager.session];
+    self.cameraView.backgroundColor = [UIColor clearColor];
+    UIView *view = self.cameraView;
+    CALayer *viewLayer = [view layer];
+    [viewLayer setMasksToBounds:YES];
+    CGRect bounds = [view bounds];
+    [newCaptureVideoPreviewLayer setFrame:bounds];
+    [newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+    [viewLayer addSublayer:newCaptureVideoPreviewLayer];
+    self.captureVideoPreviewLayer = newCaptureVideoPreviewLayer;
+    /* finish init preview layer ********************************************************************************/
+    
+    [self.captureManager.session startRunning];
     NSLog(@"Camera started");
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,36 +103,47 @@
 }
 
 - (IBAction)startProcessing:(id)sender {
-    [self.cvCamera lockBalance];
-    [self.cvCamera lockExposure];
-    [self.cvCamera lockFocus];
-    
+    if (self.timer != nil) {
+        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        [runLoop addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    }
+
+    [self.captureManager toggleAutoExposure];
+    [self.captureManager toggleAutoFocus];
+    [self.captureManager toggleAutoWB];
+
     [self.startButton setEnabled:NO];
     [self.startButton setHidden:YES];
-    [self.statusLabel setText:@"Running..."];
     [self setState:RUNNING];
     
     /* adds delay before calling endProcessing */
     [self performSelector:@selector(endProcessing) withObject:nil afterDelay:self.test.runtime];
     
+    [self.statusLabel setText:@"Analyzing..."];
     NSLog(@"Camera state set to RUNNING");
+}
+
+- (void)updateProgress:(NSTimer *)timer {
+    if ([self state] == RUNNING) {
+        self.timerCount++;
+        
+        [self.progressBar setProgress:self.timerCount * TIMER_STEP / self.test.runtime animated:YES];
+        
+        if (self.timerCount * TIMER_STEP > self.test.runtime) {
+            [self.timer invalidate];
+            [self endProcessing];
+        }
+    }
 }
 
 - (void)endProcessing {
     /* Camera shutdown */
     [self setState:DONE];
-    [self.cvCamera stop];
-    
-    // hessk: why are these maintained?
-    [self.cvCamera unlockBalance];
-    [self.cvCamera unlockExposure];
-    [self.cvCamera unlockFocus];
+    [self.captureManager.session stopRunning];
+    [self.captureManager setSession: nil];
     
     /* Do stuff with processor results here */
-    
-    
-    
-    
+    /* when done processing, call getSamples() to get an array of vectors */
     
     NSLog(@"Camera state set to DONE");
     [self.statusLabel setText:@"Done."];
@@ -118,36 +155,123 @@
     }
 }
 
-#pragma mark - Protocol CvVideoCameraDelegate
-#ifdef __cplusplus
-- (void)processImage:(cv::Mat&)image;
-{
-    /* Do stuff with the image */
-    if ([self state] == RUNNING) {
-        
-        dispatch_sync(dispatch_get_main_queue(),
-                      ^{
-                          //NSInteger timeRemaining = self.test.runtime - self.timeElapsed;
-                          self.timeElapsed = self.timeElapsed + (1.0 / (float)self.cvCamera.defaultFPS);
-                          [self.progressBar setProgress:self.timeElapsed / self.test.runtime animated:YES];
-                          
-                          /*
-                          // Do some OpenCV stuff with the image
-                          cv::Mat image_copy;
-                          cvtColor(image, image_copy, CV_BGRA2BGR);
-                          
-                          // invert image
-                          bitwise_not(image_copy, image_copy);
-                          cvtColor(image_copy, image, CV_BGR2BGRA);
-                           */
-                          
-                          cv::Scalar rgb = self.processor.process(image);
-                      });
+/* Apple's image conversion function */
+- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer {
+    
+    // This example assumes the sample buffer came from an AVCaptureOutput,
+    // so its image buffer is known to be a pixel buffer.
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    // Lock the base address of the pixel buffer.
+    CVPixelBufferLockBaseAddress(imageBuffer,0);
+    
+    // Get the number of bytes per row for the pixel buffer.
+    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+    // Get the pixel buffer width and height.
+    size_t width = CVPixelBufferGetWidth(imageBuffer);
+    size_t height = CVPixelBufferGetHeight(imageBuffer);
+    
+    // Create a device-dependent RGB color space.
+    static CGColorSpaceRef colorSpace = NULL;
+    if (colorSpace == NULL) {
+        colorSpace = CGColorSpaceCreateDeviceRGB();
+        if (colorSpace == NULL) {
+            // Handle the error appropriately.
+            return nil;
+        }
     }
     
-    /* when done processing, call getSamples() to get an array of vectors */
+    // Get the base address of the pixel buffer.
+    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+    // Get the data size for contiguous planes of the pixel buffer.
+    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
     
+    // Create a Quartz direct-access data provider that uses data we supply.
+    CGDataProviderRef dataProvider =
+    CGDataProviderCreateWithData(NULL, baseAddress, bufferSize, NULL);
+    // Create a bitmap image from data supplied by the data provider.
+    CGImageRef cgImage =
+    CGImageCreate(width, height, 8, 32, bytesPerRow,
+                  colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little,
+                  dataProvider, NULL, true, kCGRenderingIntentDefault);
+    CGDataProviderRelease(dataProvider);
+    
+    // Create and return an image object to represent the Quartz image.
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+    
+    return image;
 }
-#endif
+
+#pragma mark - Protocol AVCaptureVideoDataOutputSampleBufferDelegate
+- (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    if ([self state] == RUNNING) {
+        IplImage *image = [self CreateIplImageFromUIImage:[self imageFromSampleBuffer:sampleBuffer]];
+        self.processor.process((cv::Mat)image);
+        cvReleaseImage(&image);
+    }
+}
+
+// hessk: TODO: read this license agreement
+/* author: YOSHIMASA NIWA under MIT LICENSE ******************************************************************** */
+
+// NOTE you SHOULD cvReleaseImage() for the return value when end of the code.
+- (IplImage *)CreateIplImageFromUIImage:(UIImage *)image {
+    // Getting CGImage from UIImage
+    CGImageRef imageRef = image.CGImage;
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    // Creating temporal IplImage for drawing
+    IplImage *iplimage = cvCreateImage(
+                                       cvSize(image.size.width,image.size.height), IPL_DEPTH_8U, 4
+                                       );
+    // Creating CGContext for temporal IplImage
+    CGContextRef contextRef = CGBitmapContextCreate(
+                                                    iplimage->imageData, iplimage->width, iplimage->height,
+                                                    iplimage->depth, iplimage->widthStep,
+                                                    colorSpace, kCGImageAlphaPremultipliedLast|kCGBitmapByteOrderDefault
+                                                    );
+    // Drawing CGImage to CGContext
+    CGContextDrawImage(
+                       contextRef,
+                       CGRectMake(0, 0, image.size.width, image.size.height),
+                       imageRef
+                       );
+    CGContextRelease(contextRef);
+    CGColorSpaceRelease(colorSpace);
+    
+    // Creating result IplImage
+    IplImage *ret = cvCreateImage(cvGetSize(iplimage), IPL_DEPTH_8U, 3);
+    cvCvtColor(iplimage, ret, CV_RGBA2BGR);
+    cvReleaseImage(&iplimage);
+    
+    return ret;
+}
+
+// NOTE You should convert color mode as RGB before passing to this function
+- (UIImage *)UIImageFromIplImage:(IplImage *)image {
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    // Allocating the buffer for CGImage
+    NSData *data =
+    [NSData dataWithBytes:image->imageData length:image->imageSize];
+    CGDataProviderRef provider =
+    CGDataProviderCreateWithCFData((CFDataRef)data);
+    // Creating CGImage from chunk of IplImage
+    CGImageRef imageRef = CGImageCreate(
+                                        image->width, image->height,
+                                        image->depth, image->depth * image->nChannels, image->widthStep,
+                                        colorSpace, kCGImageAlphaNone|kCGBitmapByteOrderDefault,
+                                        provider, NULL, false, kCGRenderingIntentDefault
+                                        );
+    // Getting UIImage from CGImage
+    UIImage *ret = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(colorSpace);
+    return ret;
+}
+
+/* ************************************************************************************************************* */
 
 @end
