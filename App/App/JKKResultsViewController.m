@@ -40,13 +40,12 @@
 }
 
 - (void)populateControls {
-    // hessk: needs to be released...?
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"mm/dd/yyyy"];
+    [formatter setDateStyle: NSDateFormatterShortStyle];
     
-    self.testLabel.text = self.result.test.name;
+    self.testLabel.text = [formatter stringFromDate:self.result.date];
     self.dateLabel.text = [formatter stringFromDate:self.result.date];
-    self.valueLabel.text = [self.result.value stringValue];
+    self.valueLabel.text = [NSString stringWithFormat:@"%f", self.result.value];
 }
 
 @end

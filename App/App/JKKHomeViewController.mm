@@ -36,18 +36,52 @@
     [self.historyTable setDataSource:self];
     [self.historyTable setDelegate:self];
     
-    
     // hessk: TODO: only adding sample items here; update to actually pull from core data
-    
     self.historyItems = [[NSMutableArray alloc] init];
     self.testItems = [[NSMutableArray alloc] init];
     
+    RegressionFactory::RegressionFactory factory;
+    factory.createNew("Sample", "Sample");
+    factory.addNewComponent(ModelComponent::LINEAR, 0, 326, ModelComponent::RED);
+    factory.addNewComponent(ModelComponent::POINT, 293, 326, ModelComponent::RED);
+    
+    cv::Mat matrix(5, 3, CV_32F);
+    matrix.row(0).at<float>(0) = 40;
+    matrix.row(0).at<float>(1) = .00023632315 * 30;
+    matrix.row(0).at<float>(2) = 235.61401;
+    
+    matrix.row(1).at<float>(0) = 100;
+    matrix.row(1).at<float>(1) = -0.00077432749 * 30;
+    matrix.row(1).at<float>(2) = 227.77617;
+    
+    matrix.row(2).at<float>(0) = 200;
+    matrix.row(2).at<float>(1) = -0.00279011 * 30;
+    matrix.row(2).at<float>(2) = 213.48505;
+    
+    matrix.row(3).at<float>(0) = 300;
+    matrix.row(3).at<float>(1) = -0.0048780013 * 30;
+    matrix.row(3).at<float>(2) = 189.93724;
+    
+    matrix.row(4).at<float>(0) = 400;
+    matrix.row(4).at<float>(1) = -0.0069368137 * 30;
+    matrix.row(4).at<float>(2) = 173.00835;
+    
+    JKKModel* sampleModel;
+    sampleModel = [[JKKModel alloc] initWithModel: factory.getCreatedModel()];
+    sampleModel.model->setIndices(3, 2, 1, 0, -1);
+    sampleModel.model->superSecretCalibrationOverride(matrix);
+    sampleModel.model->dryCalibrate();
+    
+    [self.testItems addObject:sampleModel];
+    [self.testsTable reloadData];
+    
+    /* Placeholder objects
     JKKTest* test1 = [[JKKTest alloc] initWithName:@"Glucose test"];
     JKKResult* result1 = [[JKKResult alloc] initWithTest:test1];
     result1.value = @42;
-    
     [self.testItems addObject:test1];
     [self.historyItems addObject:result1];
+     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +120,7 @@
 {
     static NSString *cellIdentifier;
     
+    
     if (tableView == self.testsTable) {
         cellIdentifier = @"TestsPrototypeCell";
     } else if (tableView == self.historyTable) {
@@ -98,12 +133,15 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     if (tableView == self.testsTable) {
+        //JKKTest* testItem = [self.testItems objectAtIndex:indexPath.row];
+        JKKModel* testItem = [self.testItems objectAtIndex:indexPath.row];
+        cell.textLabel.text = [testItem getModelName];
         
-        JKKTest* testItem = [self.testItems objectAtIndex:indexPath.row];
-        cell.textLabel.text = testItem.name;
+        //RegressionModel::RegressionModel* testItem = (RegressionModel::RegressionModel *)CFBridgingRetain([self.testItems objectAtIndex:indexPath.row]);
+        //cell.textLabel.text = [NSString stringWithCString: testItem->GetModelName().c_str()];
         
     } else if (tableView == self.historyTable) {
-
+        /*
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"mm/dd/yyyy"];
         
@@ -116,7 +154,7 @@
         
         title.text = historyItem.test.name;
         subtitle.text = [formatter stringFromDate:historyItem.date];
-
+         */
     } else {
         //error
     }
@@ -149,14 +187,17 @@
         JKKResult* selectedResult = [self.historyItems objectAtIndex:selectedHistoryItemPath.row];
         
         [[segue destinationViewController] setResult:selectedResult];
-        
     } else if ([[segue identifier] isEqualToString:@"showTest"]) {
         // hessk: pass on the selected test to the test view controller instance
         NSIndexPath* selectedTestItemPath = [self.testsTable indexPathForSelectedRow];
-        JKKTest* selectedTest = [self.testItems objectAtIndex:selectedTestItemPath.row];
+        JKKModel* selectedTest = [self.testItems objectAtIndex:selectedTestItemPath.row];
         
         [[segue destinationViewController] setTest:selectedTest];
-        
+        [[segue destinationViewController] setNewTest:NO];
+    } else if ([[segue identifier] isEqualToString:@"showNewTest"]) {
+        // new test setup
+        [[segue destinationViewController] setTest:nil];
+        [[segue destinationViewController] setNewTest:YES];
     }
 }
 
@@ -166,7 +207,7 @@
     
     if ([source isKindOfClass:[JKKTestViewController class]]) {
         JKKTestViewController* testViewSource = (JKKTestViewController *)source;
-        JKKTest* newTest = testViewSource.test;
+        JKKModel* newTest = testViewSource.test;
         
         if (![self.testItems containsObject:newTest]) {
             [self.testItems addObject:newTest];

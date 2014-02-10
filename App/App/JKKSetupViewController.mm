@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,10 +53,14 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    JKKResult* newResult = [[JKKResult alloc] init];
+    newResult.date = [NSDate date];
+    self.result = newResult;
     
     // hessk: pass pointers on
     if ([[segue identifier] isEqualToString:@"showCameraFromSetup"]) {
         [[segue destinationViewController] setTest:self.test];
+        [[segue destinationViewController] setResult:self.result];
         [[segue destinationViewController] setTakingCalibrationPoint:NO];
     }
 }

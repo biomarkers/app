@@ -11,11 +11,10 @@
 @implementation JKKResult
 
 /* hessk: Initializer with given test and current date */
-- (id)initWithTest:(JKKTest *)test {
+- (id)init {
     self = [super init];
     
     if (self) {
-        self.test = test;
         self.date = [NSDate date];
     }
     

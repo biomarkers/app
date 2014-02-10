@@ -5,15 +5,20 @@
 //  Created by Kevin on 1/27/14.
 //  Copyright (c) 2014 Koalas. All rights reserved.
 //
-
+#pragma once
 #import <UIKit/UIKit.h>
 
-#import "JKKTest.h"
+#import "JKKModel.h"
+#import "JKKResult.h"
 #import "JKKCaptureManager.h"
+#import "RegressionFactory.h"
 
 @interface JKKCameraViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 
-@property JKKTest* test;
+@property JKKModel* test;
+@property JKKResult* result;
+@property float calibrationValue;
+
 @property CameraState state;
 @property (getter=isTakingCalibrationPoint) BOOL takingCalibrationPoint;
 

@@ -5,7 +5,7 @@
 //  Created by Kevin on 11/15/13.
 //  Copyright (c) 2013 Koalas. All rights reserved.
 //
-
+#pragma once
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 

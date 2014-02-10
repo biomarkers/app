@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A066FD4189978BD0097A0B5 /* JKKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A066FD2189978BD0097A0B5 /* JKKHomeViewController.m */; };
-		0A066FD5189978BD0097A0B5 /* JKKTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A066FD3189978BD0097A0B5 /* JKKTestViewController.m */; };
+		0A05457518A9517600BF2072 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05457418A9517600BF2072 /* boost.framework */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
 		0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
 		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; };
@@ -17,7 +16,7 @@
 		0A503B6918909C7C009BF78F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6818909C7C009BF78F /* CoreGraphics.framework */; };
 		0A503B6B18909C7C009BF78F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6A18909C7C009BF78F /* UIKit.framework */; };
 		0A503B7118909C7C009BF78F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A503B6F18909C7C009BF78F /* InfoPlist.strings */; };
-		0A503B7318909C7C009BF78F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A503B7218909C7C009BF78F /* main.m */; };
+		0A503B7318909C7C009BF78F /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A503B7218909C7C009BF78F /* main.mm */; };
 		0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A503B7618909C7C009BF78F /* JKKAppDelegate.mm */; };
 		0A503B7918909C7C009BF78F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A503B7818909C7C009BF78F /* Images.xcassets */; };
 		0A503B8018909C7C009BF78F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B7F18909C7C009BF78F /* XCTest.framework */; };
@@ -39,9 +38,13 @@
 		0A503BD41890A43D009BF78F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCE1890A43D009BF78F /* QuartzCore.framework */; };
 		0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9CC7DE1894897E0035959E /* Main.storyboard */; };
 		0A9CC7E5189576560035959E /* JKKResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E4189576560035959E /* JKKResult.m */; };
-		0A9CC7EB189577530035959E /* JKKTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7EA189577530035959E /* JKKTest.m */; };
 		0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */; };
-		0A9CC7F4189732560035959E /* JKKSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7F3189732560035959E /* JKKSetupViewController.m */; };
+		0ACB6C05189ACA89000E6DCB /* JKKTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C04189ACA89000E6DCB /* JKKTestViewController.mm */; };
+		0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C06189ACBFB000E6DCB /* JKKHomeViewController.mm */; };
+		0ACB6C09189AD08C000E6DCB /* JKKSetupViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C08189AD08C000E6DCB /* JKKSetupViewController.mm */; };
+		0ACB6C0C189B04DD000E6DCB /* JKKModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C0B189B04DD000E6DCB /* JKKModel.mm */; };
+		0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */; };
+		0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E2018A6ED70001A5FFC /* JKKComponent.mm */; };
 		0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */; };
 /* End PBXBuildFile section */
 
@@ -56,8 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A066FD2189978BD0097A0B5 /* JKKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKHomeViewController.m; sourceTree = "<group>"; };
-		0A066FD3189978BD0097A0B5 /* JKKTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKTestViewController.m; sourceTree = "<group>"; };
+		0A05457418A9517600BF2072 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = boost.framework; sourceTree = "<group>"; };
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
 		0A503B6318909C7C009BF78F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,7 +68,7 @@
 		0A503B6A18909C7C009BF78F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0A503B6E18909C7C009BF78F /* App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
 		0A503B7018909C7C009BF78F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0A503B7218909C7C009BF78F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0A503B7218909C7C009BF78F /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		0A503B7418909C7C009BF78F /* App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Prefix.pch"; sourceTree = "<group>"; };
 		0A503B7518909C7C009BF78F /* JKKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKKAppDelegate.h; sourceTree = "<group>"; };
 		0A503B7618909C7C009BF78F /* JKKAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKAppDelegate.mm; sourceTree = "<group>"; };
@@ -101,13 +103,19 @@
 		0A9CC7E01894919D0035959E /* JKKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKHomeViewController.h; sourceTree = "<group>"; };
 		0A9CC7E3189576560035959E /* JKKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResult.h; sourceTree = "<group>"; };
 		0A9CC7E4189576560035959E /* JKKResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKResult.m; sourceTree = "<group>"; };
-		0A9CC7E9189577530035959E /* JKKTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTest.h; sourceTree = "<group>"; };
-		0A9CC7EA189577530035959E /* JKKTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKTest.m; sourceTree = "<group>"; };
 		0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResultsViewController.h; sourceTree = "<group>"; };
 		0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKResultsViewController.m; sourceTree = "<group>"; };
 		0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTestViewController.h; sourceTree = "<group>"; };
 		0A9CC7F2189732560035959E /* JKKSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKSetupViewController.h; sourceTree = "<group>"; };
-		0A9CC7F3189732560035959E /* JKKSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKSetupViewController.m; sourceTree = "<group>"; };
+		0ACB6C04189ACA89000E6DCB /* JKKTestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKTestViewController.mm; sourceTree = "<group>"; };
+		0ACB6C06189ACBFB000E6DCB /* JKKHomeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKHomeViewController.mm; sourceTree = "<group>"; };
+		0ACB6C08189AD08C000E6DCB /* JKKSetupViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKSetupViewController.mm; sourceTree = "<group>"; };
+		0ACB6C0A189B04DD000E6DCB /* JKKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKModel.h; sourceTree = "<group>"; };
+		0ACB6C0B189B04DD000E6DCB /* JKKModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKModel.mm; sourceTree = "<group>"; };
+		0AEF3E0718A6E6D0001A5FFC /* JKKAddComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKAddComponentViewController.h; sourceTree = "<group>"; };
+		0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKAddComponentViewController.mm; sourceTree = "<group>"; };
+		0AEF3E1F18A6ED70001A5FFC /* JKKComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKComponent.h; sourceTree = "<group>"; };
+		0AEF3E2018A6ED70001A5FFC /* JKKComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKComponent.mm; sourceTree = "<group>"; };
 		0AFAC4431899EBF40029D0F2 /* JKKCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCaptureManager.h; sourceTree = "<group>"; };
 		0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKCaptureManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A05457518A9517600BF2072 /* boost.framework in Frameworks */,
 				0A503BCF1890A43D009BF78F /* AssetsLibrary.framework in Frameworks */,
 				0A503BD01890A43D009BF78F /* AVFoundation.framework in Frameworks */,
 				0A503BD11890A43D009BF78F /* CoreImage.framework in Frameworks */,
@@ -168,6 +177,7 @@
 		0A503B6518909C7C009BF78F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A05457418A9517600BF2072 /* boost.framework */,
 				0A503BC91890A43D009BF78F /* AssetsLibrary.framework */,
 				0A503BCA1890A43D009BF78F /* AVFoundation.framework */,
 				0A503BCB1890A43D009BF78F /* CoreImage.framework */,
@@ -203,7 +213,7 @@
 			children = (
 				0A503B6E18909C7C009BF78F /* App-Info.plist */,
 				0A503B6F18909C7C009BF78F /* InfoPlist.strings */,
-				0A503B7218909C7C009BF78F /* main.m */,
+				0A503B7218909C7C009BF78F /* main.mm */,
 				0A503B7418909C7C009BF78F /* App-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -277,8 +287,10 @@
 			children = (
 				0A9CC7E3189576560035959E /* JKKResult.h */,
 				0A9CC7E4189576560035959E /* JKKResult.m */,
-				0A9CC7E9189577530035959E /* JKKTest.h */,
-				0A9CC7EA189577530035959E /* JKKTest.m */,
+				0ACB6C0A189B04DD000E6DCB /* JKKModel.h */,
+				0ACB6C0B189B04DD000E6DCB /* JKKModel.mm */,
+				0AEF3E1F18A6ED70001A5FFC /* JKKComponent.h */,
+				0AEF3E2018A6ED70001A5FFC /* JKKComponent.mm */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -286,16 +298,18 @@
 		0A9CC7E8189576B30035959E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A9CC7E01894919D0035959E /* JKKHomeViewController.h */,
+				0ACB6C06189ACBFB000E6DCB /* JKKHomeViewController.mm */,
+				0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */,
+				0ACB6C04189ACA89000E6DCB /* JKKTestViewController.mm */,
+				0AEF3E0718A6E6D0001A5FFC /* JKKAddComponentViewController.h */,
+				0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */,
+				0A9CC7F2189732560035959E /* JKKSetupViewController.h */,
+				0ACB6C08189AD08C000E6DCB /* JKKSetupViewController.mm */,
 				0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */,
 				0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */,
-				0A9CC7E01894919D0035959E /* JKKHomeViewController.h */,
-				0A066FD2189978BD0097A0B5 /* JKKHomeViewController.m */,
 				0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */,
 				0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */,
-				0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */,
-				0A066FD3189978BD0097A0B5 /* JKKTestViewController.m */,
-				0A9CC7F2189732560035959E /* JKKSetupViewController.h */,
-				0A9CC7F3189732560035959E /* JKKSetupViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -412,18 +426,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACB6C09189AD08C000E6DCB /* JKKSetupViewController.mm in Sources */,
 				0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */,
-				0A066FD5189978BD0097A0B5 /* JKKTestViewController.m in Sources */,
 				0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */,
-				0A066FD4189978BD0097A0B5 /* JKKHomeViewController.m in Sources */,
 				0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */,
+				0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */,
+				0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */,
 				0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */,
-				0A503B7318909C7C009BF78F /* main.m in Sources */,
-				0A9CC7F4189732560035959E /* JKKSetupViewController.m in Sources */,
+				0A503B7318909C7C009BF78F /* main.mm in Sources */,
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
 				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
-				0A9CC7EB189577530035959E /* JKKTest.m in Sources */,
+				0ACB6C05189ACA89000E6DCB /* JKKTestViewController.mm in Sources */,
+				0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */,
+				0ACB6C0C189B04DD000E6DCB /* JKKModel.mm in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,
 				0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */,
 			);
@@ -472,7 +488,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -503,6 +519,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -511,7 +528,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -534,8 +551,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -548,10 +567,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kevin/Development/app/App,
+					"/Users/kevin/Development/addons/boost-ios-master/Dist",
+					"/Users/kevin/Downloads/boost-master/ios/framework",
+					/Users/kevin/Development/Frameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
 				INFOPLIST_FILE = "App/App-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -566,10 +589,15 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kevin/Development/app/App,
+					"/Users/kevin/Development/addons/boost-ios-master/Dist",
+					"/Users/kevin/Downloads/boost-master/ios/framework",
+					/Users/kevin/Development/Frameworks,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
 				INFOPLIST_FILE = "App/App-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

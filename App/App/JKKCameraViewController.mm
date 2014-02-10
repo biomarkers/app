@@ -13,7 +13,6 @@
 
 @interface JKKCameraViewController ()
 
-@property BiomarkerImageProcessor processor;
 
 //@property RegressionFactory factory;
 //@property RegressionModel* model;
@@ -24,9 +23,12 @@
 @property NSTimer* timer;
 @property int timerCount;
 
+@property int FPS;
+
 @end
 
-const int FPS = 30;
+BiomarkerImageProcessor processor;
+
 const float TIMER_STEP = 0.1;
 
 @implementation JKKCameraViewController
@@ -45,17 +47,14 @@ const float TIMER_STEP = 0.1;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.FPS = 30;
+    
     if (!self.test) NSLog(@"No test loaded.");
 
     [self setState: POSITIONING];
     
     /* hessk: Regression model setup */
-    /*
-    self.factory.addNewComponent(ModelComponent::EXPONENTIAL, 1, 400, ModelComponent::HUE);
-    self.model = self.factory.getCreatedModel();
-    
-    self.model->setIndices(3, 2, 1, 0, -1);
-    */
+   
     
     /* hessk: Timer setup */
     self.timeElapsed = 0.0;
@@ -73,7 +72,7 @@ const float TIMER_STEP = 0.1;
     AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
     [self.captureManager.session addOutput:videoOut];
     videoOut.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
-    videoOut.minFrameDuration = CMTimeMake(1, FPS);
+    videoOut.minFrameDuration = CMTimeMake(1, self.FPS);
     
     dispatch_queue_t queue = dispatch_queue_create("VideoOutQueue", NULL);
     [videoOut setSampleBufferDelegate:self queue:queue];
@@ -116,8 +115,10 @@ const float TIMER_STEP = 0.1;
     [self.startButton setHidden:YES];
     [self setState:RUNNING];
     
+    processor.reset();
+    
     /* adds delay before calling endProcessing */
-    [self performSelector:@selector(endProcessing) withObject:nil afterDelay:self.test.runtime];
+    [self performSelector:@selector(endProcessing) withObject:nil afterDelay: (self.test.model->getModelRunTime())];
     
     [self.statusLabel setText:@"Analyzing..."];
     NSLog(@"Camera state set to RUNNING");
@@ -127,9 +128,9 @@ const float TIMER_STEP = 0.1;
     if ([self state] == RUNNING) {
         self.timerCount++;
         
-        [self.progressBar setProgress:self.timerCount * TIMER_STEP / self.test.runtime animated:YES];
+        [self.progressBar setProgress:(self.timerCount * TIMER_STEP) / (self.test.model->getModelRunTime()) animated:YES];
         
-        if (self.timerCount * TIMER_STEP > self.test.runtime) {
+        if (self.timerCount * TIMER_STEP > self.test.model->getModelRunTime()) {
             [self.timer invalidate];
             [self endProcessing];
         }
@@ -149,9 +150,20 @@ const float TIMER_STEP = 0.1;
     [self.statusLabel setText:@"Done."];
     
     if ([self isTakingCalibrationPoint]) {
+        self.test.model->calibrate(processor.getSamples(), self.calibrationValue);
+        
         [self performSegueWithIdentifier:@"returnToTestView" sender:self];
     } else /* if (there are results) */ {
+
+        self.result.value = self.test.model->evaluate(processor.getSamples());
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showResultsFromCamera"]) {
+        [[segue destinationViewController] setResult:self.result];
     }
 }
 
@@ -208,8 +220,12 @@ const float TIMER_STEP = 0.1;
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     if ([self state] == RUNNING) {
         IplImage *image = [self CreateIplImageFromUIImage:[self imageFromSampleBuffer:sampleBuffer]];
-        self.processor.process((cv::Mat)image);
+        cv::Scalar rgb = processor.process((cv::Mat)image);
         cvReleaseImage(&image);
+        
+        std::stringstream ss;
+        ss << rgb;
+        NSLog([NSString stringWithCString:ss.str().c_str()]);
     }
 }
 

@@ -5,7 +5,7 @@
 //  Created by Kevin on 1/26/14.
 //  Copyright (c) 2014 Koalas. All rights reserved.
 //
-
+#pragma once
 #import <UIKit/UIKit.h>
 #import "JKKResult.h"
 
