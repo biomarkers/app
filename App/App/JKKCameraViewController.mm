@@ -23,10 +23,9 @@
 @property NSTimer* timer;
 @property int timerCount;
 
-@property int FPS;
-
 @end
 
+NSUserDefaults* defaults;
 BiomarkerImageProcessor processor;
 
 const float TIMER_STEP = 0.1;
@@ -47,7 +46,7 @@ const float TIMER_STEP = 0.1;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.FPS = 30;
+    defaults = [NSUserDefaults standardUserDefaults];
     
     if (!self.test) NSLog(@"No test loaded.");
 
@@ -72,7 +71,7 @@ const float TIMER_STEP = 0.1;
     AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
     [self.captureManager.session addOutput:videoOut];
     videoOut.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
-    videoOut.minFrameDuration = CMTimeMake(1, self.FPS);
+    videoOut.minFrameDuration = CMTimeMake(1, [defaults integerForKey:@"kFPS"]);
     
     dispatch_queue_t queue = dispatch_queue_create("VideoOutQueue", NULL);
     [videoOut setSampleBufferDelegate:self queue:queue];

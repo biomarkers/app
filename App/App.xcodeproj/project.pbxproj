@@ -43,6 +43,9 @@
 		0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C06189ACBFB000E6DCB /* JKKHomeViewController.mm */; };
 		0ACB6C09189AD08C000E6DCB /* JKKSetupViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C08189AD08C000E6DCB /* JKKSetupViewController.mm */; };
 		0ACB6C0C189B04DD000E6DCB /* JKKModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C0B189B04DD000E6DCB /* JKKModel.mm */; };
+		0ACF780318A9AFB300134713 /* JKKConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF780218A9AFB300134713 /* JKKConfigViewController.m */; };
+		0ACF780918A9B13700134713 /* DataPersistence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF780818A9B13600134713 /* DataPersistence.cpp */; };
+		0ACF780B18A9B2BD00134713 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACF780A18A9B2BD00134713 /* libsqlite3.0.dylib */; };
 		0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */; };
 		0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E2018A6ED70001A5FFC /* JKKComponent.mm */; };
 		0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */; };
@@ -112,6 +115,11 @@
 		0ACB6C08189AD08C000E6DCB /* JKKSetupViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKSetupViewController.mm; sourceTree = "<group>"; };
 		0ACB6C0A189B04DD000E6DCB /* JKKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKModel.h; sourceTree = "<group>"; };
 		0ACB6C0B189B04DD000E6DCB /* JKKModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKModel.mm; sourceTree = "<group>"; };
+		0ACF780118A9AFB200134713 /* JKKConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKConfigViewController.h; sourceTree = "<group>"; };
+		0ACF780218A9AFB300134713 /* JKKConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKConfigViewController.m; sourceTree = "<group>"; };
+		0ACF780718A9B11B00134713 /* DataPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPersistence.h; sourceTree = "<group>"; };
+		0ACF780818A9B13600134713 /* DataPersistence.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataPersistence.cpp; sourceTree = "<group>"; };
+		0ACF780A18A9B2BD00134713 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		0AEF3E0718A6E6D0001A5FFC /* JKKAddComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKAddComponentViewController.h; sourceTree = "<group>"; };
 		0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKAddComponentViewController.mm; sourceTree = "<group>"; };
 		0AEF3E1F18A6ED70001A5FFC /* JKKComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKComponent.h; sourceTree = "<group>"; };
@@ -125,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ACF780B18A9B2BD00134713 /* libsqlite3.0.dylib in Frameworks */,
 				0A05457518A9517600BF2072 /* boost.framework in Frameworks */,
 				0A503BCF1890A43D009BF78F /* AssetsLibrary.framework in Frameworks */,
 				0A503BD01890A43D009BF78F /* AVFoundation.framework in Frameworks */,
@@ -177,6 +186,7 @@
 		0A503B6518909C7C009BF78F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0ACF780A18A9B2BD00134713 /* libsqlite3.0.dylib */,
 				0A05457418A9517600BF2072 /* boost.framework */,
 				0A503BC91890A43D009BF78F /* AssetsLibrary.framework */,
 				0A503BCA1890A43D009BF78F /* AVFoundation.framework */,
@@ -254,6 +264,7 @@
 		0A503BAD18909F95009BF78F /* include */ = {
 			isa = PBXGroup;
 			children = (
+				0ACF780718A9B11B00134713 /* DataPersistence.h */,
 				0A503BAE18909F95009BF78F /* BiomarkerImageProcessor.h */,
 				0A503BAF18909F95009BF78F /* ModelComponent.h */,
 				0A503BB018909F95009BF78F /* RegressionFactory.h */,
@@ -273,6 +284,7 @@
 		0A503BB618909F95009BF78F /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0ACF780818A9B13600134713 /* DataPersistence.cpp */,
 				0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */,
 				0A503BB818909F95009BF78F /* ModelComponent.cpp */,
 				0A503BB918909F95009BF78F /* regression.cpp */,
@@ -310,6 +322,8 @@
 				0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */,
 				0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */,
 				0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */,
+				0ACF780118A9AFB200134713 /* JKKConfigViewController.h */,
+				0ACF780218A9AFB300134713 /* JKKConfigViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -427,7 +441,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ACB6C09189AD08C000E6DCB /* JKKSetupViewController.mm in Sources */,
+				0ACF780318A9AFB300134713 /* JKKConfigViewController.m in Sources */,
 				0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */,
+				0ACF780918A9B13700134713 /* DataPersistence.cpp in Sources */,
 				0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */,
 				0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */,
 				0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */,

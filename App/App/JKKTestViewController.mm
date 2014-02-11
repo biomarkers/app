@@ -13,7 +13,6 @@
 @interface JKKTestViewController ()
 
 @property float calibrationValue;
-@property int FPS;
 
 @property NSMutableArray* componentItems;
 @property NSMutableArray* calibrationItems;
@@ -39,7 +38,6 @@ RegressionFactory factory;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.FPS = 30;
     
     [self.componentsTable setDataSource:self];
     [self.componentsTable setDelegate:self];
@@ -56,7 +54,7 @@ RegressionFactory factory;
     // Dispose of any resources that can be recreated.
 }
 
-/* hessk: called initially to match interface to current JKKTest and do other UI config */
+// hessk: called initially to match interface to current JKKModel and do other UI config
 - (void)populateControls {
     if (!self.test) {
         self.navBar.title = @"New Test";
@@ -66,27 +64,49 @@ RegressionFactory factory;
     }
     
     // hessk: TODO: really awkward button fiddling here - find a better system
-    if ([self isNewTest]) {
-        [[self takeSampleButton] setEnabled:NO];
-        
-        if ([[self componentItems] count] > 0) {
-            [[self addCalibrationButton] setEnabled:YES];
+    // hessk: interface manipulations must be done in the main queue (this allows setting of the "hidden" property)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self isNewTest]) {
+            [self.takeSampleButton setEnabled:NO];
+            
+            // show components stuff
+            [self.addComponentButton setHidden:NO];
+            [self.componentsTable setHidden:NO];
+            [self.componentsLabel setHidden:NO];
+            
+            // show calibration stuff
+            [self.calibrationValuesLabel setHidden:NO];
+            [self.addCalibrationButton setHidden:NO];
+            
+            if ([[self componentItems] count] > 0) {
+                [[self addCalibrationButton] setEnabled:YES];
+            } else {
+                [[self addCalibrationButton] setEnabled:NO];
+            }
+            
+            if ([self.calibrationItems count] > 0) {
+                [self.addComponentButton setEnabled:NO];
+                [self.doneButton setEnabled:YES];
+            } else {
+                [self.addComponentButton setEnabled:YES];
+                [self.doneButton setEnabled:NO];
+            }
         } else {
-            [[self addCalibrationButton] setEnabled:NO];
+            [self.doneButton setEnabled:YES];
+            [self.takeSampleButton setEnabled:YES];
+            
+            // hide components stuff
+            [self.addComponentButton setHidden:YES];
+            [self.componentsTable setHidden:YES];
+            [self.componentsLabel setHidden:YES];
+            
+            // hide calibration stuff
+            [self.calibrationValuesLabel setHidden:YES];
+            [self.addCalibrationButton setHidden:YES];
         }
-        
-        if ([self.calibrationItems count] > 0) {
-            [self.addComponentButton setEnabled:NO];
-        } else {
-            [self.addComponentButton setEnabled:YES];
-        }
-    } else {
-        [[self takeSampleButton] setEnabled:YES];
-        [[self addCalibrationButton] setEnabled:NO];
-        [[self addComponentButton] setEnabled:NO];
-    }
+    });
     
-    [self.calibrationValuesLabel setText:[NSString stringWithFormat:@"Cal. Values: %d", [self.calibrationItems count]]];
+    [self.calibrationValuesLabel setText:[NSString stringWithFormat:@"Cal. Values: %lu", (unsigned long)[self.calibrationItems count]]];
 }
 
 - (IBAction)updateTitle:(id)sender {
@@ -115,6 +135,10 @@ RegressionFactory factory;
         
         self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel()];
         self.test.model->setIndices(3, 2, 1, 0, -1);
+        
+        self.test.model->saveToFile();
+        
+        factory.loadFromFile(self.test.model->GetModelName());
     }
     
     // hessk: pass pointers on
