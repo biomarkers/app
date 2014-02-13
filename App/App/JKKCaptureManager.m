@@ -17,12 +17,20 @@
     self.session = [[AVCaptureSession alloc] init];
 }
 
-- (void)initializeDevice {
+- (void)initializeDevice:(BOOL) useFront {
     NSError *error;
     
     //hessk: define the device for the sessions: using default device here
     NSLog(@"Setting device for session...");
-    AVCaptureDevice *newDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    AVCaptureDevice* newDevice;
+    
+    if (useFront) {
+        newDevice = [self getFrontCamera];
+    } else {
+        newDevice = [self getBackCamera];
+    }
+    
     NSLog(@"Device set.");
     
     NSLog(@"Changing camera settings...");
@@ -73,46 +81,81 @@
 - (void)toggleAutoExposure {
     NSError *error;
     
-    [self.device lockForConfiguration:&error];
-    
-    if (self.device.exposureMode != AVCaptureExposureModeContinuousAutoExposure) {
+    if ((self.device.exposureMode != AVCaptureExposureModeContinuousAutoExposure) && [self.device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+        [self.device lockForConfiguration:&error];
         self.device.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
-    } else {
+        [self.device unlockForConfiguration];
+    } else if ([self.device isExposureModeSupported:AVCaptureExposureModeLocked]) {
+        [self.device lockForConfiguration:&error];
         self.device.exposureMode = AVCaptureExposureModeLocked;
+        [self.device unlockForConfiguration];
+    } else {
+        NSLog(@"Error toggling exposure mode; exposure mode not supported for this camera.");
     }
     
-    [self.device unlockForConfiguration];
 }
 
 - (void)toggleAutoWB {
     NSError *error;
     
-    [self.device lockForConfiguration:&error];
-    
-    if (self.device.whiteBalanceMode != AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance) {
+    if (self.device.whiteBalanceMode != AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance && [self.device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance]) {
+        [self.device lockForConfiguration:&error];
         self.device.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
-    } else {
+        [self.device unlockForConfiguration];
+    } else if ([self.device isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeLocked]) {
+        [self.device lockForConfiguration:&error];
         self.device.whiteBalanceMode = AVCaptureWhiteBalanceModeLocked;
+        [self.device unlockForConfiguration];
+    } else {
+        NSLog(@"Error toggling white balance mode; white balance mode not supported for this camera.");
     }
     
-    [self.device unlockForConfiguration];
+    
 }
 
 - (void)toggleAutoFocus {
     NSError *error;
     
-    [self.device lockForConfiguration:&error];
-    
-    if (self.device.focusMode != AVCaptureFocusModeContinuousAutoFocus) {
+    if (self.device.focusMode != AVCaptureFocusModeContinuousAutoFocus && [self.device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+        [self.device lockForConfiguration:&error];
         self.device.focusMode = AVCaptureFocusModeContinuousAutoFocus;
-    } else {
+        [self.device unlockForConfiguration];
+    } else if ([self.device isFocusModeSupported:AVCaptureFocusModeLocked]) {
+        [self.device lockForConfiguration:&error];
         self.device.focusMode = AVCaptureFocusModeLocked;
+        [self.device unlockForConfiguration];
+    } else {
+        NSLog(@"Error toggling white balance mode; white balance mode not supported for this camera.");
+    }
+}
+
+- (AVCaptureDevice *)getFrontCamera {
+    NSArray* devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    
+    for (AVCaptureDevice* device in devices) {
+        if ([device position] == AVCaptureDevicePositionFront) {
+            return device;
+        }
     }
     
-    [self.device unlockForConfiguration];
+    return nil;
+}
+
+- (AVCaptureDevice *)getBackCamera {
+    NSArray* devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    
+    for (AVCaptureDevice* device in devices) {
+        if ([device position] == AVCaptureDevicePositionBack) {
+            return device;
+        }
+    }
+    
+    return nil;
 }
 
 @end
+
+
 
 /*
 hessk:

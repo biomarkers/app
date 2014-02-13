@@ -15,7 +15,7 @@
 @property AVCaptureDevice *device;
 
 - (void)initializeSession;
-- (void)initializeDevice;
+- (void)initializeDevice: (BOOL) useFront;
 - (void)captureImage;
 - (void)toggleAutoExposure;
 - (void)toggleAutoWB;

@@ -28,7 +28,7 @@
 NSUserDefaults* defaults;
 BiomarkerImageProcessor processor;
 
-const float TIMER_STEP = 0.1;
+const float TIMER_STEP = 0.01;
 
 @implementation JKKCameraViewController
 
@@ -63,7 +63,17 @@ const float TIMER_STEP = 0.1;
     /* hessk: AVFoundation camera setup */
     self.captureManager = [JKKCaptureManager new];
     [self.captureManager initializeSession];
-    [self.captureManager initializeDevice];
+    
+    CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
+    switch (location) {
+        case FRONT:
+            [self.captureManager initializeDevice:YES];
+            break;
+        case BACK:
+        default:
+            [self.captureManager initializeDevice:NO];
+            break;
+    }
     
     /* init video out *******************************************************************************************/
     NSLog(@"Initializing session video output...");
@@ -129,16 +139,17 @@ const float TIMER_STEP = 0.1;
         
         [self.progressBar setProgress:(self.timerCount * TIMER_STEP) / (self.test.model->getModelRunTime()) animated:YES];
         
-        if (self.timerCount * TIMER_STEP > self.test.model->getModelRunTime()) {
+        if (self.timerCount * TIMER_STEP >= self.test.model->getModelRunTime()) {
             [self.timer invalidate];
             [self endProcessing];
+            [self setState:DONE];
         }
     }
 }
 
 - (void)endProcessing {
     /* Camera shutdown */
-    [self setState:DONE];
+    
     [self.captureManager.session stopRunning];
     [self.captureManager setSession: nil];
     
@@ -204,6 +215,12 @@ const float TIMER_STEP = 0.1;
     CGImageCreate(width, height, 8, 32, bytesPerRow,
                   colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little,
                   dataProvider, NULL, true, kCGRenderingIntentDefault);
+    
+    /* hessk: Kevin's code here ***************************************** */
+
+    
+    /******************************************************************** */
+    
     CGDataProviderRelease(dataProvider);
     
     // Create and return an image object to represent the Quartz image.

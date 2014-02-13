@@ -135,10 +135,6 @@ RegressionFactory factory;
         
         self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel()];
         self.test.model->setIndices(3, 2, 1, 0, -1);
-        
-        self.test.model->saveToFile();
-        
-        factory.loadFromFile(self.test.model->GetModelName());
     }
     
     // hessk: pass pointers on

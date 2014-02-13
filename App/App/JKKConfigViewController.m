@@ -26,7 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    // hessk: TODO: populate location segmented control labels with camera location enumeration
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -35,6 +37,10 @@
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSInteger fps = [defaults integerForKey:@"kFPS"];
+    
+    NSInteger cameraLocation = [defaults integerForKey:@"kCameraLocation"];
+    
+    [self.locationSegControl setSelectedSegmentIndex:cameraLocation];
     [self.fpsStepper setValue:fps];
     [self updateGUI:self.fpsStepper];
     
@@ -55,6 +61,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
+    [defaults setInteger:[self.locationSegControl selectedSegmentIndex] forKey:@"kCameraLocation"];
     [defaults setInteger:[self.fpsStepper value] forKey:@"kFPS"];
 }
 
@@ -72,7 +79,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 1;
+    return 2;
 }
 
 /*

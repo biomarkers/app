@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *fpsLabel;
 @property (strong, nonatomic) IBOutlet UIStepper *fpsStepper;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *locationSegControl;
 
 @end

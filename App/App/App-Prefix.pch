@@ -24,3 +24,8 @@ typedef enum {
     RUNNING,
     DONE
 } CameraState;
+
+typedef enum {
+    BACK,
+    FRONT
+} CameraLocation;
