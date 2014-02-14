@@ -18,6 +18,11 @@
     //self.window.backgroundColor = [UIColor whiteColor];
     //[self.window makeKeyAndVisible];
     
+    //hessk: load default configuration settings
+    NSString* defaultConfigFile = [[NSBundle mainBundle] pathForResource:@"defaultConfig" ofType:@"plist"];
+    NSDictionary* defaultConfig = [NSDictionary dictionaryWithContentsOfFile:defaultConfigFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultConfig];
+    
     BiomarkerImageProcessor processor;
     return YES;
 }
