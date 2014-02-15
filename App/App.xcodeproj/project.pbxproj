@@ -13,6 +13,7 @@
 		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; };
 		0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBB18909F95009BF78F /* RegressionModel.cpp */; };
 		0A2AD04E18AC5D2900064DC3 /* DataStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A2AD04D18AC5D2900064DC3 /* DataStore.cpp */; };
+		0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */; };
 		0A503B6718909C7C009BF78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6618909C7C009BF78F /* Foundation.framework */; };
 		0A503B6918909C7C009BF78F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6818909C7C009BF78F /* CoreGraphics.framework */; };
 		0A503B6B18909C7C009BF78F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6A18909C7C009BF78F /* UIKit.framework */; };
@@ -69,6 +70,7 @@
 		0A2AD04A18AC5D1500064DC3 /* ModelEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntry.h; sourceTree = "<group>"; };
 		0A2AD04B18AC5D1500064DC3 /* ResultEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultEntry.h; sourceTree = "<group>"; };
 		0A2AD04D18AC5D2900064DC3 /* DataStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStore.cpp; sourceTree = "<group>"; };
+		0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultConfig.plist; sourceTree = "<group>"; };
 		0A503B6318909C7C009BF78F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A503B6618909C7C009BF78F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A503B6818909C7C009BF78F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -241,6 +243,7 @@
 		0A503B6D18909C7C009BF78F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */,
 				0A503B6E18909C7C009BF78F /* App-Info.plist */,
 				0A503B6F18909C7C009BF78F /* InfoPlist.strings */,
 				0A503B7218909C7C009BF78F /* main.mm */,
@@ -439,6 +442,7 @@
 				0A503B7118909C7C009BF78F /* InfoPlist.strings in Resources */,
 				0A503BBC18909F95009BF78F /* .gitignore in Resources */,
 				0A503BBE18909F95009BF78F /* README.md in Resources */,
+				0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */,
 				0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */,
 				0A503BBF18909F95009BF78F /* plot.py in Resources */,
 				0A503B7918909C7C009BF78F /* Images.xcassets in Resources */,
