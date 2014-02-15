@@ -16,6 +16,7 @@
 @property float value;
 
 // hessk: TODO: continue adding result properties here
+@property NSString* name;
 
 - (id)init;
 

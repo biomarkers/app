@@ -12,7 +12,6 @@
 		0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
 		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; };
 		0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBB18909F95009BF78F /* RegressionModel.cpp */; };
-		0A2AD04E18AC5D2900064DC3 /* DataStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A2AD04D18AC5D2900064DC3 /* DataStore.cpp */; };
 		0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */; };
 		0A503B6718909C7C009BF78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6618909C7C009BF78F /* Foundation.framework */; };
 		0A503B6918909C7C009BF78F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6818909C7C009BF78F /* CoreGraphics.framework */; };
@@ -66,10 +65,6 @@
 		0A05457418A9517600BF2072 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = boost.framework; sourceTree = "<group>"; };
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
-		0A2AD04918AC5D1500064DC3 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
-		0A2AD04A18AC5D1500064DC3 /* ModelEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntry.h; sourceTree = "<group>"; };
-		0A2AD04B18AC5D1500064DC3 /* ResultEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultEntry.h; sourceTree = "<group>"; };
-		0A2AD04D18AC5D2900064DC3 /* DataStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStore.cpp; sourceTree = "<group>"; };
 		0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultConfig.plist; sourceTree = "<group>"; };
 		0A503B6318909C7C009BF78F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A503B6618909C7C009BF78F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -166,24 +161,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A2AD04818AC5D1500064DC3 /* persist */ = {
-			isa = PBXGroup;
-			children = (
-				0A2AD04918AC5D1500064DC3 /* DataStore.h */,
-				0A2AD04A18AC5D1500064DC3 /* ModelEntry.h */,
-				0A2AD04B18AC5D1500064DC3 /* ResultEntry.h */,
-			);
-			path = persist;
-			sourceTree = "<group>";
-		};
-		0A2AD04C18AC5D2900064DC3 /* persist */ = {
-			isa = PBXGroup;
-			children = (
-				0A2AD04D18AC5D2900064DC3 /* DataStore.cpp */,
-			);
-			path = persist;
-			sourceTree = "<group>";
-		};
 		0A503B5A18909C7C009BF78F = {
 			isa = PBXGroup;
 			children = (
@@ -287,7 +264,6 @@
 		0A503BAD18909F95009BF78F /* include */ = {
 			isa = PBXGroup;
 			children = (
-				0A2AD04818AC5D1500064DC3 /* persist */,
 				0A503BAE18909F95009BF78F /* BiomarkerImageProcessor.h */,
 				0A503BAF18909F95009BF78F /* ModelComponent.h */,
 				0A503BB018909F95009BF78F /* RegressionFactory.h */,
@@ -307,7 +283,6 @@
 		0A503BB618909F95009BF78F /* src */ = {
 			isa = PBXGroup;
 			children = (
-				0A2AD04C18AC5D2900064DC3 /* persist */,
 				0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */,
 				0A503BB818909F95009BF78F /* ModelComponent.cpp */,
 				0A503BB918909F95009BF78F /* regression.cpp */,
@@ -481,7 +456,6 @@
 				0ACB6C0C189B04DD000E6DCB /* JKKModel.mm in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,
 				0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */,
-				0A2AD04E18AC5D2900064DC3 /* DataStore.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

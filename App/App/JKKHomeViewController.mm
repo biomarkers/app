@@ -141,9 +141,8 @@
         //cell.textLabel.text = [NSString stringWithCString: testItem->GetModelName().c_str()];
         
     } else if (tableView == self.historyTable) {
-        /*
         NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"mm/dd/yyyy"];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
         
         JKKResult* historyItem = [self.historyItems objectAtIndex:indexPath.row];
         
@@ -152,9 +151,8 @@
         UILabel* title = (UILabel *)[cell.contentView viewWithTag:10];
         UILabel* subtitle = (UILabel *)[cell.contentView viewWithTag:11];
         
-        title.text = historyItem.test.name;
+        title.text = historyItem.name;
         subtitle.text = [formatter stringFromDate:historyItem.date];
-         */
     } else {
         //error
     }
@@ -214,7 +212,7 @@
         }
         
         [self.testsTable reloadData];
-    } /*else if ([source isKindOfClass:[JKKResultsViewController class]]) {
+    } else if ([source isKindOfClass:[JKKResultsViewController class]]) {
         JKKResultsViewController* resultsViewSource = (JKKResultsViewController *)source;
         JKKResult* newResult = resultsViewSource.result;
         
@@ -223,7 +221,7 @@
         }
         
         [self.historyTable reloadData];
-    }*/
+    }
 }
 
 @end
