@@ -8,6 +8,8 @@
 
 #import "JKKConfigViewController.h"
 
+/* display pixel density for a circle based on the fps settings and x, y configuration */
+
 @interface JKKConfigViewController ()
 
 @end

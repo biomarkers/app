@@ -75,6 +75,8 @@
     self.currentEndTimeSeconds = [self.secondStepper value];
     
     [self updateRuntimeControls];
+    
+    /* validate negative values for start and endtime */
 }
 
 - (void)updateRuntimeControls {
