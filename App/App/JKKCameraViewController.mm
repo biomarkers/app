@@ -57,6 +57,7 @@ const float TIMER_STEP = 0.01;
     
     /* hessk: Timer setup */
     self.timeElapsed = 0.0;
+    [self.timer invalidate];
     self.timer = [NSTimer timerWithTimeInterval:TIMER_STEP target:self selector:@selector(updateProgress:) userInfo:NULL repeats:YES];
     self.timerCount = 0;
     
@@ -126,11 +127,11 @@ const float TIMER_STEP = 0.01;
     
     processor.reset();
     
-    /* adds delay before calling endProcessing */
-    [self performSelector:@selector(endProcessing) withObject:nil afterDelay: (self.test.model->getModelRunTime())];
-    
     [self.statusLabel setText:@"Analyzing..."];
     NSLog(@"Camera state set to RUNNING");
+    
+    /* adds delay before calling endProcessing */
+    [self performSelector:@selector(endProcessing) withObject:nil afterDelay: (self.test.model->getModelRunTime())];
 }
 
 - (void)updateProgress:(NSTimer *)timer {
@@ -140,23 +141,20 @@ const float TIMER_STEP = 0.01;
         [self.progressBar setProgress:(self.timerCount * TIMER_STEP) / (self.test.model->getModelRunTime()) animated:YES];
         
         if (self.timerCount * TIMER_STEP >= self.test.model->getModelRunTime()) {
-            [self.timer invalidate];
-            [self endProcessing];
+            NSLog(@"Camera state set to DONE");
             [self setState:DONE];
+            
+            [self.timer invalidate];
+            self.timer = nil;
         }
     }
 }
 
 - (void)endProcessing {
     /* Camera shutdown */
-    
     [self.captureManager.session stopRunning];
     [self.captureManager setSession: nil];
     
-    /* Do stuff with processor results here */
-    /* when done processing, call getSamples() to get an array of vectors */
-    
-    NSLog(@"Camera state set to DONE");
     [self.statusLabel setText:@"Done."];
     
     if ([self isTakingCalibrationPoint]) {

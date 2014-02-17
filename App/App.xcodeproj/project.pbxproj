@@ -25,9 +25,6 @@
 		0A503B8218909C7C009BF78F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6A18909C7C009BF78F /* UIKit.framework */; };
 		0A503B8A18909C7C009BF78F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A503B8818909C7C009BF78F /* InfoPlist.strings */; };
 		0A503B8C18909C7C009BF78F /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A503B8B18909C7C009BF78F /* AppTests.m */; };
-		0A503BBC18909F95009BF78F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0A503BAC18909F95009BF78F /* .gitignore */; };
-		0A503BBE18909F95009BF78F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0A503BB318909F95009BF78F /* README.md */; };
-		0A503BBF18909F95009BF78F /* plot.py in Resources */ = {isa = PBXBuildFile; fileRef = 0A503BB518909F95009BF78F /* plot.py */; };
 		0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */; };
 		0A503BC61890A2A8009BF78F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC51890A2A8009BF78F /* opencv2.framework */; };
 		0A503BC81890A402009BF78F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC71890A402009BF78F /* Accelerate.framework */; };
@@ -327,6 +324,8 @@
 			children = (
 				0A9CC7E01894919D0035959E /* JKKHomeViewController.h */,
 				0ACB6C06189ACBFB000E6DCB /* JKKHomeViewController.mm */,
+				0ACF780118A9AFB200134713 /* JKKConfigViewController.h */,
+				0ACF780218A9AFB300134713 /* JKKConfigViewController.m */,
 				0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */,
 				0ACB6C04189ACA89000E6DCB /* JKKTestViewController.mm */,
 				0AEF3E0718A6E6D0001A5FFC /* JKKAddComponentViewController.h */,
@@ -337,8 +336,6 @@
 				0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */,
 				0A9CC7EC1895911E0035959E /* JKKResultsViewController.h */,
 				0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */,
-				0ACF780118A9AFB200134713 /* JKKConfigViewController.h */,
-				0ACF780218A9AFB300134713 /* JKKConfigViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -450,11 +447,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A503B7118909C7C009BF78F /* InfoPlist.strings in Resources */,
-				0A503BBC18909F95009BF78F /* .gitignore in Resources */,
-				0A503BBE18909F95009BF78F /* README.md in Resources */,
 				0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */,
 				0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */,
-				0A503BBF18909F95009BF78F /* plot.py in Resources */,
 				0A503B7918909C7C009BF78F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
