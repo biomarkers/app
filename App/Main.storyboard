@@ -143,7 +143,7 @@
                                     <segment title="Type 2"/>
                                 </segments>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="xm1-wH-1Hd">
+                            <segmentedControl opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xm1-wH-1Hd">
                                 <rect key="frame" x="20" y="179" width="280" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -666,7 +666,7 @@
                                     <navigationItem title="Results" id="f1V-Lm-x92">
                                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="cEO-FR-bE6">
                                             <connections>
-                                                <segue destination="WJv-mx-CN3" kind="unwind" identifier="returnToTestFromResults" unwindAction="unwindToTestView:" id="w3A-V7-a3H"/>
+                                                <action selector="unwindToSource:" destination="iqK-DG-DA3" id="mnx-ee-Fkc"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -696,8 +696,8 @@
                         <outlet property="subjectLabel" destination="5jz-JT-Muk" id="V2h-0W-QYk"/>
                         <outlet property="testLabel" destination="pv1-fS-p8J" id="D8G-VP-o9e"/>
                         <outlet property="valueLabel" destination="0Oe-03-94D" id="B6h-BS-XOx"/>
-                        <segue destination="WJv-mx-CN3" kind="unwind" unwindAction="unwindToHome:" id="xdI-7d-ueT"/>
-                        <segue destination="WJv-mx-CN3" kind="unwind" unwindAction="unwindToTestView:" id="Py3-tB-UyK"/>
+                        <segue destination="WJv-mx-CN3" kind="unwind" identifier="unwindToHomeFromResults" unwindAction="unwindToHome:" id="xdI-7d-ueT"/>
+                        <segue destination="WJv-mx-CN3" kind="unwind" identifier="unwindToTestFromResults" unwindAction="unwindToTestView:" id="Py3-tB-UyK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yz5-P1-hDa" userLabel="First Responder" sceneMemberID="firstResponder"/>

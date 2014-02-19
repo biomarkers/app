@@ -19,4 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
 @property (strong, nonatomic) IBOutlet UITextView *notesTextView;
 
+@property UIViewController* sourceView;
+
 @end

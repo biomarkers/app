@@ -44,14 +44,17 @@
 }
 
 - (void)initializeControls {
-    NSArray *colorSelectorSubviews = [self.channelSelector subviews];
-    [[colorSelectorSubviews objectAtIndex: ModelComponent::RED] setTintColor:[UIColor redColor]];
+    // hessk: TODO: temporarily removing colors until we can figure out how to handle the discrepancy between
+    // segment index and subview index (can't just call "setTitle" on one of the subviews)
+    
+    //NSArray *colorSelectorSubviews = [self.channelSelector subviews];
+    //[[colorSelectorSubviews objectAtIndex: ModelComponent::RED] setTintColor:[UIColor redColor]];
     [[self channelSelector] setTitle:@"Red" forSegmentAtIndex:ModelComponent::RED];
     
-    [[colorSelectorSubviews objectAtIndex: ModelComponent::GREEN] setTintColor:[UIColor blueColor]];
+    //[[colorSelectorSubviews objectAtIndex: ModelComponent::GREEN] setTintColor:[UIColor blueColor]];
     [[self channelSelector] setTitle:@"Green" forSegmentAtIndex:ModelComponent::GREEN];
     
-    [[colorSelectorSubviews objectAtIndex: ModelComponent::BLUE] setTintColor:[UIColor greenColor]];
+    //[[colorSelectorSubviews objectAtIndex: ModelComponent::BLUE] setTintColor:[UIColor greenColor]];
     [[self channelSelector] setTitle:@"Blue" forSegmentAtIndex:ModelComponent::BLUE];
     
     [[self typeSelector] setTitle:@"Point" forSegmentAtIndex:ModelComponent::POINT];

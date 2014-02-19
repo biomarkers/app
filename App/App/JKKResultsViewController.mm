@@ -8,6 +8,9 @@
 
 #import "JKKResultsViewController.h"
 
+#import "JKKHomeViewController.h"
+#import "JKKCameraViewController.h"
+
 @interface JKKResultsViewController ()
 
 - (void)populateControls;
@@ -46,6 +49,14 @@
     self.testLabel.text = self.result.name;
     self.dateLabel.text = [formatter stringFromDate:self.result.date];
     self.valueLabel.text = [NSString stringWithFormat:@"%f", self.result.value];
+}
+
+- (IBAction)unwindToSource:(id)sender {
+    if ([self.sourceView isKindOfClass:[JKKHomeViewController class]]) {
+        [self performSegueWithIdentifier:@"unwindToHomeFromResults" sender:sender];
+    } else if ([self.sourceView isKindOfClass:[JKKCameraViewController class]]) {
+        [self performSegueWithIdentifier:@"unwindToTestFromResults" sender:sender];
+    }
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import "JKKCameraViewController.h"
 
+#import "JKKResultsViewController.h"
+
 #import "BiomarkerImageProcessor.h"
 #import "RegressionFactory.h"
 #import "DataStore.h"
@@ -179,6 +181,7 @@ const float TIMER_STEP = 0.01;
 {
     if ([[segue identifier] isEqualToString:@"showResultsFromCamera"]) {
         [[segue destinationViewController] setResult:self.result];
+        [[segue destinationViewController] setSourceView:self];
     }
 }
 

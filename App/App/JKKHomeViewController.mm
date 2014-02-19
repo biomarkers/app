@@ -208,6 +208,7 @@
         JKKResult* selectedResult = [self.historyItems objectAtIndex:selectedHistoryItemPath.row];
         
         [[segue destinationViewController] setResult:selectedResult];
+        [[segue destinationViewController] setSourceView:self];
     } else if ([[segue identifier] isEqualToString:@"showTest"]) {
         // hessk: pass on the selected test to the test view controller instance
         NSIndexPath* selectedTestItemPath = [self.testsTable indexPathForSelectedRow];
