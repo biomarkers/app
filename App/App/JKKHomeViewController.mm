@@ -40,26 +40,8 @@
     [self.historyTable setDataSource:self];
     [self.historyTable setDelegate:self];
     
-    // hessk:generate history items from sqlite database
     self.historyItems = [[NSMutableArray alloc] init];
-    
-    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
-    std::vector<ResultEntry> results = p.findAllResultEntries();
-    p.close();
-    
-    JKKResult* currentResult;
-    NSString* name;
-    float value;
-    
-    for (int i = 0; i < results.size(); i++) {
-        name = [NSString stringWithUTF8String:results[i].modelName.c_str()];
-        value = results[i].value;
-        
-        currentResult = [[JKKResult alloc] initWithName:name value:value];
-        [self.historyItems addObject:currentResult];
-    }
-    
-    [self.historyTable reloadData];
+    [self populateHistoryTable];
     
     self.testItems = [[NSMutableArray alloc] init];
     
@@ -111,6 +93,40 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) populateHistoryTable {
+    // hessk:generate history items from sqlite database
+    
+    // TODO: getting rid of all the objects all the time and rereading from the database isn't very efficient...
+    [self.historyItems removeAllObjects];
+    
+    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+    std::vector<ResultEntry> results = p.findAllResultEntries();
+    p.close();
+    
+    JKKResult* currentResult;
+    NSString *name, *subject, *notes;
+    float value;
+    // hessk: TODO: dates
+    
+    for (int i = 0; i < results.size(); i++) {
+        name = [NSString stringWithUTF8String:results[i].modelName.c_str()];
+        subject = [NSString stringWithUTF8String:results[i].subjectName.c_str()];
+        notes = [NSString stringWithUTF8String:results[i].notes.c_str()];
+        
+        value = results[i].value;
+        
+        currentResult = [[JKKResult alloc] initResultWithName:name
+                                                      subject:subject
+                                                        notes:notes
+                                                         date:0
+                                                        value:value];
+        
+        [self.historyItems addObject:currentResult];
+    }
+    
+    [self.historyTable reloadData];
 }
 
 #pragma mark UITableViewDelegate/UITableViewDataSource protocol methods
@@ -237,28 +253,8 @@
         
         [self.testsTable reloadData];
     }
-    
-    // TODO: getting rid of all the objects all the time and rereading from the database isn't very efficient...
-    [self.historyItems removeAllObjects];
-    
-    // get history items from db
-    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
-    std::vector<ResultEntry> results = p.findAllResultEntries();
-    p.close();
-    
-    JKKResult* currentResult;
-    NSString* name;
-    float value;
-    
-    for (int i = 0; i < results.size(); i++) {
-        name = [NSString stringWithUTF8String:results[i].modelName.c_str()];
-        value = results[i].value;
-        
-        currentResult = [[JKKResult alloc] initWithName:name value:value];
-        [self.historyItems addObject:currentResult];
-    }
-    
-    [self.historyTable reloadData];
+
+    [self populateHistoryTable];
 }
 
 @end

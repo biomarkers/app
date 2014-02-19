@@ -169,7 +169,7 @@ const float TIMER_STEP = 0.01;
 
         // write results to database
         DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
-        ResultEntry entry(-1, [self.result.name UTF8String], "Test_subject", "Test notes", self.result.value);
+        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], self.result.value);
         p.insertResultEntry(entry);
         p.close();
         

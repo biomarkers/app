@@ -10,15 +10,13 @@
 
 @interface JKKResult : NSObject
 
-@property NSDate* date;
-
-// hessk: placeholder member
-@property float value;
-
-// hessk: TODO: continue adding result properties here
 @property NSString* name;
+@property NSDate* date;
+@property float value;
+@property NSString* subject;
+@property NSString* notes;
 
-- (id)init;
-- (id)initWithName: (NSString*)name value: (float)value;
+- (id)initNewResultWithName:(NSString*)name subject:(NSString*)subject notes:(NSString*)notes;
+- (id)initResultWithName:(NSString*)name subject:(NSString*)subject notes:(NSString*)notes date:(NSDate*)date value:(float)value;
 
 @end

@@ -10,27 +10,31 @@
 
 @implementation JKKResult
 
-/* hessk: Initializer with given test and current date */
-- (id)init {
+// hessk: initializer for a result which we will add a value to later
+- (id)initNewResultWithName:(NSString*)name subject:(NSString *)subject notes:(NSString *)notes{
     self = [super init];
     
     if (self) {
         self.date = [NSDate date];
+        self.name = name;
+        self.subject = subject;
+        self.notes = notes;
     }
     
     return self;
 }
 
-- (id)initWithName: (NSString*)name value: (float)value {
-    self = [super init];
+// hessk: initializer for a previously evaluated result for historical display
+- (id)initResultWithName:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes date:(NSDate*)date value:(float)value {
+    self = [self initNewResultWithName:name subject:subject notes:notes];
     
     if (self) {
-        self.date = 0;
-        self.name = name;
+        self.date = date;
         self.value = value;
     }
     
     return self;
 }
+
 
 @end

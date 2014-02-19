@@ -53,10 +53,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    JKKResult* newResult = [[JKKResult alloc] init];
     // initialize result data with information user enters here; subject, notes, etc
+    JKKResult* newResult = [[JKKResult alloc] initNewResultWithName:[self.test getModelName]
+                                                            subject:[self.subjectField text]
+                                                              notes:[self.notesField text]];
     self.result = newResult;
-    self.result.name = [self.test getModelName];
     
     // hessk: pass pointers on
     if ([[segue identifier] isEqualToString:@"showCameraFromSetup"]) {
