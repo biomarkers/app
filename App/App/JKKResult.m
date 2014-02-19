@@ -21,4 +21,16 @@
     return self;
 }
 
+- (id)initWithName: (NSString*)name value: (float)value {
+    self = [super init];
+    
+    if (self) {
+        self.date = 0;
+        self.name = name;
+        self.value = value;
+    }
+    
+    return self;
+}
+
 @end

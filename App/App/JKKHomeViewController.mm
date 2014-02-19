@@ -8,6 +8,9 @@
 
 #import "JKKHomeViewController.h"
 
+#import "DataStore.h"
+#import "ResultEntry.h"
+
 @interface JKKHomeViewController ()
 
 @property NSMutableArray* testItems;
@@ -36,8 +39,34 @@
     [self.historyTable setDataSource:self];
     [self.historyTable setDelegate:self];
     
-    // hessk: TODO: only adding sample items here; update to actually pull from core data
+    // hessk:generate history items from sqlite database
     self.historyItems = [[NSMutableArray alloc] init];
+    
+    //NSString* libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    //NSString* databasePath = [libraryPath stringByAppendingString:@"JKK/jkk_store.sqlite3"];
+    
+    NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* databasePath = [documentsPath stringByAppendingPathComponent:@"/taterbase.sqlite"];
+    
+    DataStore p = DataStore::open([databasePath UTF8String]);
+    p.createTables();
+    std::vector<ResultEntry> results = p.findAllResultEntries();
+    p.close();
+    
+    JKKResult* currentResult;
+    NSString* name;
+    float value;
+    
+    for (int i = 0; i < results.size(); i++) {
+        name = [NSString stringWithUTF8String:results[i].modelName.c_str()];
+        value = results[i].value;
+        
+        currentResult = [[JKKResult alloc] initWithName:name value:value];
+        [self.historyItems addObject:currentResult];
+    }
+    
+    [self.historyTable reloadData];
+    
     self.testItems = [[NSMutableArray alloc] init];
     
     RegressionFactory::RegressionFactory factory;
@@ -212,16 +241,30 @@
         }
         
         [self.testsTable reloadData];
-    } else if ([source isKindOfClass:[JKKResultsViewController class]]) {
-        JKKResultsViewController* resultsViewSource = (JKKResultsViewController *)source;
-        JKKResult* newResult = resultsViewSource.result;
-        
-        if (![self.historyItems containsObject:newResult]) {
-            [self.historyItems addObject:newResult];
-        }
-        
-        [self.historyTable reloadData];
     }
+    
+    /* get history items from db */
+    NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* databasePath = [documentsPath stringByAppendingPathComponent:@"/taterbase.sqlite"];
+    
+    DataStore p = DataStore::open([databasePath UTF8String]);
+    p.createTables();
+    std::vector<ResultEntry> results = p.findAllResultEntries();
+    p.close();
+    
+    JKKResult* currentResult;
+    NSString* name;
+    float value;
+    
+    for (int i = 0; i < results.size(); i++) {
+        name = [NSString stringWithUTF8String:results[i].modelName.c_str()];
+        value = results[i].value;
+        
+        currentResult = [[JKKResult alloc] initWithName:name value:value];
+        [self.historyItems addObject:currentResult];
+    }
+    
+    [self.historyTable reloadData];
 }
 
 @end

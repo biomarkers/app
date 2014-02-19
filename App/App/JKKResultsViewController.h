@@ -16,5 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *testLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
+@property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
+@property (strong, nonatomic) IBOutlet UITextView *notesTextView;
 
 @end

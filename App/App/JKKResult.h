@@ -19,5 +19,6 @@
 @property NSString* name;
 
 - (id)init;
+- (id)initWithName: (NSString*)name value: (float)value;
 
 @end
