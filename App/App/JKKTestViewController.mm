@@ -148,7 +148,6 @@ RegressionFactory factory;
 }
 
 - (IBAction)unwindToTestView:(UIStoryboardSegue *)segue {
-    //hessk: TODO: this method is getting called twice from camera view - fix this
     UIViewController* sourceController = segue.sourceViewController;
     
     if ([sourceController isKindOfClass:[JKKAddComponentViewController class]]) {
@@ -189,6 +188,11 @@ RegressionFactory factory;
 - (IBAction)addCalibrationPoint:(id)sender {
     UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:@"Calibration value" message:@"Please enter the value of this sample."  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
     calibrationValueAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    [[calibrationValueAlert textFieldAtIndex:0] resignFirstResponder];
+    [[calibrationValueAlert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDecimalPad];
+    [[calibrationValueAlert textFieldAtIndex:0] becomeFirstResponder];
+    
     [calibrationValueAlert show];
 }
 
