@@ -34,6 +34,7 @@
 		0A503BD21890A43D009BF78F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCC1890A43D009BF78F /* CoreMedia.framework */; };
 		0A503BD31890A43D009BF78F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCD1890A43D009BF78F /* CoreVideo.framework */; };
 		0A503BD41890A43D009BF78F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCE1890A43D009BF78F /* QuartzCore.framework */; };
+		0A7412E818B46E42004E0D52 /* JKKDatabaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */; };
 		0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9CC7DE1894897E0035959E /* Main.storyboard */; };
 		0A9CC7E5189576560035959E /* JKKResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E4189576560035959E /* JKKResult.m */; };
 		0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7ED1895911E0035959E /* JKKResultsViewController.m */; };
@@ -103,6 +104,8 @@
 		0A503BCC1890A43D009BF78F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		0A503BCD1890A43D009BF78F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0A503BCE1890A43D009BF78F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0A7412E618B46E42004E0D52 /* JKKDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKDatabaseManager.h; sourceTree = "<group>"; };
+		0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKDatabaseManager.mm; sourceTree = "<group>"; };
 		0A9CC7DE1894897E0035959E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0A9CC7E01894919D0035959E /* JKKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKHomeViewController.h; sourceTree = "<group>"; };
 		0A9CC7E3189576560035959E /* JKKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResult.h; sourceTree = "<group>"; };
@@ -363,6 +366,8 @@
 			children = (
 				0AFAC4431899EBF40029D0F2 /* JKKCaptureManager.h */,
 				0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */,
+				0A7412E618B46E42004E0D52 /* JKKDatabaseManager.h */,
+				0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -474,6 +479,7 @@
 				0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */,
 				0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */,
 				0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */,
+				0A7412E818B46E42004E0D52 /* JKKDatabaseManager.mm in Sources */,
 				0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */,
 				0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */,
 				0A9CC7EE1895911E0035959E /* JKKResultsViewController.m in Sources */,

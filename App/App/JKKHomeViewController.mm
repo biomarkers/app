@@ -10,6 +10,7 @@
 
 #import "DataStore.h"
 #import "ResultEntry.h"
+#import "JKKDatabaseManager.h"
 
 @interface JKKHomeViewController ()
 
@@ -42,14 +43,7 @@
     // hessk:generate history items from sqlite database
     self.historyItems = [[NSMutableArray alloc] init];
     
-    //NSString* libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    //NSString* databasePath = [libraryPath stringByAppendingString:@"JKK/jkk_store.sqlite3"];
-    
-    NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* databasePath = [documentsPath stringByAppendingPathComponent:@"/taterbase.sqlite"];
-    
-    DataStore p = DataStore::open([databasePath UTF8String]);
-    p.createTables();
+    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
     std::vector<ResultEntry> results = p.findAllResultEntries();
     p.close();
     
@@ -178,10 +172,10 @@
         // hessk: Get references to the prototype cells subviews by their tags (defined in IB)
         // But using literals like this is awkward. Consider alternatives.
         UILabel* title = (UILabel *)[cell.contentView viewWithTag:10];
-        UILabel* subtitle = (UILabel *)[cell.contentView viewWithTag:11];
+        UILabel* detail = (UILabel *)[cell.contentView viewWithTag:11];
         
         title.text = historyItem.name;
-        subtitle.text = [formatter stringFromDate:historyItem.date];
+        detail.text = [NSString stringWithFormat:@"%f", historyItem.value];
     } else {
         //error
     }
@@ -243,12 +237,11 @@
         [self.testsTable reloadData];
     }
     
-    /* get history items from db */
-    NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* databasePath = [documentsPath stringByAppendingPathComponent:@"/taterbase.sqlite"];
+    // TODO: getting rid of all the objects all the time and rereading from the database isn't very efficient...
+    [self.historyItems removeAllObjects];
     
-    DataStore p = DataStore::open([databasePath UTF8String]);
-    p.createTables();
+    // get history items from db
+    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
     std::vector<ResultEntry> results = p.findAllResultEntries();
     p.close();
     

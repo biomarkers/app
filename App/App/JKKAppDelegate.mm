@@ -23,17 +23,6 @@
     NSDictionary* defaultConfig = [NSDictionary dictionaryWithContentsOfFile:defaultConfigFile];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultConfig];
     
-    //hessk: create directory for data store if it doesn't already exist
-    NSError* error;
-    NSFileManager* manager = [[NSFileManager alloc] init];
-    /*
-    NSString* libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* databasePath = [libraryPath stringByAppendingPathComponent:@"/JKK"];
-    if (![manager createDirectoryAtPath:databasePath withIntermediateDirectories:YES attributes:nil error:&error]) {
-        NSLog([NSString stringWithFormat:@"Could not create directory %@", databasePath]);
-    }
-     */
-    
     BiomarkerImageProcessor processor;
     return YES;
 }

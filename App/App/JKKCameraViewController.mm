@@ -12,6 +12,7 @@
 #import "RegressionFactory.h"
 #import "DataStore.h"
 #import "ResultEntry.h"
+#import "JKKDatabaseManager.h"
 
 @interface JKKCameraViewController ()
 
@@ -53,9 +54,6 @@ const float TIMER_STEP = 0.01;
     if (!self.test) NSLog(@"No test loaded.");
 
     [self setState: POSITIONING];
-    
-    /* hessk: Regression model setup */
-   
     
     /* hessk: Timer setup */
     self.timeElapsed = 0.0;
@@ -166,15 +164,9 @@ const float TIMER_STEP = 0.01;
     } else /* if (there are results) */ {
 
         self.result.value = self.test.model->evaluate(processor.getSamples());
-        //get location of user's library folder
-        //NSString* libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        //NSString* databasePath = [libraryPath stringByAppendingString:@"JKK/jkk_store.sqlite3"];
-        
-        NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString* databasePath = [documentsPath stringByAppendingPathComponent:@"/taterbase.sqlite"];
-        
-        DataStore p = DataStore::open([databasePath UTF8String]);
-        p.createTables();
+
+        // write results to database
+        DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
         ResultEntry entry(-1, [self.result.name UTF8String], "Test_subject", "Test notes", self.result.value);
         p.insertResultEntry(entry);
         p.close();
