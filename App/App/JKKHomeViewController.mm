@@ -231,11 +231,9 @@
         JKKModel* selectedTest = [self.testItems objectAtIndex:selectedTestItemPath.row];
         
         [[segue destinationViewController] setTest:selectedTest];
-        [[segue destinationViewController] setNewTest:NO];
     } else if ([[segue identifier] isEqualToString:@"showNewTest"]) {
         // new test setup
         [[segue destinationViewController] setTest:nil];
-        [[segue destinationViewController] setNewTest:YES];
     }
 }
 
@@ -247,14 +245,15 @@
         JKKTestViewController* testViewSource = (JKKTestViewController *)source;
         JKKModel* newTest = testViewSource.test;
         
-        if (![self.testItems containsObject:newTest]) {
+        if (newTest != nil) {
             [self.testItems addObject:newTest];
         }
         
         [self.testsTable reloadData];
+    } else if ([source isKindOfClass:[JKKResultsViewController class]]) {
+        // new history item may have been added to the database, so re-query
+        [self populateHistoryTable];
     }
-
-    [self populateHistoryTable];
 }
 
 @end

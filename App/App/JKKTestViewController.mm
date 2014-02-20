@@ -56,53 +56,30 @@ RegressionFactory factory;
 
 // hessk: called initially to match interface to current JKKModel and do other UI config
 - (void)populateControls {
-    if (!self.test) {
-        self.navBar.title = @"New Test";
-    } else {
-        self.navBar.title = [self.test getModelName];
-        self.nameField.text = [self.test getModelName];
-    }
-    
     // hessk: TODO: really awkward button fiddling here - find a better system
     // hessk: interface manipulations must be done in the main queue (this allows setting of the "hidden" property)
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([self isNewTest]) {
-            [self.takeSampleButton setEnabled:NO];
-            
-            // show components stuff
-            [self.addComponentButton setHidden:NO];
-            [self.componentsTable setHidden:NO];
-            [self.componentsLabel setHidden:NO];
-            
-            // show calibration stuff
-            [self.calibrationValuesLabel setHidden:NO];
-            [self.addCalibrationButton setHidden:NO];
-            
-            if ([[self componentItems] count] > 0) {
-                [[self addCalibrationButton] setEnabled:YES];
-            } else {
-                [[self addCalibrationButton] setEnabled:NO];
-            }
-            
-            if ([self.calibrationItems count] > 0) {
-                [self.addComponentButton setEnabled:NO];
-                [self.doneButton setEnabled:YES];
-            } else {
-                [self.addComponentButton setEnabled:YES];
-                [self.doneButton setEnabled:NO];
-            }
+        // show components stuff
+        [self.addComponentButton setHidden:NO];
+        [self.componentsTable setHidden:NO];
+        [self.componentsLabel setHidden:NO];
+        
+        // show calibration stuff
+        [self.calibrationValuesLabel setHidden:NO];
+        [self.addCalibrationButton setHidden:NO];
+        
+        if ([[self componentItems] count] > 0) {
+            [[self addCalibrationButton] setEnabled:YES];
         } else {
+            [[self addCalibrationButton] setEnabled:NO];
+        }
+        
+        if ([self.calibrationItems count] > 0) {
+            [self.addComponentButton setEnabled:NO];
             [self.doneButton setEnabled:YES];
-            [self.takeSampleButton setEnabled:YES];
-            
-            // hide components stuff
-            [self.addComponentButton setHidden:YES];
-            [self.componentsTable setHidden:YES];
-            [self.componentsLabel setHidden:YES];
-            
-            // hide calibration stuff
-            [self.calibrationValuesLabel setHidden:YES];
-            [self.addCalibrationButton setHidden:YES];
+        } else {
+            [self.addComponentButton setEnabled:YES];
+            [self.doneButton setEnabled:NO];
         }
     });
     
@@ -115,35 +92,33 @@ RegressionFactory factory;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // hessk: initialize a test if there isn't one already (TEMP: and you aren't just adding a component)
-    if (!self.test && sender != self.addComponentButton) {
-        NSLog(@"Creating a new model...");
-        std::string* modelName;
-        if (self.nameField.text.length > 0) {
-            modelName = new std::string([self.nameField.text UTF8String]);
-        } else {
-            modelName = new std::string([@"No name" UTF8String]);
-        }
-        
-        factory.createNew(*modelName, *modelName);
-        
-        JKKComponent* currentComponent;
-        for (int i = 0; i < [self.componentItems count]; i++) {
-            currentComponent = [self.componentItems objectAtIndex:i];
-            factory.addNewComponent([currentComponent modelType], [currentComponent startTime], [currentComponent endTime], [currentComponent varType]);
-        }
-        
-        self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel()];
-        self.test.model->setIndices(3, 2, 1, 0, -1);
-    }
-    
-    // hessk: pass pointers on
+    // hessk: pass pointers on for calibration if a calibration is being run
     if ([[segue identifier] isEqualToString:@"showCameraFromTest"]) {
+        // hessk: initialize a test if there isn't one
+        if (!self.test) {
+            NSLog(@"Creating a new model...");
+            std::string* modelName;
+            if (self.nameField.text.length > 0) {
+                modelName = new std::string([self.nameField.text UTF8String]);
+            } else {
+                modelName = new std::string([@"No name" UTF8String]);
+            }
+            
+            factory.createNew(*modelName, *modelName);
+            
+            JKKComponent* currentComponent;
+            for (int i = 0; i < [self.componentItems count]; i++) {
+                currentComponent = [self.componentItems objectAtIndex:i];
+                factory.addNewComponent([currentComponent modelType], [currentComponent startTime], [currentComponent endTime], [currentComponent varType]);
+            }
+            
+            self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel()];
+            self.test.model->setIndices(3, 2, 1, 0, -1);
+        }
+        
         [[segue destinationViewController] setTest:self.test];
         [[segue destinationViewController] setCalibrationValue:self.calibrationValue];
         [[segue destinationViewController] setTakingCalibrationPoint:YES];
-    } else if ([[segue identifier] isEqualToString:@"showSetup"]) {
-        [[segue destinationViewController] setTest:self.test];
     }
 }
 
@@ -156,10 +131,9 @@ RegressionFactory factory;
         JKKComponent* item = [source component];
         
         if (item != nil) {
-            NSLog(@"Found item to add");
+            NSLog(@"Adding component");
             [self.componentItems addObject:item];
             [self.componentsTable reloadData];
-            // TODO: Add to component to model here?
         }
     } else if ([sourceController isKindOfClass:[JKKCameraViewController class]]) {
         JKKCameraViewController* source = (JKKCameraViewController*)sourceController;

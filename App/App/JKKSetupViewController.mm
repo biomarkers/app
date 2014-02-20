@@ -28,7 +28,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
+    if (self.test) {
+        [self.navBar setTitle:[[self.test getModelName] stringByAppendingString:@" Setup"]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +67,10 @@
         [[segue destinationViewController] setResult:self.result];
         [[segue destinationViewController] setTakingCalibrationPoint:NO];
     }
+}
+
+- (IBAction)unwindToSetup:(id)sender {
+    // Unwind to run the test again from the results screen
 }
 
 @end

@@ -24,10 +24,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *calibrationValuesLabel;
 @property (strong, nonatomic) IBOutlet UIButton *addCalibrationButton;
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *takeSampleButton;
-
 @property JKKModel* test;
-
-@property (getter = isNewTest) bool newTest;
 
 @end

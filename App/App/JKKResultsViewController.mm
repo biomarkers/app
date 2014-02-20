@@ -57,7 +57,7 @@
     if ([self.sourceView isKindOfClass:[JKKHomeViewController class]]) {
         [self performSegueWithIdentifier:@"unwindToHomeFromResults" sender:sender];
     } else if ([self.sourceView isKindOfClass:[JKKCameraViewController class]]) {
-        [self performSegueWithIdentifier:@"unwindToTestFromResults" sender:sender];
+        [self performSegueWithIdentifier:@"unwindToSetupFromResults" sender:sender];
     }
 }
 
