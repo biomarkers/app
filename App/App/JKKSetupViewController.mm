@@ -7,6 +7,7 @@
 //
 
 #import "JKKSetupViewController.h"
+#import "JKKHomeViewController.h"
 
 @interface JKKSetupViewController ()
 

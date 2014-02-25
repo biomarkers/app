@@ -10,7 +10,7 @@
 		0A05457518A9517600BF2072 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05457418A9517600BF2072 /* boost.framework */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
 		0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
-		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; };
+		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; settings = {COMPILER_FLAGS = "-ftemplate-depth=1024"; }; };
 		0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBB18909F95009BF78F /* RegressionModel.cpp */; };
 		0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */; };
 		0A503B6718909C7C009BF78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6618909C7C009BF78F /* Foundation.framework */; };
@@ -35,6 +35,9 @@
 		0A503BD31890A43D009BF78F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCD1890A43D009BF78F /* CoreVideo.framework */; };
 		0A503BD41890A43D009BF78F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCE1890A43D009BF78F /* QuartzCore.framework */; };
 		0A7412E818B46E42004E0D52 /* JKKDatabaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */; };
+		0A8899AA18B81FB70097354E /* ExponentialRegression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A8899A718B81FB70097354E /* ExponentialRegression.cpp */; };
+		0A8899AB18B81FB70097354E /* LinearRegression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A8899A818B81FB70097354E /* LinearRegression.cpp */; };
+		0A8899AC18B81FB70097354E /* PointAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A8899A918B81FB70097354E /* PointAnalysis.cpp */; };
 		0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9CC7DE1894897E0035959E /* Main.storyboard */; };
 		0A9CC7E5189576560035959E /* JKKResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E4189576560035959E /* JKKResult.m */; };
 		0A9CC7EE1895911E0035959E /* JKKResultsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7ED1895911E0035959E /* JKKResultsViewController.mm */; };
@@ -106,6 +109,12 @@
 		0A503BCE1890A43D009BF78F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A7412E618B46E42004E0D52 /* JKKDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKDatabaseManager.h; sourceTree = "<group>"; };
 		0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKDatabaseManager.mm; sourceTree = "<group>"; };
+		0A8899A718B81FB70097354E /* ExponentialRegression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExponentialRegression.cpp; sourceTree = "<group>"; };
+		0A8899A818B81FB70097354E /* LinearRegression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearRegression.cpp; sourceTree = "<group>"; };
+		0A8899A918B81FB70097354E /* PointAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PointAnalysis.cpp; sourceTree = "<group>"; };
+		0A8899AD18B81FD30097354E /* ExponentialRegression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExponentialRegression.h; sourceTree = "<group>"; };
+		0A8899AE18B81FD30097354E /* LinearRegression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearRegression.h; sourceTree = "<group>"; };
+		0A8899AF18B81FD30097354E /* PointAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointAnalysis.h; sourceTree = "<group>"; };
 		0A9CC7DE1894897E0035959E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0A9CC7E01894919D0035959E /* JKKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKHomeViewController.h; sourceTree = "<group>"; };
 		0A9CC7E3189576560035959E /* JKKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResult.h; sourceTree = "<group>"; };
@@ -275,6 +284,9 @@
 		0A503BAD18909F95009BF78F /* include */ = {
 			isa = PBXGroup;
 			children = (
+				0A8899AD18B81FD30097354E /* ExponentialRegression.h */,
+				0A8899AE18B81FD30097354E /* LinearRegression.h */,
+				0A8899AF18B81FD30097354E /* PointAnalysis.h */,
 				0AB0BE1818B19F9300494DA3 /* SerializableMat.h */,
 				0AB0BE1918B19F9300494DA3 /* SerializableScalar.h */,
 				0AB0BE0D18B19F4F00494DA3 /* persist */,
@@ -297,6 +309,9 @@
 		0A503BB618909F95009BF78F /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0A8899A718B81FB70097354E /* ExponentialRegression.cpp */,
+				0A8899A818B81FB70097354E /* LinearRegression.cpp */,
+				0A8899A918B81FB70097354E /* PointAnalysis.cpp */,
 				0AB0BE1418B19F7D00494DA3 /* SerializableMat.cpp */,
 				0AB0BE1518B19F7D00494DA3 /* SerializableScalar.cpp */,
 				0AB0BE1118B19F6700494DA3 /* persist */,
@@ -473,6 +488,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8899AC18B81FB70097354E /* PointAnalysis.cpp in Sources */,
+				0A8899AA18B81FB70097354E /* ExponentialRegression.cpp in Sources */,
 				0ACB6C09189AD08C000E6DCB /* JKKSetupViewController.mm in Sources */,
 				0ACF780318A9AFB300134713 /* JKKConfigViewController.m in Sources */,
 				0AB0BE1618B19F7D00494DA3 /* SerializableMat.cpp in Sources */,
@@ -486,6 +503,7 @@
 				0A503B7318909C7C009BF78F /* main.mm in Sources */,
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
 				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */,
+				0A8899AB18B81FB70097354E /* LinearRegression.cpp in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
 				0ACB6C05189ACA89000E6DCB /* JKKTestViewController.mm in Sources */,
 				0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */,

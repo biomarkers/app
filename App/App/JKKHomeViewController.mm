@@ -7,6 +7,7 @@
 //
 
 #import "JKKHomeViewController.h"
+#import "JKKSetupViewController.h"
 
 #import "DataStore.h"
 #import "ResultEntry.h"
@@ -18,6 +19,8 @@
 @property NSMutableArray* historyItems;
 
 @end
+
+RegressionFactory homeFactory;
 
 @implementation JKKHomeViewController
 
@@ -44,7 +47,9 @@
     [self populateHistoryTable];
     
     self.testItems = [[NSMutableArray alloc] init];
+    [self populateTestTable];
     
+    /* sample model
     RegressionFactory::RegressionFactory factory;
     factory.createNew("Sample", "Sample");
     factory.addNewComponent(ModelComponent::LINEAR, 0, 326, ModelComponent::RED);
@@ -79,6 +84,7 @@
     
     [self.testItems addObject:sampleModel];
     [self.testsTable reloadData];
+     */
     
     /* Placeholder objects
     JKKTest* test1 = [[JKKTest alloc] initWithName:@"Glucose test"];
@@ -126,7 +132,36 @@
         [self.historyItems addObject:currentResult];
     }
     
+    /* sort history items so latest is on top
+    [self.historyItems sortedArrayUsingComparator:^NSComparisonResult(id a, id b){
+        NSDate* dateA = [(JKKResult*)a date];
+        NSDate* dateB = [(JKKResult*)b date];
+        
+        return [dateA compare:dateB];
+    }];
+    */
+    
     [self.historyTable reloadData];
+}
+
+- (void) populateTestTable {
+    // hessk: generate test (model) items from sqlite database
+    
+    [self.testItems removeAllObjects];
+    
+    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+    std::vector<ModelEntry> models = p.findAllModelEntries();
+    p.close();
+    
+    JKKModel* currentModel;
+    
+    for (int i = 0; i < models.size(); i++) {
+        currentModel = [[JKKModel alloc] initWithModel:homeFactory.deserializeFromDB(models[i].data, models[i].length)];
+
+        [self.testItems addObject:currentModel];
+    }
+    
+    [self.testsTable reloadData];
 }
 
 #pragma mark UITableViewDelegate/UITableViewDataSource protocol methods
@@ -245,13 +280,26 @@
         JKKTestViewController* testViewSource = (JKKTestViewController *)source;
         JKKModel* newTest = testViewSource.test;
         
+        // if they came back from the test screen and there's a test - it must be new !!
         if (newTest != nil) {
-            [self.testItems addObject:newTest];
+            //[self.testItems addObject:newTest];
+            DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+            
+            const void* blob;
+            unsigned int len;
+            
+            homeFactory.serializeToDB(newTest.model, blob, len);
+            
+            ModelEntry entry(newTest.model->GetModelName(), blob, len);
+            p.insertModelEntry(entry);
+            p.close();
+            
+            [self populateTestTable];
         }
         
         [self.testsTable reloadData];
-    } else if ([source isKindOfClass:[JKKResultsViewController class]]) {
-        // new history item may have been added to the database, so re-query
+    } else if ([source isKindOfClass:[JKKSetupViewController class]]) {
+        //results may have been added to db, so repopulate the table
         [self populateHistoryTable];
     }
 }

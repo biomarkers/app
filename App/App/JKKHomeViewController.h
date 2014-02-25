@@ -12,6 +12,7 @@
 #import "JKKTestViewController.h"
 
 #import "JKKResult.h"
+#import "JKKModel.h"
 
 #import "RegressionFactory.h"
 

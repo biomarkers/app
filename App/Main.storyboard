@@ -16,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tests" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wy9-EW-C31">
-                                <rect key="frame" x="11" y="76" width="45" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Models" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wy9-EW-C31">
+                                <rect key="frame" x="11" y="76" width="60" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="08T-iL-hcM"/>
+                                    <constraint firstAttribute="width" constant="60" id="08T-iL-hcM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -347,7 +347,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New Test" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kIM-au-0ju">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New Model" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kIM-au-0ju">
                                 <rect key="frame" x="79" y="79" width="221" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -451,7 +451,7 @@
                             <constraint firstAttribute="trailing" secondItem="jHH-EH-LVD" secondAttribute="trailing" constant="20" id="yEY-4b-cCq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Test" id="UoL-g2-3ly">
+                    <navigationItem key="navigationItem" title="New Model" id="UoL-g2-3ly">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pe9-Yc-M6v">
                             <connections>
                                 <segue destination="cl3-DY-1ab" kind="unwind" unwindAction="unwindToHome:" id="8uz-bS-SdR"/>
@@ -542,6 +542,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Initial Setup" id="35q-cL-Clc">
+                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="Oqh-42-fNH">
+                            <connections>
+                                <segue destination="xbI-hs-daQ" kind="unwind" unwindAction="unwindToHome:" id="nvU-9K-pTj"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Begin" id="DE5-Qc-pwM">
                             <connections>
                                 <segue destination="IBn-tG-ojN" kind="modal" identifier="showCameraFromSetup" id="uaq-hR-d9G"/>
@@ -555,6 +560,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnO-pd-ki8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xbI-hs-daQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1073" y="319"/>
         </scene>
@@ -889,7 +895,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Xrj-BB-YLO"/>
-        <segue reference="1u0-kE-RYg"/>
+        <segue reference="T03-si-de6"/>
+        <segue reference="uaq-hR-d9G"/>
     </inferredMetricsTieBreakers>
 </document>

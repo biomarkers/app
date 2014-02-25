@@ -27,6 +27,7 @@
 
 @property NSTimer* timer;
 @property int timerCount;
+@property AVAudioPlayer* alertSound;
 
 @end
 
@@ -158,6 +159,20 @@ const float TIMER_STEP = 0.01;
     [self.captureManager setSession: nil];
     
     [self.statusLabel setText:@"Done."];
+
+    /*
+    // notification w/sound
+    NSError* error;
+#warning untested alert message
+    NSURL *soundFile = [[NSBundle bundleWithIdentifier:@"com.apple.UIKit"] URLForResource:@"Tock" withExtension:@"aiff"];
+    self.alertSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFile error:&error];
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Analysis completed."  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert setAlertViewStyle:UIAlertViewStyleDefault];
+    
+    [self.alertSound play];
+    [alert show];
+     */
     
     if ([self isTakingCalibrationPoint]) {
         self.test.model->calibrate(processor.getSamples(), self.calibrationValue);
@@ -175,6 +190,12 @@ const float TIMER_STEP = 0.01;
         
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
     }
+}
+
+#pragma mark UIAlertViewDelegate method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self.alertSound stop];
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -13,7 +13,7 @@
 #import "JKKCaptureManager.h"
 #import "RegressionFactory.h"
 
-@interface JKKCameraViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface JKKCameraViewController : UIViewController <UIAlertViewDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 
 @property JKKModel* test;
 @property JKKResult* result;
