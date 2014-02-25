@@ -637,10 +637,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/kevin/Development/app/App,
-					"/Users/kevin/Development/addons/boost-ios-master/Dist",
-					"/Users/kevin/Downloads/boost-master/ios/framework",
-					/Users/kevin/Development/Frameworks,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
@@ -659,10 +656,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/kevin/Development/app/App,
-					"/Users/kevin/Development/addons/boost-ios-master/Dist",
-					"/Users/kevin/Downloads/boost-master/ios/framework",
-					/Users/kevin/Development/Frameworks,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
