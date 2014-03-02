@@ -28,13 +28,14 @@
 @property NSTimer* timer;
 @property int timerCount;
 @property AVAudioPlayer* alertSound;
+@property NSDate* timerStartDate;
 
 @end
 
 NSUserDefaults* defaults;
 BiomarkerImageProcessor processor;
 
-const float TIMER_STEP = 0.01;
+const float TIMER_STEP = 0.1;
 
 @implementation JKKCameraViewController
 
@@ -130,20 +131,25 @@ const float TIMER_STEP = 0.01;
     
     processor.reset();
     
-    [self.statusLabel setText:@"Analyzing..."];
+    [self.statusLabel setText:@"Analyzing"];
     NSLog(@"Camera state set to RUNNING");
     
-    /* adds delay before calling endProcessing */
+    // adds delay before calling endProcessing and sets the start date for the countdown label
+    [self setTimerStartDate:[NSDate date]];
     [self performSelector:@selector(endProcessing) withObject:nil afterDelay: (self.test.model->getModelRunTime())];
 }
 
 - (void)updateProgress:(NSTimer *)timer {
     if ([self state] == RUNNING) {
-        self.timerCount++;
+        NSTimeInterval timeSinceStart = [[NSDate date] timeIntervalSinceDate:self.timerStartDate];
+        NSTimeInterval timeLeft = self.test.model->getModelRunTime() - timeSinceStart;
+        double minutesLeft = floor(timeLeft / 60);
+        double secondsLeft = trunc(timeLeft - (minutesLeft * 60));
         
-        [self.progressBar setProgress:(self.timerCount * TIMER_STEP) / (self.test.model->getModelRunTime()) animated:YES];
+        [self.progressBar setProgress: (timeSinceStart / self.test.model->getModelRunTime()) animated:YES];
+        [self.statusLabel setText:[NSString stringWithFormat:@"Analyzing [%02.0f:%02.0f]", minutesLeft, secondsLeft]];
         
-        if (self.timerCount * TIMER_STEP >= self.test.model->getModelRunTime()) {
+        if (timeLeft <= 0.0) {
             NSLog(@"Camera state set to DONE");
             [self setState:DONE];
             
