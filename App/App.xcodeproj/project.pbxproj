@@ -13,6 +13,7 @@
 		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; settings = {COMPILER_FLAGS = "-ftemplate-depth=1024"; }; };
 		0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBB18909F95009BF78F /* RegressionModel.cpp */; };
 		0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */; };
+		0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */; };
 		0A503B6718909C7C009BF78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6618909C7C009BF78F /* Foundation.framework */; };
 		0A503B6918909C7C009BF78F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6818909C7C009BF78F /* CoreGraphics.framework */; };
 		0A503B6B18909C7C009BF78F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6A18909C7C009BF78F /* UIKit.framework */; };
@@ -70,6 +71,8 @@
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
 		0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultConfig.plist; sourceTree = "<group>"; };
+		0A48363218C3F80300FB93E9 /* JKKCameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraOverlayView.h; sourceTree = "<group>"; };
+		0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKCameraOverlayView.m; sourceTree = "<group>"; };
 		0A503B6318909C7C009BF78F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A503B6618909C7C009BF78F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A503B6818909C7C009BF78F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -181,6 +184,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A48363118C3F7E200FB93E9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A48363218C3F80300FB93E9 /* JKKCameraOverlayView.h */,
+				0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		0A503B5A18909C7C009BF78F = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +238,7 @@
 		0A503B6C18909C7C009BF78F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0A48363118C3F7E200FB93E9 /* Views */,
 				0A503B7518909C7C009BF78F /* JKKAppDelegate.h */,
 				0A503B7618909C7C009BF78F /* JKKAppDelegate.mm */,
 				0A9CC7E7189576A80035959E /* Models */,
@@ -504,6 +517,7 @@
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
 				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */,
 				0A8899AB18B81FB70097354E /* LinearRegression.cpp in Sources */,
+				0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
 				0ACB6C05189ACA89000E6DCB /* JKKTestViewController.mm in Sources */,
 				0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */,

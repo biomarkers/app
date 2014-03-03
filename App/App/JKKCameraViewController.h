@@ -11,6 +11,8 @@
 #import "JKKModel.h"
 #import "JKKResult.h"
 #import "JKKCaptureManager.h"
+#import "JKKCameraOverlayView.h"
+
 #import "RegressionFactory.h"
 
 @interface JKKCameraViewController : UIViewController <UIAlertViewDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -23,6 +25,7 @@
 @property (getter=isTakingCalibrationPoint) BOOL takingCalibrationPoint;
 
 @property (strong, nonatomic) IBOutlet UIImageView *cameraView;
+@property (strong, nonatomic) IBOutlet JKKCameraOverlayView *cameraOverlayView;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (strong, nonatomic) IBOutlet UIProgressView *progressBar;

@@ -251,11 +251,6 @@ const float TIMER_STEP = 0.1;
                   colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little,
                   dataProvider, NULL, true, kCGRenderingIntentDefault);
     
-    /* hessk: Kevin's code here ***************************************** */
-
-    
-    /******************************************************************** */
-    
     CGDataProviderRelease(dataProvider);
     
     // Create and return an image object to represent the Quartz image.
@@ -269,6 +264,14 @@ const float TIMER_STEP = 0.1;
 
 #pragma mark - Protocol AVCaptureVideoDataOutputSampleBufferDelegate
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    
+    int radius = 50;
+    CGRect circleBounds = CGRectMake(self.cameraOverlayView.frame.size.width / 2 - radius, self.cameraOverlayView.frame.size.height / 2 - radius, radius * 2, radius * 2);
+    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [self.cameraOverlayView updateCircle:circleBounds];
+    });
+    
     if ([self state] == RUNNING) {
         IplImage *image = [self CreateIplImageFromUIImage:[self imageFromSampleBuffer:sampleBuffer]];
         cv::Scalar rgb = processor.process((cv::Mat)image);
