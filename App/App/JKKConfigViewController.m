@@ -42,6 +42,29 @@
     
     NSInteger cameraLocation = [defaults integerForKey:@"kCameraLocation"];
     
+    ROIMode roiMode = (ROIMode)[defaults integerForKey:@"kROIMode"];
+    NSInteger roiX = [defaults integerForKey:@"kROIX"];
+    NSInteger roiY = [defaults integerForKey:@"kROIY"];
+    NSInteger roiR = [defaults integerForKey:@"kROIR"];
+    
+    
+    [self.roiModeSegControl setSelectedSegmentIndex:roiMode];
+    [self.roiXField setText:[NSString stringWithFormat:@"%ld", (long)roiX]];
+    [self.roiYField setText:[NSString stringWithFormat:@"%ld", (long)roiY]];
+    [self.roiRField setText:[NSString stringWithFormat:@"%ld", (long)roiR]];
+    
+    if (roiMode == AUTOMATIC) {
+        [self.roiXField setEnabled:NO];
+        [self.roiYField setEnabled:NO];
+        [self.roiRField setEnabled:NO];
+    } else if (roiMode == MANUAL) {
+        [self.roiXField setEnabled:YES];
+        [self.roiYField setEnabled:YES];
+        [self.roiRField setEnabled:YES];
+    } else {
+        NSLog(@"Undefined ROI mode.");
+    }
+    
     [self.locationSegControl setSelectedSegmentIndex:cameraLocation];
     [self.fpsStepper setValue:fps];
     [self updateGUI:self.fpsStepper];
@@ -56,8 +79,22 @@
 
 - (IBAction)updateGUI:(id)sender {
     
-    if (sender == self.fpsStepper)
+    if (sender == self.fpsStepper) {
         [self.fpsLabel setText:[NSString stringWithFormat:@"%.0f", [self.fpsStepper value]]];
+    } else if (sender == self.roiModeSegControl) {
+        if ([self.roiModeSegControl selectedSegmentIndex] == 0) {
+            [self.roiXField setEnabled:NO];
+            [self.roiYField setEnabled:NO];
+            [self.roiRField setEnabled:NO];
+        } else if ([self.roiModeSegControl selectedSegmentIndex] == 1) {
+            [self.roiXField setEnabled:YES];
+            [self.roiYField setEnabled:YES];
+            [self.roiRField setEnabled:YES];
+        } else {
+            NSLog(@"Undefined ROI mode.");
+        }
+    }
+        
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -65,6 +102,12 @@
     
     [defaults setInteger:[self.locationSegControl selectedSegmentIndex] forKey:@"kCameraLocation"];
     [defaults setInteger:[self.fpsStepper value] forKey:@"kFPS"];
+    
+    [defaults setInteger:[self.roiModeSegControl selectedSegmentIndex] forKey:@"kROIMode"];
+    [defaults setInteger:[[self.roiXField text] integerValue] forKey:@"kROIX"];
+    [defaults setInteger:[[self.roiYField text] integerValue] forKey:@"kROIY"];
+    [defaults setInteger:[[self.roiRField text] integerValue] forKey:@"kROIR"];
+    
 }
 
 
@@ -81,7 +124,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 2;
+    return 3;
 }
 
 /*

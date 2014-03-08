@@ -11,12 +11,12 @@
 @interface JKKResult : NSObject
 
 @property NSString* name;
-@property NSDate* date;
+@property NSString* date;
 @property float value;
 @property NSString* subject;
 @property NSString* notes;
 
 - (id)initNewResultWithName:(NSString*)name subject:(NSString*)subject notes:(NSString*)notes;
-- (id)initResultWithName:(NSString*)name subject:(NSString*)subject notes:(NSString*)notes date:(NSDate*)date value:(float)value;
+- (id)initResultWithName:(NSString*)name subject:(NSString*)subject notes:(NSString*)notes date:(NSString*)date value:(float)value;
 
 @end

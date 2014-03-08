@@ -47,7 +47,7 @@
     [formatter setDateStyle: NSDateFormatterShortStyle];
     
     self.testLabel.text = self.result.name;
-    self.dateLabel.text = [formatter stringFromDate:self.result.date];
+    self.dateLabel.text = self.result.date;
     self.valueLabel.text = [NSString stringWithFormat:@"%f", self.result.value];
     self.subjectLabel.text = self.result.subject;
     self.notesTextView.text = self.result.notes;

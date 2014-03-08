@@ -31,7 +31,8 @@
     CGContextStrokeEllipseInRect(context, self.circleBounds);
 }
 
-- (void)updateCircle:(CGRect)boundingRectangle {
+- (void)updateCircleWithCenterX:(float)x centerY:(float)y radius:(float)r {
+    CGRect boundingRectangle = CGRectMake(x - r, y - r, r * 2, r * 2);
     self.circleBounds = boundingRectangle;
     [self setNeedsDisplay];
 }

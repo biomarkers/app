@@ -30,10 +30,17 @@
 @property AVAudioPlayer* alertSound;
 @property NSDate* timerStartDate;
 
+@property ROIMode roiMode;
+@property int roiX;
+@property int roiY;
+@property int roiR;
+
 @end
 
 NSUserDefaults* defaults;
 BiomarkerImageProcessor processor;
+bool overlayScaled = NO;
+UIImage* outputImage;
 
 const float TIMER_STEP = 0.1;
 
@@ -59,16 +66,33 @@ const float TIMER_STEP = 0.1;
 
     [self setState: POSITIONING];
     
-    /* hessk: Timer setup */
+    // hessk: Timer setup
     self.timeElapsed = 0.0;
     [self.timer invalidate];
     self.timer = [NSTimer timerWithTimeInterval:TIMER_STEP target:self selector:@selector(updateProgress:) userInfo:NULL repeats:YES];
     self.timerCount = 0;
     
-    /* hessk: AVFoundation camera setup */
+    // hessk: AVFoundation camera setup
     self.captureManager = [JKKCaptureManager new];
     [self.captureManager initializeSession];
     
+    // hessk: region of interest setup
+    self.roiMode = (ROIMode)[defaults integerForKey:@"kROIMode"];
+    self.roiX = [defaults integerForKey:@"kROIX"];
+    self.roiY = [defaults integerForKey:@"kROIY"];
+    self.roiR = [defaults integerForKey:@"kROIR"];
+    
+    if (self.roiMode == AUTOMATIC) {
+        processor.setCircleDetectionEnabled(true);
+    } else if (self.roiMode == MANUAL) {
+        processor.setCircleDetectionEnabled(false);
+        
+        processor.setCircleCenterX(self.roiX);
+        processor.setCircleCenterY(self.roiY);
+        processor.setCircleRadius(self.roiR);
+    }
+    
+    // hessk: camera location setup
     CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
     switch (location) {
         case FRONT:
@@ -93,7 +117,7 @@ const float TIMER_STEP = 0.1;
     /* finish video out init ************************************************************************************/
     
     /* init preview layer ***************************************************************************************/
-    AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureManager.session];
+    AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureManager.session];
     self.cameraView.backgroundColor = [UIColor clearColor];
     UIView *view = self.cameraView;
     CALayer *viewLayer = [view layer];
@@ -185,12 +209,15 @@ const float TIMER_STEP = 0.1;
         
         [self performSegueWithIdentifier:@"returnToTestView" sender:self];
     } else /* if (there are results) */ {
-
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"Y-M-d h:m:s"];
+        
         self.result.value = self.test.model->evaluate(processor.getSamples());
+        self.result.date = [formatter stringFromDate:[NSDate date]];
 
         // write results to database
         DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
-        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], self.result.value);
+        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value);
         p.insertResultEntry(entry);
         p.close();
         
@@ -264,23 +291,44 @@ const float TIMER_STEP = 0.1;
 
 #pragma mark - Protocol AVCaptureVideoDataOutputSampleBufferDelegate
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    
-    int radius = 50;
-    CGRect circleBounds = CGRectMake(self.cameraOverlayView.frame.size.width / 2 - radius, self.cameraOverlayView.frame.size.height / 2 - radius, radius * 2, radius * 2);
-    
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [self.cameraOverlayView updateCircle:circleBounds];
-    });
-    
-    if ([self state] == RUNNING) {
-        IplImage *image = [self CreateIplImageFromUIImage:[self imageFromSampleBuffer:sampleBuffer]];
-        cv::Scalar rgb = processor.process((cv::Mat)image);
-        cvReleaseImage(&image);
+    //if (!outputImage) {
+        //NSLog(@"Capturing new image.");
+        outputImage = [self imageFromSampleBuffer:sampleBuffer];
         
-        std::stringstream ss;
-        ss << rgb;
-        NSLog([NSString stringWithCString:ss.str().c_str()]);
-    }
+        if ([self state] == RUNNING) {
+            IplImage *image = [self CreateIplImageFromUIImage:outputImage];
+            cv::Scalar rgb = processor.process((cv::Mat)image);
+            cvReleaseImage(&image);
+            
+            std::stringstream ss;
+            ss << rgb;
+            NSLog([NSString stringWithCString:ss.str().c_str()]);
+        }
+        
+        /*
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (outputImage) {
+                if (![self isFloat:self.cameraOverlayView.frame.size.width equalToFloat:outputImage.size.width] || ![self isFloat:self.cameraOverlayView.frame.size.height equalToFloat:outputImage.size.height]) {
+                    NSLog(@"Updating frame");
+                    float scale = MIN(self.cameraView.frame.size.width / outputImage.size.width, self.cameraView.frame.size.height / outputImage.size.height);
+                    self.cameraOverlayView.frame = CGRectMake((self.cameraView.frame.size.width - outputImage.size.width * scale) / 2,
+                                                              (self.cameraView.frame.size.height - outputImage.size.height * scale) / 2,
+                                                              outputImage.size.width,
+                                                              outputImage.size.height);
+                    
+                    self.cameraOverlayView.transform = CGAffineTransformMakeScale(scale, scale);
+                }
+                
+                [self.cameraOverlayView updateCircleWithCenterX:processor.getCircleCenterX() centerY:processor.getCircleCenterY() radius:processor.getCircleRadius()];
+                outputImage = nil;
+            }
+        });
+         */
+    //}
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.cameraOverlayView updateCircleWithCenterX:processor.getCircleCenterX() centerY:processor.getCircleCenterY() radius:processor.getCircleRadius()];
+    });
 }
 
 // hessk: TODO: read this license agreement
@@ -308,6 +356,7 @@ const float TIMER_STEP = 0.1;
                        CGRectMake(0, 0, image.size.width, image.size.height),
                        imageRef
                        );
+    
     CGContextRelease(contextRef);
     CGColorSpaceRelease(colorSpace);
     
@@ -343,5 +392,15 @@ const float TIMER_STEP = 0.1;
 }
 
 /* ************************************************************************************************************* */
+
+- (bool) isFloat: (float)floatA equalToFloat: (float)floatB {
+    float epsilon = 0.001;
+    
+    if (fabs(floatA - floatB) < epsilon) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
 
 @end

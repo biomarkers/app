@@ -15,7 +15,7 @@
     self = [super init];
     
     if (self) {
-        self.date = [NSDate date];
+        //self.date = [NSDate date];
         self.name = name;
         self.subject = subject;
         self.notes = notes;
@@ -25,7 +25,7 @@
 }
 
 // hessk: initializer for a previously evaluated result for historical display
-- (id)initResultWithName:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes date:(NSDate*)date value:(float)value {
+- (id)initResultWithName:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes date:(NSString*)date value:(float)value {
     self = [self initNewResultWithName:name subject:subject notes:notes];
     
     if (self) {

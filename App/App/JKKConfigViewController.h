@@ -14,4 +14,10 @@
 @property (strong, nonatomic) IBOutlet UIStepper *fpsStepper;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *locationSegControl;
 
+@property (strong, nonatomic) IBOutlet UISegmentedControl *roiModeSegControl;
+@property (strong, nonatomic) IBOutlet UITextField *roiXField;
+@property (strong, nonatomic) IBOutlet UITextField *roiYField;
+@property (strong, nonatomic) IBOutlet UITextField *roiRField;
+
+
 @end

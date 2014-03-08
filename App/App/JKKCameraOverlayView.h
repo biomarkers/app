@@ -10,8 +10,8 @@
 
 @interface JKKCameraOverlayView : UIView
 
-@property CGRect circleBounds;
+@property (nonatomic, assign) CGRect circleBounds;
 
-- (void)updateCircle:(CGRect)boundingRectangle;
+- (void)updateCircleWithCenterX:(float)x centerY:(float)y radius:(float)r;
 
 @end

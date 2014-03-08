@@ -29,3 +29,9 @@ typedef enum {
     BACK,
     FRONT
 } CameraLocation;
+
+typedef enum {
+    AUTOMATIC,
+    MANUAL,
+    UNDEFINED
+} ROIMode;
