@@ -508,11 +508,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zfn-wb-vlg">
-                                <rect key="frame" x="20" y="150" width="280" height="398"/>
+                                <rect key="frame" x="20" y="150" width="280" height="351"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.97409986413043481" green="0.97409986413043481" blue="0.97409986413043481" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="398" id="bet-23-iMg"/>
+                                    <constraint firstAttribute="height" constant="351" id="iPR-iN-naf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -526,19 +526,33 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZq-bI-ULV">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="trash" id="FTc-q0-ZpN">
+                                        <connections>
+                                            <segue destination="xbI-hs-daQ" kind="unwind" unwindAction="unwindToHome:" id="kmO-lA-rqx"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EZq-bI-ULV" secondAttribute="trailing" id="0Cs-tn-vBy"/>
                             <constraint firstItem="T7T-bg-jXX" firstAttribute="trailing" secondItem="zl1-M1-o42" secondAttribute="trailing" id="0Z0-Zh-1Op"/>
                             <constraint firstItem="CzT-lN-TWH" firstAttribute="leading" secondItem="zl1-M1-o42" secondAttribute="trailing" constant="8" symbolic="YES" id="71z-Pm-qeG"/>
                             <constraint firstItem="T7T-bg-jXX" firstAttribute="leading" secondItem="zfn-wb-vlg" secondAttribute="leading" id="9Wl-c6-uAd"/>
                             <constraint firstItem="zl1-M1-o42" firstAttribute="leading" secondItem="jNQ-MD-50g" secondAttribute="leading" constant="5" id="9t1-6s-8C0"/>
+                            <constraint firstItem="dyB-qi-vQm" firstAttribute="top" secondItem="EZq-bI-ULV" secondAttribute="bottom" id="Brf-df-wKZ"/>
+                            <constraint firstItem="EZq-bI-ULV" firstAttribute="leading" secondItem="jNQ-MD-50g" secondAttribute="leading" id="IVE-ml-nBp"/>
                             <constraint firstItem="zfn-wb-vlg" firstAttribute="top" secondItem="T7T-bg-jXX" secondAttribute="bottom" constant="8" symbolic="YES" id="Lhr-9w-O9K"/>
                             <constraint firstItem="zl1-M1-o42" firstAttribute="top" secondItem="aKW-2P-m6K" secondAttribute="bottom" constant="20" id="ThK-t7-wBW"/>
                             <constraint firstItem="CzT-lN-TWH" firstAttribute="top" secondItem="aKW-2P-m6K" secondAttribute="bottom" constant="16" id="Ztg-tl-RH6"/>
                             <constraint firstAttribute="trailing" secondItem="zfn-wb-vlg" secondAttribute="trailing" constant="20" id="fQt-Zt-9tm"/>
+                            <constraint firstItem="T7T-bg-jXX" firstAttribute="top" secondItem="zl1-M1-o42" secondAttribute="bottom" constant="16" id="hGf-CB-u5Y"/>
                             <constraint firstItem="zfn-wb-vlg" firstAttribute="leading" secondItem="jNQ-MD-50g" secondAttribute="leading" constant="20" id="uxc-Q1-gst"/>
-                            <constraint firstItem="dyB-qi-vQm" firstAttribute="top" secondItem="zfn-wb-vlg" secondAttribute="bottom" constant="20" id="w3H-wx-9SV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Initial Setup" id="35q-cL-Clc">
@@ -554,6 +568,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="FTc-q0-ZpN" id="2uq-8t-1zU"/>
                         <outlet property="navBar" destination="35q-cL-Clc" id="Y8F-ZN-hc8"/>
                         <outlet property="notesField" destination="zfn-wb-vlg" id="ULB-KT-02s"/>
                         <outlet property="subjectField" destination="CzT-lN-TWH" id="0mg-jX-MmP"/>

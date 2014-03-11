@@ -12,7 +12,6 @@
 #import "JKKCameraViewController.h"
 
 #import "JKKDatabaseManager.h"
-#import "DataStore.h"
 
 @interface JKKResultsViewController ()
 

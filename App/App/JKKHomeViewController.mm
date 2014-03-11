@@ -304,8 +304,9 @@ RegressionFactory homeFactory;
         
         [self.testsTable reloadData];
     } else if ([source isKindOfClass:[JKKSetupViewController class]] || [source isKindOfClass:[JKKResultsViewController class]]) {
-        //results may have been added to db, so repopulate the table
+        //results/models may have been changed, so repopulate the table
         [self populateHistoryTable];
+        [self populateTestTable];
     }
 }
 

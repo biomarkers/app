@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *subjectField;
 @property (strong, nonatomic) IBOutlet UITextView *notesField;
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
 //@property JKKTest* test;
 //@property RegressionModel::RegressionModel* test;

@@ -9,6 +9,8 @@
 #import "JKKSetupViewController.h"
 #import "JKKHomeViewController.h"
 
+#import "JKKDatabaseManager.h"
+
 @interface JKKSetupViewController ()
 
 @end
@@ -56,17 +58,22 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // initialize result data with information user enters here; subject, notes, etc
-    JKKResult* newResult = [[JKKResult alloc] initNewResultWithName:[self.test getModelName]
-                                                            subject:[self.subjectField text]
-                                                              notes:[self.notesField text]];
-    self.result = newResult;
-    
     // hessk: pass pointers on
     if ([[segue identifier] isEqualToString:@"showCameraFromSetup"]) {
+        // initialize result data with information user enters here; subject, notes, etc
+        JKKResult* newResult = [[JKKResult alloc] initNewResultWithName:[self.test getModelName]
+                                                                subject:[self.subjectField text]
+                                                                  notes:[self.notesField text]];
+        
+        self.result = newResult;
+        
         [[segue destinationViewController] setTest:self.test];
         [[segue destinationViewController] setResult:self.result];
         [[segue destinationViewController] setTakingCalibrationPoint:NO];
+    } else if (sender == self.deleteButton) {
+        DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+        p.deleteModelEntry(self.test.model->GetModelName());
+        p.close();
     }
 }
 
