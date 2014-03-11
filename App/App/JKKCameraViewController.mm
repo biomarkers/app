@@ -209,17 +209,7 @@ const float TIMER_STEP = 0.1;
         
         [self performSegueWithIdentifier:@"returnToTestView" sender:self];
     } else /* if (there are results) */ {
-        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"Y-M-d h:m:s"];
-        
         self.result.value = self.test.model->evaluate(processor.getSamples());
-        self.result.date = [formatter stringFromDate:[NSDate date]];
-
-        // write results to database
-        DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
-        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value);
-        p.insertResultEntry(entry);
-        p.close();
         
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
     }

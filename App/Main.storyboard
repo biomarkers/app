@@ -896,10 +896,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwX-aY-h3Q">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="trash" id="Slm-LB-qIe">
+                                        <connections>
+                                            <action selector="unwindToSource:" destination="iqK-DG-DA3" id="EJf-h6-xa2"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YBo-gB-aDB" firstAttribute="baseline" secondItem="Q7g-c7-Cwb" secondAttribute="baseline" id="26Z-QR-lDW"/>
+                            <constraint firstItem="hwX-aY-h3Q" firstAttribute="leading" secondItem="jvp-bu-Tsu" secondAttribute="leading" id="333-SY-g00"/>
                             <constraint firstItem="atY-QF-TRe" firstAttribute="leading" secondItem="jvp-bu-Tsu" secondAttribute="leading" id="7jx-bz-jJl"/>
                             <constraint firstItem="5jz-JT-Muk" firstAttribute="baseline" secondItem="FW8-sW-xnK" secondAttribute="baseline" id="9JP-QQ-cd0"/>
                             <constraint firstItem="0Oe-03-94D" firstAttribute="top" secondItem="YBo-gB-aDB" secondAttribute="bottom" constant="8" symbolic="YES" id="9La-w6-uwI"/>
@@ -909,12 +921,14 @@
                             <constraint firstItem="YBo-gB-aDB" firstAttribute="centerX" secondItem="pv1-fS-p8J" secondAttribute="centerX" id="DjB-3g-bCc"/>
                             <constraint firstItem="Q7g-c7-Cwb" firstAttribute="top" secondItem="FW8-sW-xnK" secondAttribute="bottom" constant="8" symbolic="YES" id="FBD-IR-uHo"/>
                             <constraint firstAttribute="trailing" secondItem="pv1-fS-p8J" secondAttribute="trailing" constant="30" id="GAL-m2-BSN"/>
+                            <constraint firstItem="Ah1-84-CFV" firstAttribute="top" secondItem="hwX-aY-h3Q" secondAttribute="bottom" id="IxD-tS-UEo"/>
                             <constraint firstItem="pv1-fS-p8J" firstAttribute="baseline" secondItem="obS-gN-f5u" secondAttribute="baseline" id="LeL-Rw-tpX"/>
                             <constraint firstItem="0Oe-03-94D" firstAttribute="baseline" secondItem="WCC-WI-Fmi" secondAttribute="baseline" id="MxQ-fB-iWt"/>
                             <constraint firstItem="uzc-af-q43" firstAttribute="leading" secondItem="WCC-WI-Fmi" secondAttribute="leading" id="Ntr-iq-0TB"/>
                             <constraint firstItem="obS-gN-f5u" firstAttribute="top" secondItem="atY-QF-TRe" secondAttribute="bottom" constant="12" id="QQQ-mK-8jH"/>
                             <constraint firstItem="FW8-sW-xnK" firstAttribute="top" secondItem="obS-gN-f5u" secondAttribute="bottom" constant="8" symbolic="YES" id="Vnq-Cx-jFz"/>
                             <constraint firstItem="uzc-af-q43" firstAttribute="centerX" secondItem="atY-QF-TRe" secondAttribute="centerX" id="W93-bV-rUc"/>
+                            <constraint firstAttribute="trailing" secondItem="hwX-aY-h3Q" secondAttribute="trailing" id="Z8c-aA-Y0O"/>
                             <constraint firstItem="YBo-gB-aDB" firstAttribute="leading" secondItem="Q7g-c7-Cwb" secondAttribute="trailing" constant="8" symbolic="YES" id="ZHw-gj-VAx"/>
                             <constraint firstItem="obS-gN-f5u" firstAttribute="leading" secondItem="jvp-bu-Tsu" secondAttribute="leading" constant="20" symbolic="YES" id="aFm-AK-47S"/>
                             <constraint firstAttribute="trailing" secondItem="5jz-JT-Muk" secondAttribute="trailing" constant="20" symbolic="YES" id="dn9-JR-94S"/>
@@ -931,6 +945,7 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="YBo-gB-aDB" id="xGW-5V-RFI"/>
+                        <outlet property="deleteButton" destination="Slm-LB-qIe" id="Eus-Fb-YWM"/>
                         <outlet property="notesTextView" destination="uzc-af-q43" id="Jiv-cQ-guT"/>
                         <outlet property="subjectLabel" destination="5jz-JT-Muk" id="V2h-0W-QYk"/>
                         <outlet property="testLabel" destination="pv1-fS-p8J" id="D8G-VP-o9e"/>

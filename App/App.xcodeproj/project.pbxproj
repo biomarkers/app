@@ -99,7 +99,6 @@
 		0A503BB518909F95009BF78F /* plot.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = plot.py; sourceTree = "<group>"; };
 		0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BiomarkerImageProcessor.cpp; sourceTree = "<group>"; };
 		0A503BB818909F95009BF78F /* ModelComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelComponent.cpp; sourceTree = "<group>"; };
-		0A503BB918909F95009BF78F /* regression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = regression.cpp; sourceTree = "<group>"; };
 		0A503BBA18909F95009BF78F /* RegressionFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegressionFactory.cpp; sourceTree = "<group>"; };
 		0A503BBB18909F95009BF78F /* RegressionModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegressionModel.cpp; sourceTree = "<group>"; };
 		0A503BC51890A2A8009BF78F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
@@ -330,7 +329,6 @@
 				0AB0BE1118B19F6700494DA3 /* persist */,
 				0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */,
 				0A503BB818909F95009BF78F /* ModelComponent.cpp */,
-				0A503BB918909F95009BF78F /* regression.cpp */,
 				0A503BBA18909F95009BF78F /* RegressionFactory.cpp */,
 				0A503BBB18909F95009BF78F /* RegressionModel.cpp */,
 			);

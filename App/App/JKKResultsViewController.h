@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
 @property (strong, nonatomic) IBOutlet UITextView *notesTextView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
 @property UIViewController* sourceView;
 

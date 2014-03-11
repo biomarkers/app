@@ -112,23 +112,27 @@ RegressionFactory homeFactory;
     p.close();
     
     JKKResult* currentResult;
+    int resultID;
     NSString *name, *subject, *notes, *date;
     float value;
     // hessk: TODO: dates
     
     for (int i = 0; i < results.size(); i++) {
+        resultID = results[i].id;
         name = [NSString stringWithUTF8String:results[i].modelName.c_str()];
         subject = [NSString stringWithUTF8String:results[i].subjectName.c_str()];
         notes = [NSString stringWithUTF8String:results[i].notes.c_str()];
         date = [NSString stringWithUTF8String:results[i].date.c_str()];
         
         value = results[i].value;
-        
-        currentResult = [[JKKResult alloc] initResultWithName:name
-                                                      subject:subject
-                                                        notes:notes
-                                                         date:date
-                                                        value:value];
+
+        currentResult = [[JKKResult alloc] initResultFromDatabaseWithID:resultID
+                                                                   date:date
+                                                                   name:name
+                                                                subject:subject
+                                                                  notes:notes
+                                                                  value:value];
+         
         
         [self.historyItems addObject:currentResult];
     }
@@ -299,7 +303,7 @@ RegressionFactory homeFactory;
         }
         
         [self.testsTable reloadData];
-    } else if ([source isKindOfClass:[JKKSetupViewController class]]) {
+    } else if ([source isKindOfClass:[JKKSetupViewController class]] || [source isKindOfClass:[JKKResultsViewController class]]) {
         //results may have been added to db, so repopulate the table
         [self populateHistoryTable];
     }

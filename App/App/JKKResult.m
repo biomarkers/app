@@ -11,30 +11,34 @@
 @implementation JKKResult
 
 // hessk: initializer for a result which we will add a value to later
-- (id)initNewResultWithName:(NSString*)name subject:(NSString *)subject notes:(NSString *)notes{
+- (id)initNewResultWithName:(NSString*)name subject:(NSString *)subject notes:(NSString *)notes {
     self = [super init];
     
     if (self) {
-        //self.date = [NSDate date];
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+        
+        self.date = [formatter stringFromDate:[NSDate date]];
         self.name = name;
         self.subject = subject;
         self.notes = notes;
+        
+        self.resultID = -1;
     }
     
     return self;
 }
 
-// hessk: initializer for a previously evaluated result for historical display
-- (id)initResultWithName:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes date:(NSString*)date value:(float)value {
+- (id)initResultFromDatabaseWithID:(int)resultID date:(NSString *)date name:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes value:(float)value{
     self = [self initNewResultWithName:name subject:subject notes:notes];
     
     if (self) {
-        self.date = date;
+        self.resultID = resultID;
         self.value = value;
+        self.date = date;
     }
     
     return self;
 }
-
 
 @end

@@ -15,8 +15,9 @@
 @property float value;
 @property NSString* subject;
 @property NSString* notes;
+@property int resultID;
 
 - (id)initNewResultWithName:(NSString*)name subject:(NSString*)subject notes:(NSString*)notes;
-- (id)initResultWithName:(NSString*)name subject:(NSString*)subject notes:(NSString*)notes date:(NSString*)date value:(float)value;
+- (id)initResultFromDatabaseWithID:(int)resultID date:(NSString *)date name:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes value:(float)value;
 
 @end

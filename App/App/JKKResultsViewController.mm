@@ -11,6 +11,9 @@
 #import "JKKHomeViewController.h"
 #import "JKKCameraViewController.h"
 
+#import "JKKDatabaseManager.h"
+#import "DataStore.h"
+
 @interface JKKResultsViewController ()
 
 - (void)populateControls;
@@ -54,6 +57,19 @@
 }
 
 - (IBAction)unwindToSource:(id)sender {
+    // if they pressed the delete button, go through delete process for result
+    
+    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+    if (sender == self.deleteButton) {
+        if (self.result.resultID != -1) p.deleteResultEntry(self.result.resultID);
+    } else {
+        // write results to database
+        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value);
+        p.insertResultEntry(entry);
+    }
+    p.close();
+    
+    // perform unwind segue back from the source
     if ([self.sourceView isKindOfClass:[JKKHomeViewController class]]) {
         [self performSegueWithIdentifier:@"unwindToHomeFromResults" sender:sender];
     } else if ([self.sourceView isKindOfClass:[JKKCameraViewController class]]) {
