@@ -11,7 +11,7 @@
 #import "RegressionFactory.h"
 #import "JkkModel.h"
 
-@interface JKKSetupViewController : UIViewController
+@interface JKKSetupViewController : UIViewController <UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *subjectField;
 @property (strong, nonatomic) IBOutlet UITextView *notesField;
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;

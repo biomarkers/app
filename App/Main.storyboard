@@ -532,7 +532,7 @@
                                 <items>
                                     <barButtonItem systemItem="trash" id="FTc-q0-ZpN">
                                         <connections>
-                                            <segue destination="xbI-hs-daQ" kind="unwind" unwindAction="unwindToHome:" id="kmO-lA-rqx"/>
+                                            <action selector="deleteTestWithConfirmation:" destination="jXv-ef-bTX" id="pjq-CX-iXr"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -572,6 +572,7 @@
                         <outlet property="navBar" destination="35q-cL-Clc" id="Y8F-ZN-hc8"/>
                         <outlet property="notesField" destination="zfn-wb-vlg" id="ULB-KT-02s"/>
                         <outlet property="subjectField" destination="CzT-lN-TWH" id="0mg-jX-MmP"/>
+                        <segue destination="xbI-hs-daQ" kind="unwind" identifier="deleteModelSegue" unwindAction="unwindToHome:" id="dkF-G0-fQq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnO-pd-ki8" userLabel="First Responder" sceneMemberID="firstResponder"/>

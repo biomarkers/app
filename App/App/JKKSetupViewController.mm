@@ -70,7 +70,7 @@
         [[segue destinationViewController] setTest:self.test];
         [[segue destinationViewController] setResult:self.result];
         [[segue destinationViewController] setTakingCalibrationPoint:NO];
-    } else if (sender == self.deleteButton) {
+    } else if ([[segue identifier] isEqualToString:@"deleteModelSegue"]) {
         DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
         p.deleteModelEntry(self.test.model->GetModelName());
         p.close();
@@ -79,6 +79,19 @@
 
 - (IBAction)unwindToSetup:(id)sender {
     // Unwind to run the test again from the results screen
+}
+
+- (IBAction)deleteTestWithConfirmation:(id)sender {
+    UIAlertView* deleteConfirmationAlert = [[UIAlertView alloc] initWithTitle:@"Delete model?" message:@"Are you sure you want to delete this model?"  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete", nil];
+    deleteConfirmationAlert.alertViewStyle = UIAlertViewStyleDefault;
+    [deleteConfirmationAlert show];
+}
+
+#pragma mark UIAlertViewDelegate methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.firstOtherButtonIndex) {
+        [self performSegueWithIdentifier:@"deleteModelSegue" sender:self];
+    }
 }
 
 @end
