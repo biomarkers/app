@@ -207,7 +207,8 @@ const float TIMER_STEP = 0.1;
     if ([self isTakingCalibrationPoint]) {
         self.test.model->calibrate(processor.getSamples(), self.calibrationValue);
         
-        [self performSegueWithIdentifier:@"returnToTestView" sender:self];
+        //[self performSegueWithIdentifier:@"returnToTestView" sender:self];
+        [self performSegueWithIdentifier:@"showCalibrationResults" sender:self];
     } else /* if (there are results) */ {
         self.result.value = self.test.model->evaluate(processor.getSamples());
         

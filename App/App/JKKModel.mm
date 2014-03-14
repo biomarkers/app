@@ -22,11 +22,11 @@
 
 - (NSString *)getModelName {
     NSStringEncoding asciiEncoding  = NSASCIIStringEncoding;
-    return [NSString stringWithCString: self.model->GetModelName().c_str() encoding:asciiEncoding];
+    return [NSString stringWithCString: self.model->getModelName().c_str() encoding:asciiEncoding];
 }
 
 - (NSString *)getTestName {
     NSStringEncoding asciiEncoding  = NSASCIIStringEncoding;
-    return [NSString stringWithCString: self.model->GetTestName().c_str() encoding:asciiEncoding];
+    return [NSString stringWithCString: self.model->getTestName().c_str() encoding:asciiEncoding];
 }
 @end

@@ -116,6 +116,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="historyTable" destination="k3a-iw-4jg" id="JdX-xA-E74"/>
                         <outlet property="testsTable" destination="vVR-DF-asH" id="Zpx-y1-nyl"/>
@@ -327,7 +328,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lN6-6w-ZaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="B1C-kn-DwO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1614" y="-748"/>
+            <point key="canvasLocation" x="1618" y="-807"/>
         </scene>
         <!--Test View Controller - Test Detail-->
         <scene sceneID="vbM-bp-p0F">
@@ -356,19 +357,6 @@
                                     <action selector="updateTitle:" destination="W7S-tI-5gN" eventType="editingDidEnd" id="FpQ-hn-JPm"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9t-D5-wzm">
-                                <rect key="frame" x="149" y="518" width="151" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="151" id="HHm-nY-u12"/>
-                                </constraints>
-                                <state key="normal" title="Add calibration point">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addCalibrationPoint:" destination="W7S-tI-5gN" eventType="touchUpInside" id="Hdf-e7-CtG"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCU-Dg-Wrp">
                                 <rect key="frame" x="143" y="329" width="157" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -420,24 +408,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cal. Values: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAN-us-Dbl">
-                                <rect key="frame" x="20" y="523" width="131" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="131" id="hEu-kE-1hq"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="R9t-D5-wzm" secondAttribute="trailing" constant="20" id="1s4-gR-ITD"/>
-                            <constraint firstItem="VFg-My-tKq" firstAttribute="top" secondItem="R9t-D5-wzm" secondAttribute="bottom" constant="20" id="6yr-PT-pof"/>
                             <constraint firstAttribute="trailing" secondItem="kIM-au-0ju" secondAttribute="trailing" constant="20" id="7CR-78-ru7"/>
                             <constraint firstItem="hun-qm-gLz" firstAttribute="top" secondItem="afP-91-UeU" secondAttribute="bottom" constant="19" id="8Km-h2-len"/>
                             <constraint firstItem="fJn-mo-7Hy" firstAttribute="top" secondItem="kIM-au-0ju" secondAttribute="bottom" constant="13" id="JMk-Fz-85Q"/>
-                            <constraint firstItem="R9t-D5-wzm" firstAttribute="centerY" secondItem="EAN-us-Dbl" secondAttribute="centerY" id="MlH-Qk-EVR"/>
                             <constraint firstItem="hun-qm-gLz" firstAttribute="leading" secondItem="uJQ-ph-HZt" secondAttribute="leading" constant="20" id="R5l-SN-OAe"/>
                             <constraint firstItem="kIM-au-0ju" firstAttribute="leading" secondItem="hun-qm-gLz" secondAttribute="trailing" constant="8" id="UeF-38-dl3"/>
                             <constraint firstItem="fJn-mo-7Hy" firstAttribute="leading" secondItem="uJQ-ph-HZt" secondAttribute="leading" constant="20" id="Uuo-IU-htB"/>
@@ -446,7 +422,6 @@
                             <constraint firstItem="lCU-Dg-Wrp" firstAttribute="top" secondItem="jHH-EH-LVD" secondAttribute="bottom" constant="8" id="eYB-88-upl"/>
                             <constraint firstAttribute="trailing" secondItem="fJn-mo-7Hy" secondAttribute="trailing" constant="20" id="iWx-xT-EVA"/>
                             <constraint firstItem="kIM-au-0ju" firstAttribute="top" secondItem="afP-91-UeU" secondAttribute="bottom" constant="15" id="le7-fT-cV6"/>
-                            <constraint firstItem="EAN-us-Dbl" firstAttribute="leading" secondItem="uJQ-ph-HZt" secondAttribute="leading" constant="20" id="nlK-iE-J92"/>
                             <constraint firstItem="jHH-EH-LVD" firstAttribute="leading" secondItem="uJQ-ph-HZt" secondAttribute="leading" constant="20" id="uzZ-mC-zqB"/>
                             <constraint firstAttribute="trailing" secondItem="jHH-EH-LVD" secondAttribute="trailing" constant="20" id="yEY-4b-cCq"/>
                         </constraints>
@@ -457,28 +432,103 @@
                                 <segue destination="cl3-DY-1ab" kind="unwind" unwindAction="unwindToHome:" id="8uz-bS-SdR"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="tKp-Fp-HcF">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="tKp-Fp-HcF">
                             <connections>
-                                <segue destination="cl3-DY-1ab" kind="unwind" unwindAction="unwindToHome:" id="CBF-0s-IKT"/>
+                                <segue destination="f4e-CD-yQz" kind="push" identifier="showCalibrationList" id="jir-DO-fkV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addCalibrationButton" destination="R9t-D5-wzm" id="hNk-I3-NJz"/>
                         <outlet property="addComponentButton" destination="lCU-Dg-Wrp" id="n13-Ma-dlf"/>
-                        <outlet property="calibrationValuesLabel" destination="EAN-us-Dbl" id="mC2-71-CrP"/>
                         <outlet property="componentsLabel" destination="fJn-mo-7Hy" id="i3g-qz-Ab4"/>
                         <outlet property="componentsTable" destination="jHH-EH-LVD" id="Gfr-3Y-F6Z"/>
-                        <outlet property="doneButton" destination="tKp-Fp-HcF" id="N0f-M1-Cn1"/>
                         <outlet property="nameField" destination="kIM-au-0ju" id="PUF-hT-hCM"/>
                         <outlet property="navBar" destination="UoL-g2-3ly" id="G3s-a1-Aoy"/>
-                        <segue destination="IBn-tG-ojN" kind="modal" identifier="showCameraFromTest" id="Xrj-BB-YLO"/>
+                        <outlet property="nextButton" destination="tKp-Fp-HcF" id="aLP-BB-9fk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5J8-2M-fRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cl3-DY-1ab" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1073" y="-347"/>
+        </scene>
+        <!--Calibration List View Controller - Add Calibration-->
+        <scene sceneID="lRc-J2-BRz">
+            <objects>
+                <viewController title="Add Calibration" id="f4e-CD-yQz" customClass="JKKCalibrationListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KdD-Fm-eBc"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vql-uY-Z15"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JAL-Bv-OwH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Calibration points:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edz-ir-aLa">
+                                <rect key="frame" x="20" y="79" width="146" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6t1-gX-e8Q">
+                                <rect key="frame" x="20" y="108" width="280" height="200"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CalibrationPrototypeCell" id="o77-Fd-fp0">
+                                        <rect key="frame" x="0.0" y="22" width="280" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o77-Fd-fp0" id="sjh-dW-KsD">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mIo-CG-y63">
+                                <rect key="frame" x="146" y="316" width="154" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add calibration point">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCalibrationPoint:" destination="f4e-CD-yQz" eventType="touchUpInside" id="iuZ-wg-5MX"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6aJ-dd-x7Z">
+                                <rect key="frame" x="20" y="354" width="280" height="194"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Calibration" id="ghh-kL-dVA">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="mpU-q5-Xg1">
+                            <connections>
+                                <segue destination="dcP-xe-CtC" kind="unwind" identifier="returnToTestFromCalibration" unwindAction="unwindToTestView:" id="60h-EC-cPZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Finish" id="qFr-Eb-xzm">
+                            <connections>
+                                <segue destination="dcP-xe-CtC" kind="unwind" unwindAction="unwindToHome:" id="KbI-zL-crI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="calibrationStatsTextView" destination="6aJ-dd-x7Z" id="xaw-Es-Tea"/>
+                        <outlet property="calibrationTable" destination="6t1-gX-e8Q" id="eM4-S4-yyJ"/>
+                        <outlet property="cancelButton" destination="mpU-q5-Xg1" id="VLP-8k-GPc"/>
+                        <segue destination="IBn-tG-ojN" kind="modal" identifier="showCameraForCalibration" id="09M-e8-hBx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="soX-eg-lyh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dcP-xe-CtC" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1618" y="-121"/>
         </scene>
         <!--Setup View Controller - Initial Setup-->
         <scene sceneID="I00-YQ-VGq">
@@ -651,12 +701,13 @@
                         <outlet property="statusLabel" destination="qHR-Td-1wl" id="y8t-tA-e0F"/>
                         <segue destination="iqK-DG-DA3" kind="modal" identifier="showResultsFromCamera" modalTransitionStyle="coverVertical" animates="NO" id="1u0-kE-RYg"/>
                         <segue destination="ayl-5g-93y" kind="unwind" identifier="returnToTestView" unwindAction="unwindToTestView:" id="cYj-6P-Lex"/>
+                        <segue destination="SXh-rv-nzx" kind="modal" identifier="showCalibrationResults" id="wjR-gm-Iqe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MsN-Ri-bL6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ayl-5g-93y" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1614" y="26"/>
+            <point key="canvasLocation" x="2154" y="319"/>
         </scene>
         <!--Config View Controller - Configuration-->
         <scene sceneID="tmQ-U0-Ix5">
@@ -817,6 +868,53 @@
             </objects>
             <point key="canvasLocation" x="1073" y="1026"/>
         </scene>
+        <!--View Controller - Calibration results-->
+        <scene sceneID="lfn-ee-dJx">
+            <objects>
+                <viewController title="Calibration results" id="SXh-rv-nzx" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jaR-mv-hBA"/>
+                        <viewControllerLayoutGuide type="bottom" id="YJC-rl-4ZU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HAe-cS-iJC">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yxZ-vC-O18">
+                                <rect key="frame" x="0.0" y="19" width="568" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Calibration graph" id="1O9-rN-X62">
+                                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Discard Point" id="yUP-12-cst"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Keep Point" id="Ega-uI-Y5N">
+                                            <connections>
+                                                <segue destination="GZk-R6-SIj" kind="unwind" unwindAction="unwindToCalibrationList:" id="NOP-di-DOw"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vcB-TI-Ap5">
+                                <rect key="frame" x="20" y="73" width="528" height="227"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YJC-rl-4ZU" firstAttribute="top" secondItem="vcB-TI-Ap5" secondAttribute="bottom" constant="20" id="Dec-LU-Sav"/>
+                            <constraint firstItem="vcB-TI-Ap5" firstAttribute="top" secondItem="jaR-mv-hBA" secondAttribute="bottom" constant="53" id="aLF-7U-fO1"/>
+                            <constraint firstAttribute="trailing" secondItem="vcB-TI-Ap5" secondAttribute="trailing" constant="20" id="gCa-LM-3pb"/>
+                            <constraint firstItem="vcB-TI-Ap5" firstAttribute="leading" secondItem="HAe-cS-iJC" secondAttribute="leading" constant="20" id="snd-VF-gPq"/>
+                        </constraints>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b9R-q7-RPP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="GZk-R6-SIj" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2694" y="183"/>
+        </scene>
         <!--Results View Controller - Results-->
         <scene sceneID="e40-oE-AjU">
             <objects>
@@ -973,7 +1071,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yz5-P1-hDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WJv-mx-CN3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2152" y="701"/>
+            <point key="canvasLocation" x="2694" y="708"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GTB-rV-cuO">
@@ -1000,7 +1098,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uaq-hR-d9G"/>
-        <segue reference="1u0-kE-RYg"/>
+        <segue reference="T03-si-de6"/>
+        <segue reference="09M-e8-hBx"/>
     </inferredMetricsTieBreakers>
 </document>

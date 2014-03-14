@@ -64,26 +64,12 @@ RegressionFactory factory;
         [self.componentsTable setHidden:NO];
         [self.componentsLabel setHidden:NO];
         
-        // show calibration stuff
-        [self.calibrationValuesLabel setHidden:NO];
-        [self.addCalibrationButton setHidden:NO];
-        
         if ([[self componentItems] count] > 0) {
-            [[self addCalibrationButton] setEnabled:YES];
+            [[self nextButton] setEnabled:YES];
         } else {
-            [[self addCalibrationButton] setEnabled:NO];
-        }
-        
-        if ([self.calibrationItems count] > 0) {
-            [self.addComponentButton setEnabled:NO];
-            [self.doneButton setEnabled:YES];
-        } else {
-            [self.addComponentButton setEnabled:YES];
-            [self.doneButton setEnabled:NO];
+            [[self nextButton] setEnabled:NO];
         }
     });
-    
-    [self.calibrationValuesLabel setText:[NSString stringWithFormat:@"Cal. Values: %lu", (unsigned long)[self.calibrationItems count]]];
 }
 
 - (IBAction)updateTitle:(id)sender {
@@ -93,7 +79,7 @@ RegressionFactory factory;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // hessk: pass pointers on for calibration if a calibration is being run
-    if ([[segue identifier] isEqualToString:@"showCameraFromTest"]) {
+    if ([[segue identifier] isEqualToString:@"showCalibrationList"]) {
         // hessk: initialize a test if there isn't one
         if (!self.test) {
             NSLog(@"Creating a new model...");
@@ -117,8 +103,6 @@ RegressionFactory factory;
         }
         
         [[segue destinationViewController] setTest:self.test];
-        [[segue destinationViewController] setCalibrationValue:self.calibrationValue];
-        [[segue destinationViewController] setTakingCalibrationPoint:YES];
     }
 }
 

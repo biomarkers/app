@@ -72,7 +72,7 @@
         [[segue destinationViewController] setTakingCalibrationPoint:NO];
     } else if ([[segue identifier] isEqualToString:@"deleteModelSegue"]) {
         DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
-        p.deleteModelEntry(self.test.model->GetModelName());
+        p.deleteModelEntry(self.test.model->getModelName());
         p.close();
     }
 }

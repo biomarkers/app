@@ -8,6 +8,7 @@
 
 #import "JKKHomeViewController.h"
 #import "JKKSetupViewController.h"
+#import "JKKCalibrationListViewController.h"
 
 #import "DataStore.h"
 #import "ResultEntry.h"
@@ -281,7 +282,7 @@ RegressionFactory homeFactory;
     
     UIViewController* source = segue.sourceViewController;
     
-    if ([source isKindOfClass:[JKKTestViewController class]]) {
+    if ([source isKindOfClass:[JKKCalibrationListViewController class]]) {
         JKKTestViewController* testViewSource = (JKKTestViewController *)source;
         JKKModel* newTest = testViewSource.test;
         
@@ -295,7 +296,7 @@ RegressionFactory homeFactory;
             
             homeFactory.serializeToDB(newTest.model, blob, len);
             
-            ModelEntry entry(newTest.model->GetModelName(), blob, len);
+            ModelEntry entry(newTest.model->getModelName(), blob, len);
             p.insertModelEntry(entry);
             p.close();
             
