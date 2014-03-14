@@ -17,6 +17,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *calibrationStatsTextView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *finishButton;
+@property (strong, nonatomic) IBOutlet UIButton *showGraphButton;
 
 @property JKKModel* test;
 

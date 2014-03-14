@@ -36,6 +36,8 @@
     [self.calibrationTable setDelegate:self];
     [self.calibrationTable setDataSource:self];
     self.calibrationItems = [[NSMutableArray alloc] init];
+    
+    [self updateControls];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +55,8 @@
     } else if ([[segue identifier] isEqualToString:@"returnToTestFromCalibration"]) {
         //hessk: TODO: add warning that model data is going to be dropped
         [[segue destinationViewController] setTest:nil];
+    } else if ([[segue identifier] isEqualToString:@"showGraphFromList"]) {
+        [[segue destinationViewController] setTest:self.test];
     }
 }
 
@@ -60,15 +64,18 @@
     [self updateControls];
 }
 
-#warning Incomplete method implementation
 - (void)updateControls {
-    // TODO: implement this
+    //update table
     [self.calibrationItems removeAllObjects];
     for (int i = 0; i < self.test.model->getNumCalibrations(); i++) {
         [self.calibrationItems addObject:[NSNumber numberWithFloat:self.test.model->getCalibrationConcentration(i)]];
     }
-    
     [self.calibrationTable reloadData];
+    
+    //enable finish button depending on whether they've done enough calibrations
+    [self.finishButton setEnabled:self.test.model->isCalibrated()];
+    
+    [self.showGraphButton setEnabled:(self.calibrationItems.count > 0)];
 }
 
 - (IBAction)addCalibrationPoint:(id)sender {
@@ -134,7 +141,6 @@
     // hessk: react to row selection here
     self.test.model->setStatsForCalibration(indexPath.row);
     [self.calibrationStatsTextView setText:[NSString stringWithCString:self.test.model->getStatData().c_str() encoding:NSUTF8StringEncoding]];
-    
 }
 
 

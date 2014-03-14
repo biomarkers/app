@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A05457518A9517600BF2072 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05457418A9517600BF2072 /* boost.framework */; };
 		0A06637418D2818400CE6CBF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A06637318D2818300CE6CBF /* libCorePlot-CocoaTouch.a */; };
+		0A06637718D283C800CE6CBF /* JKKGraphViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
 		0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
 		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; settings = {COMPILER_FLAGS = "-ftemplate-depth=1024"; }; };
@@ -149,6 +150,8 @@
 		0A06637118D2818300CE6CBF /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		0A06637218D2818300CE6CBF /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		0A06637318D2818300CE6CBF /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
+		0A06637518D283C800CE6CBF /* JKKGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKGraphViewController.h; sourceTree = "<group>"; };
+		0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKGraphViewController.mm; sourceTree = "<group>"; };
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
 		0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultConfig.plist; sourceTree = "<group>"; };
@@ -546,6 +549,8 @@
 				0A9CC7ED1895911E0035959E /* JKKResultsViewController.mm */,
 				0AE0311118D13001002B7D87 /* JKKCalibrationListViewController.h */,
 				0AE0311218D13001002B7D87 /* JKKCalibrationListViewController.mm */,
+				0A06637518D283C800CE6CBF /* JKKGraphViewController.h */,
+				0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -692,6 +697,7 @@
 				0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */,
 				0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */,
 				0A9CC7EE1895911E0035959E /* JKKResultsViewController.mm in Sources */,
+				0A06637718D283C800CE6CBF /* JKKGraphViewController.mm in Sources */,
 				0A503B7318909C7C009BF78F /* main.mm in Sources */,
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
 				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */,

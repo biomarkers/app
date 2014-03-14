@@ -224,7 +224,9 @@ const float TIMER_STEP = 0.1;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showResultsFromCamera"]) {
+    if ([[segue identifier] isEqualToString:@"showCalibrationResults"]) {
+        [[segue destinationViewController] setTest:self.test];
+    } else if ([[segue identifier] isEqualToString:@"showResultsFromCamera"]) {
         [[segue destinationViewController] setResult:self.result];
         [[segue destinationViewController] setSourceView:self];
     }
