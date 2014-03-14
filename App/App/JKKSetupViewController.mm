@@ -42,6 +42,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 /* hessk: hides the keyboard if the user touches anywhere other than the specified views
  by "resigning" them as "first responders" */
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *) event {

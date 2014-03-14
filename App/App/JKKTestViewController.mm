@@ -54,6 +54,14 @@ RegressionFactory factory;
     // Dispose of any resources that can be recreated.
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 // hessk: called initially to match interface to current JKKModel and do other UI config
 - (void)populateControls {
     // hessk: TODO: really awkward button fiddling here - find a better system

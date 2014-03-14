@@ -43,6 +43,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)initializeControls {
     // hessk: TODO: temporarily removing colors until we can figure out how to handle the discrepancy between
     // segment index and subview index (can't just call "setTitle" on one of the subviews)

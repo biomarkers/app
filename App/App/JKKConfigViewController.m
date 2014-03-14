@@ -77,6 +77,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (IBAction)updateGUI:(id)sender {
     
     if (sender == self.fpsStepper) {

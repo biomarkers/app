@@ -44,6 +44,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)populateControls {
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle: NSDateFormatterShortStyle];

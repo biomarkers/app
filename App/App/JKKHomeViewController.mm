@@ -102,6 +102,14 @@ RegressionFactory homeFactory;
     // Dispose of any resources that can be recreated.
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void) populateHistoryTable {
     // hessk:generate history items from sqlite database
     

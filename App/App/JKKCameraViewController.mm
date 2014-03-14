@@ -139,6 +139,14 @@ const float TIMER_STEP = 0.1;
     // Dispose of any resources that can be recreated.
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (IBAction)startProcessing:(id)sender {
     if (self.timer != nil) {
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];

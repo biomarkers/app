@@ -1129,7 +1129,7 @@
         <!--Navigation Controller-->
         <scene sceneID="GTB-rV-cuO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hr-lH-Alp" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hr-lH-Alp" customClass="JKKNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WIe-pk-2xy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

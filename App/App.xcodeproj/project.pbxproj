@@ -10,6 +10,7 @@
 		0A05457518A9517600BF2072 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05457418A9517600BF2072 /* boost.framework */; };
 		0A06637418D2818400CE6CBF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A06637318D2818300CE6CBF /* libCorePlot-CocoaTouch.a */; };
 		0A06637718D283C800CE6CBF /* JKKGraphViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */; };
+		0A06637D18D2C04500CE6CBF /* JKKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
 		0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
 		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; settings = {COMPILER_FLAGS = "-ftemplate-depth=1024"; }; };
@@ -152,6 +153,8 @@
 		0A06637318D2818300CE6CBF /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		0A06637518D283C800CE6CBF /* JKKGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKGraphViewController.h; sourceTree = "<group>"; };
 		0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKGraphViewController.mm; sourceTree = "<group>"; };
+		0A06637B18D2C04500CE6CBF /* JKKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKNavigationController.h; sourceTree = "<group>"; };
+		0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKNavigationController.m; sourceTree = "<group>"; };
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
 		0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultConfig.plist; sourceTree = "<group>"; };
@@ -551,6 +554,8 @@
 				0AE0311218D13001002B7D87 /* JKKCalibrationListViewController.mm */,
 				0A06637518D283C800CE6CBF /* JKKGraphViewController.h */,
 				0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */,
+				0A06637B18D2C04500CE6CBF /* JKKNavigationController.h */,
+				0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -701,6 +706,7 @@
 				0A503B7318909C7C009BF78F /* main.mm in Sources */,
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
 				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */,
+				0A06637D18D2C04500CE6CBF /* JKKNavigationController.m in Sources */,
 				0A8899AB18B81FB70097354E /* LinearRegression.cpp in Sources */,
 				0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
