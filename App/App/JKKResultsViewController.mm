@@ -69,7 +69,7 @@
     DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
     if (sender == self.deleteButton) {
         if (self.result.resultID != -1) p.deleteResultEntry(self.result.resultID);
-    } else {
+    } else if (self.result.resultID == -1) {
         // write results to database
         ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value);
         p.insertResultEntry(entry);
