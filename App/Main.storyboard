@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7hr-lH-Alp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7hr-lH-Alp">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Home View Controller - Home-->
@@ -691,9 +691,6 @@
                                 <rect key="frame" x="15" y="546" width="285" height="10"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <rect key="contentStretch" x="0.0" y="1.38777878078145e-17" width="1" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="10" id="qyl-j8-1uD"/>
-                                </constraints>
                             </progressView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position slide..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHR-Td-1wl">
                                 <rect key="frame" x="15" y="517" width="117" height="21"/>
@@ -720,17 +717,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="o8F-rj-3Sy" secondAttribute="bottom" constant="3" id="36e-nJ-4mW"/>
                             <constraint firstItem="lQQ-lB-R1K" firstAttribute="top" secondItem="UwD-w9-WFz" secondAttribute="top" constant="20" symbolic="YES" id="5LT-eh-Uz6"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="trailing" secondItem="o8F-rj-3Sy" secondAttribute="trailing" id="85R-wg-WpJ"/>
                             <constraint firstItem="o8F-rj-3Sy" firstAttribute="top" secondItem="lQQ-lB-R1K" secondAttribute="bottom" constant="2" id="C1E-LL-rFT"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="qHR-Td-1wl" secondAttribute="bottom" constant="8" symbolic="YES" id="De0-HA-4vO"/>
                             <constraint firstItem="lQQ-lB-R1K" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" id="GzW-5B-kBU"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="qHR-Td-1wl" secondAttribute="leading" id="IVg-zI-50h"/>
-                            <constraint firstItem="70N-zC-iqS" firstAttribute="top" secondItem="Nee-Ta-CFP" secondAttribute="bottom" constant="12" id="IfZ-UB-Foi"/>
-                            <constraint firstAttribute="trailing" secondItem="Nee-Ta-CFP" secondAttribute="trailing" constant="20" symbolic="YES" id="lHi-Od-dJx"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" constant="15" id="om2-7O-xf9"/>
+                            <constraint firstAttribute="bottom" secondItem="Nee-Ta-CFP" secondAttribute="bottom" constant="20" symbolic="YES" id="P19-aO-54y"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="trailing" secondItem="o8F-rj-3Sy" secondAttribute="trailing" id="YuC-Hn-Jbz"/>
+                            <constraint firstAttribute="trailing" secondItem="Nee-Ta-CFP" secondAttribute="trailing" constant="20" symbolic="YES" id="fRI-Tm-tFm"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" constant="15" id="gYX-Zu-oLh"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="qHR-Td-1wl" secondAttribute="leading" id="rvL-TY-qMf"/>
                             <constraint firstAttribute="trailing" secondItem="lQQ-lB-R1K" secondAttribute="trailing" id="vJ8-oj-ogU"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="o8F-rj-3Sy" secondAttribute="bottom" constant="3" id="zFj-Dz-X9l"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="qHR-Td-1wl" secondAttribute="bottom" constant="8" symbolic="YES" id="zgb-de-WqQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Camera Analysis" id="uGQ-41-zb6"/>
@@ -1151,8 +1148,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="T03-si-de6"/>
-        <segue reference="4Q2-Gb-c0P"/>
+        <segue reference="wjR-gm-Iqe"/>
         <segue reference="09M-e8-hBx"/>
+        <segue reference="1u0-kE-RYg"/>
     </inferredMetricsTieBreakers>
 </document>
