@@ -687,10 +687,13 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="485"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-Ta-CFP">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-Ta-CFP">
                                 <rect key="frame" x="15" y="546" width="285" height="10"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <rect key="contentStretch" x="0.0" y="1.38777878078145e-17" width="1" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="qyl-j8-1uD"/>
+                                </constraints>
                             </progressView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position slide..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHR-Td-1wl">
                                 <rect key="frame" x="15" y="517" width="117" height="21"/>
@@ -710,24 +713,24 @@
                                 </connections>
                             </button>
                             <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="myd-3d-S1M" customClass="JKKCameraOverlayView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="485"/>
+                                <rect key="frame" x="0.0" y="20" width="283" height="446"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="o8F-rj-3Sy" secondAttribute="bottom" constant="3" id="36e-nJ-4mW"/>
                             <constraint firstItem="lQQ-lB-R1K" firstAttribute="top" secondItem="UwD-w9-WFz" secondAttribute="top" constant="20" symbolic="YES" id="5LT-eh-Uz6"/>
-                            <constraint firstItem="o8F-rj-3Sy" firstAttribute="top" secondItem="lQQ-lB-R1K" secondAttribute="bottom" constant="2" id="C1E-LL-rFT"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="trailing" secondItem="o8F-rj-3Sy" secondAttribute="trailing" id="85R-wg-WpJ"/>
                             <constraint firstItem="lQQ-lB-R1K" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" id="GzW-5B-kBU"/>
-                            <constraint firstAttribute="bottom" secondItem="Nee-Ta-CFP" secondAttribute="bottom" constant="20" symbolic="YES" id="P19-aO-54y"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="trailing" secondItem="o8F-rj-3Sy" secondAttribute="trailing" id="YuC-Hn-Jbz"/>
-                            <constraint firstAttribute="trailing" secondItem="Nee-Ta-CFP" secondAttribute="trailing" constant="20" symbolic="YES" id="fRI-Tm-tFm"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" constant="15" id="gYX-Zu-oLh"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="qHR-Td-1wl" secondAttribute="leading" id="rvL-TY-qMf"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="qHR-Td-1wl" secondAttribute="leading" id="IVg-zI-50h"/>
+                            <constraint firstItem="70N-zC-iqS" firstAttribute="top" secondItem="Nee-Ta-CFP" secondAttribute="bottom" constant="12" id="IfZ-UB-Foi"/>
+                            <constraint firstItem="70N-zC-iqS" firstAttribute="top" secondItem="lQQ-lB-R1K" secondAttribute="bottom" constant="63" id="Ugm-fO-mbL"/>
+                            <constraint firstAttribute="trailing" secondItem="Nee-Ta-CFP" secondAttribute="trailing" constant="20" symbolic="YES" id="lHi-Od-dJx"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" constant="15" id="om2-7O-xf9"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="qHR-Td-1wl" secondAttribute="bottom" constant="8" id="s78-wu-zUb"/>
                             <constraint firstAttribute="trailing" secondItem="lQQ-lB-R1K" secondAttribute="trailing" id="vJ8-oj-ogU"/>
-                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="qHR-Td-1wl" secondAttribute="bottom" constant="8" symbolic="YES" id="zgb-de-WqQ"/>
+                            <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="o8F-rj-3Sy" secondAttribute="bottom" constant="3" id="zQO-ec-9Rx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Camera Analysis" id="uGQ-41-zb6"/>
