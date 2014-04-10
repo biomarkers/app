@@ -712,10 +712,11 @@
                                     <action selector="startProcessing:" destination="IBn-tG-ojN" eventType="touchUpInside" id="myB-Fs-hYo"/>
                                 </connections>
                             </button>
-                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="myd-3d-S1M" customClass="JKKCameraOverlayView">
-                                <rect key="frame" x="0.0" y="20" width="283" height="446"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wfk-Rh-L50" customClass="JKKCameraOverlayView">
+                                <rect key="frame" x="0.0" y="20" width="320" height="485"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -723,9 +724,13 @@
                             <constraint firstItem="lQQ-lB-R1K" firstAttribute="top" secondItem="UwD-w9-WFz" secondAttribute="top" constant="20" symbolic="YES" id="5LT-eh-Uz6"/>
                             <constraint firstItem="Nee-Ta-CFP" firstAttribute="trailing" secondItem="o8F-rj-3Sy" secondAttribute="trailing" id="85R-wg-WpJ"/>
                             <constraint firstItem="lQQ-lB-R1K" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" id="GzW-5B-kBU"/>
+                            <constraint firstItem="Wfk-Rh-L50" firstAttribute="top" secondItem="lQQ-lB-R1K" secondAttribute="top" id="H4e-7N-O0S"/>
                             <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="qHR-Td-1wl" secondAttribute="leading" id="IVg-zI-50h"/>
                             <constraint firstItem="70N-zC-iqS" firstAttribute="top" secondItem="Nee-Ta-CFP" secondAttribute="bottom" constant="12" id="IfZ-UB-Foi"/>
+                            <constraint firstItem="Wfk-Rh-L50" firstAttribute="width" secondItem="lQQ-lB-R1K" secondAttribute="width" id="MaW-I7-cOT"/>
                             <constraint firstItem="70N-zC-iqS" firstAttribute="top" secondItem="lQQ-lB-R1K" secondAttribute="bottom" constant="63" id="Ugm-fO-mbL"/>
+                            <constraint firstItem="Wfk-Rh-L50" firstAttribute="height" secondItem="lQQ-lB-R1K" secondAttribute="height" id="eJV-EK-r4D"/>
+                            <constraint firstItem="Wfk-Rh-L50" firstAttribute="leading" secondItem="lQQ-lB-R1K" secondAttribute="leading" id="g2J-ec-zez"/>
                             <constraint firstAttribute="trailing" secondItem="Nee-Ta-CFP" secondAttribute="trailing" constant="20" symbolic="YES" id="lHi-Od-dJx"/>
                             <constraint firstItem="Nee-Ta-CFP" firstAttribute="leading" secondItem="UwD-w9-WFz" secondAttribute="leading" constant="15" id="om2-7O-xf9"/>
                             <constraint firstItem="Nee-Ta-CFP" firstAttribute="top" secondItem="qHR-Td-1wl" secondAttribute="bottom" constant="8" id="s78-wu-zUb"/>
@@ -735,7 +740,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Camera Analysis" id="uGQ-41-zb6"/>
                     <connections>
-                        <outlet property="cameraOverlayView" destination="myd-3d-S1M" id="7of-0Q-8vG"/>
+                        <outlet property="cameraOverlayView" destination="Wfk-Rh-L50" id="f3k-2q-AI0"/>
                         <outlet property="cameraView" destination="lQQ-lB-R1K" id="bzB-NI-4lM"/>
                         <outlet property="progressBar" destination="Nee-Ta-CFP" id="oxK-Tt-7v4"/>
                         <outlet property="startButton" destination="o8F-rj-3Sy" id="E0I-ga-qfI"/>

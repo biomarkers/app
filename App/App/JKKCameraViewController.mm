@@ -89,6 +89,7 @@ const float TIMER_STEP = 0.1;
         
         processor.setCircleCenterX(self.roiX);
         processor.setCircleCenterY(self.roiY);
+        
         processor.setCircleRadius(self.roiR);
     }
     
@@ -292,116 +293,93 @@ const float TIMER_STEP = 0.1;
 
 #pragma mark - Protocol AVCaptureVideoDataOutputSampleBufferDelegate
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    //if (!outputImage) {
-        //NSLog(@"Capturing new image.");
-        outputImage = [self imageFromSampleBuffer:sampleBuffer];
-        
+    outputImage = [self imageFromSampleBuffer:sampleBuffer];
+    
+    /* reverse x and y to account for difference between portrait/landscape discrepancy between camera view and preview view */
+    float scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
+    float scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
+    
+    @autoreleasepool {
         if ([self state] == RUNNING) {
-            IplImage *image = [self CreateIplImageFromUIImage:outputImage];
-            cv::Scalar rgb = processor.process((cv::Mat)image);
-            cvReleaseImage(&image);
+            cv::Mat mat = [self cvMatFromUIImage:outputImage];
+            cv::Scalar rgb = processor.process(mat);
             
             std::stringstream ss;
             ss << rgb;
             NSLog([NSString stringWithCString:ss.str().c_str()]);
         }
-        
-        /*
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (outputImage) {
-                if (![self isFloat:self.cameraOverlayView.frame.size.width equalToFloat:outputImage.size.width] || ![self isFloat:self.cameraOverlayView.frame.size.height equalToFloat:outputImage.size.height]) {
-                    NSLog(@"Updating frame");
-                    float scale = MIN(self.cameraView.frame.size.width / outputImage.size.width, self.cameraView.frame.size.height / outputImage.size.height);
-                    self.cameraOverlayView.frame = CGRectMake((self.cameraView.frame.size.width - outputImage.size.width * scale) / 2,
-                                                              (self.cameraView.frame.size.height - outputImage.size.height * scale) / 2,
-                                                              outputImage.size.width,
-                                                              outputImage.size.height);
-                    
-                    self.cameraOverlayView.transform = CGAffineTransformMakeScale(scale, scale);
-                }
-                
-                [self.cameraOverlayView updateCircleWithCenterX:processor.getCircleCenterX() centerY:processor.getCircleCenterY() radius:processor.getCircleRadius()];
-                outputImage = nil;
-            }
-        });
-         */
-    //}
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.cameraOverlayView updateCircleWithCenterX:processor.getCircleCenterX() centerY:processor.getCircleCenterY() radius:processor.getCircleRadius()];
+        [self.cameraOverlayView updateCircleWithCenterX:processor.getCircleCenterY() centerY:processor.getCircleCenterX() radius:processor.getCircleRadius() scaleX:scaleX scaleY:scaleY];
     });
+    
+    outputImage = nil;
 }
 
-// hessk: TODO: read this license agreement
-/* author: YOSHIMASA NIWA under MIT LICENSE ******************************************************************** */
-
-// NOTE you SHOULD cvReleaseImage() for the return value when end of the code.
-- (IplImage *)CreateIplImageFromUIImage:(UIImage *)image {
-    // Getting CGImage from UIImage
-    CGImageRef imageRef = image.CGImage;
+/* OpenCV tutorial code **************************************************************************************** */
+- (cv::Mat)cvMatFromUIImage:(UIImage *)image
+{
+    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
+    CGFloat cols = image.size.width;
+    CGFloat rows = image.size.height;
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    // Creating temporal IplImage for drawing
-    IplImage *iplimage = cvCreateImage(
-                                       cvSize(image.size.width,image.size.height), IPL_DEPTH_8U, 4
-                                       );
-    // Creating CGContext for temporal IplImage
-    CGContextRef contextRef = CGBitmapContextCreate(
-                                                    iplimage->imageData, iplimage->width, iplimage->height,
-                                                    iplimage->depth, iplimage->widthStep,
-                                                    colorSpace, kCGImageAlphaPremultipliedLast|kCGBitmapByteOrderDefault
-                                                    );
-    // Drawing CGImage to CGContext
-    CGContextDrawImage(
-                       contextRef,
-                       CGRectMake(0, 0, image.size.width, image.size.height),
-                       imageRef
-                       );
+    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
     
+    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
+                                                    cols,                       // Width of bitmap
+                                                    rows,                       // Height of bitmap
+                                                    8,                          // Bits per component
+                                                    cvMat.step[0],              // Bytes per row
+                                                    colorSpace,                 // Colorspace
+                                                    kCGImageAlphaNoneSkipLast |
+                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
+    
+    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
     CGContextRelease(contextRef);
-    CGColorSpaceRelease(colorSpace);
     
-    // Creating result IplImage
-    IplImage *ret = cvCreateImage(cvGetSize(iplimage), IPL_DEPTH_8U, 3);
-    cvCvtColor(iplimage, ret, CV_RGBA2BGR);
-    cvReleaseImage(&iplimage);
     
-    return ret;
+    
+    cv::cvtColor(cvMat, cvMat, CV_RGBA2BGR);
+    
+    return cvMat;
 }
 
-// NOTE You should convert color mode as RGB before passing to this function
-- (UIImage *)UIImageFromIplImage:(IplImage *)image {
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    // Allocating the buffer for CGImage
-    NSData *data =
-    [NSData dataWithBytes:image->imageData length:image->imageSize];
-    CGDataProviderRef provider =
-    CGDataProviderCreateWithCFData((CFDataRef)data);
-    // Creating CGImage from chunk of IplImage
-    CGImageRef imageRef = CGImageCreate(
-                                        image->width, image->height,
-                                        image->depth, image->depth * image->nChannels, image->widthStep,
-                                        colorSpace, kCGImageAlphaNone|kCGBitmapByteOrderDefault,
-                                        provider, NULL, false, kCGRenderingIntentDefault
+-(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
+{
+    NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
+    CGColorSpaceRef colorSpace;
+    
+    if (cvMat.elemSize() == 1) {
+        colorSpace = CGColorSpaceCreateDeviceGray();
+    } else {
+        colorSpace = CGColorSpaceCreateDeviceRGB();
+    }
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    
+    // Creating CGImage from cv::Mat
+    CGImageRef imageRef = CGImageCreate(cvMat.cols,                                 //width
+                                        cvMat.rows,                                 //height
+                                        8,                                          //bits per component
+                                        8 * cvMat.elemSize(),                       //bits per pixel
+                                        cvMat.step[0],                            //bytesPerRow
+                                        colorSpace,                                 //colorspace
+                                        kCGImageAlphaNone|kCGBitmapByteOrderDefault,// bitmap info
+                                        provider,                                   //CGDataProviderRef
+                                        NULL,                                       //decode
+                                        false,                                      //should interpolate
+                                        kCGRenderingIntentDefault                   //intent
                                         );
+    
+    
     // Getting UIImage from CGImage
-    UIImage *ret = [UIImage imageWithCGImage:imageRef];
+    UIImage *finalImage = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     CGDataProviderRelease(provider);
     CGColorSpaceRelease(colorSpace);
-    return ret;
-}
-
-/* ************************************************************************************************************* */
-
-- (bool) isFloat: (float)floatA equalToFloat: (float)floatB {
-    float epsilon = 0.001;
     
-    if (fabs(floatA - floatB) < epsilon) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return finalImage;
 }
 
 @end
