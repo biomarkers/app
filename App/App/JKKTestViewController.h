@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *nextButton;
 
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
+@property (strong, nonatomic) IBOutlet UITextField *unitsField;
 
 @property (strong, nonatomic) IBOutlet UILabel *componentsLabel;
 @property (strong, nonatomic) IBOutlet UITableView *componentsTable;

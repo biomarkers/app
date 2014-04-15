@@ -170,7 +170,7 @@ RegressionFactory homeFactory;
     JKKModel* currentModel;
     
     for (int i = 0; i < models.size(); i++) {
-        currentModel = [[JKKModel alloc] initWithModel:homeFactory.deserializeFromDB(models[i].data, models[i].length)];
+        currentModel = [[JKKModel alloc] initWithModel:homeFactory.deserializeFromDB(models[i].data, models[i].length) units:[NSString stringWithUTF8String:models[i].units.c_str()]];
 
         [self.testItems addObject:currentModel];
     }
@@ -240,7 +240,7 @@ RegressionFactory homeFactory;
         UILabel* detail = (UILabel *)[cell.contentView viewWithTag:11];
         
         title.text = historyItem.name;
-        detail.text = [NSString stringWithFormat:@"%f", historyItem.value];
+        detail.text = [NSString stringWithFormat:@"%.2f", historyItem.value];
     } else {
         //error
     }
@@ -304,7 +304,7 @@ RegressionFactory homeFactory;
             
             homeFactory.serializeToDB(newTest.model, blob, len);
             
-            ModelEntry entry(newTest.model->getModelName(), blob, len);
+            ModelEntry entry(newTest.model->getModelName(), blob, len, [newTest.units UTF8String]);
             p.insertModelEntry(entry);
             p.close();
             

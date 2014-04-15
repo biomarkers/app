@@ -56,9 +56,13 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle: NSDateFormatterShortStyle];
     
+    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+    ModelEntry model = p.findModelEntryByName([self.result.name UTF8String]);
+    NSString *modelUnits = [NSString stringWithUTF8String:model.units.c_str()];
+    
     self.testLabel.text = self.result.name;
     self.dateLabel.text = self.result.date;
-    self.valueLabel.text = [NSString stringWithFormat:@"%f", self.result.value];
+    self.valueLabel.text = [NSString stringWithFormat:@"%.2f %@", self.result.value, modelUnits];
     self.subjectLabel.text = self.result.subject;
     self.notesTextView.text = self.result.notes;
 }
@@ -71,7 +75,8 @@
         if (self.result.resultID != -1) p.deleteResultEntry(self.result.resultID);
     } else if (self.result.resultID == -1) {
         // write results to database
-        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value);
+        //TODO: replace empty strings with exported data, exported message...
+        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value, "", "");
         p.insertResultEntry(entry);
     }
     p.close();

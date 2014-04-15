@@ -10,11 +10,12 @@
 
 @implementation JKKModel
 
-- (id)initWithModel:(ModelPtr)model {
+- (id)initWithModel:(ModelPtr)model units:(NSString *)units{
     self = [super init];
     
     if (self) {
         self.model = model;
+        self.units = units;
     }
     
     return self;

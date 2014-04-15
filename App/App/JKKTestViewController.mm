@@ -98,6 +98,14 @@ RegressionFactory factory;
                 modelName = new std::string([@"No name" UTF8String]);
             }
             
+            NSString *modelUnits;
+            if (self.unitsField.text.length > 0) {
+                modelUnits = self.unitsField.text;
+            } else {
+#warning TODO: user should not be able to continue without entering units
+                modelUnits = @"units";
+            }
+            
             factory.createNew(*modelName, *modelName);
             
             JKKComponent* currentComponent;
@@ -106,7 +114,7 @@ RegressionFactory factory;
                 factory.addNewComponent([currentComponent modelType], [currentComponent startTime], [currentComponent endTime], [currentComponent varType]);
             }
             
-            self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel()];
+            self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel() units:modelUnits];
             self.test.model->setIndices(3, 2, 1, 0, -1);
         }
         
@@ -149,26 +157,6 @@ RegressionFactory factory;
     }
     
     [super touchesBegan:touches withEvent:event];
-}
-
-- (IBAction)addCalibrationPoint:(id)sender {
-    UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:@"Calibration value" message:@"Please enter the value of this sample."  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
-    calibrationValueAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    [[calibrationValueAlert textFieldAtIndex:0] resignFirstResponder];
-    [[calibrationValueAlert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDecimalPad];
-    [[calibrationValueAlert textFieldAtIndex:0] becomeFirstResponder];
-    
-    [calibrationValueAlert show];
-}
-
-#pragma mark UIAlertViewDelegate methods
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.firstOtherButtonIndex) {
-        NSLog(@"Calibration val entered: %@", [[alertView textFieldAtIndex:0] text]);
-        [self setCalibrationValue:[[[alertView textFieldAtIndex:0] text] floatValue]];
-        [self performSegueWithIdentifier:@"showCameraFromTest" sender:self];
-    }
 }
 
 #pragma mark UITableViewDelegate/DataSource methods

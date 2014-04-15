@@ -87,7 +87,7 @@
 }
 
 - (IBAction)addCalibrationPoint:(id)sender {
-    UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:@"Calibration value" message:@"Please enter the value of this sample."  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+    UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:@"Calibration value" message:[NSString stringWithFormat:@"Please enter the value of this sample in %@", self.test.units] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
     calibrationValueAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     [[calibrationValueAlert textFieldAtIndex:0] resignFirstResponder];
@@ -136,7 +136,7 @@
     if (tableView == self.calibrationTable) {
         NSNumber* calibrationPointValue = [self.calibrationItems objectAtIndex:indexPath.row];
         
-        cell.textLabel.text = [NSString stringWithFormat:@"%.2f", [calibrationPointValue floatValue]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%.2f %@", [calibrationPointValue floatValue], self.test.units];
     } else {
         //error
     }

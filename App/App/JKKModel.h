@@ -16,8 +16,9 @@
 @interface JKKModel : NSObject
 
 @property ModelPtr model;
+@property NSString *units;
 
-- (id)initWithModel: (ModelPtr)model;
+- (id)initWithModel: (ModelPtr)model units:(NSString *)units;
 
 - (NSString *)getModelName;
 - (NSString *)getTestName;
