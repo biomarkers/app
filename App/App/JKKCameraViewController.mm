@@ -89,7 +89,6 @@ const float TIMER_STEP = 0.1;
         
         processor.setCircleCenterX(self.roiX);
         processor.setCircleCenterY(self.roiY);
-        
         processor.setCircleRadius(self.roiR);
     }
     
@@ -105,33 +104,9 @@ const float TIMER_STEP = 0.1;
             break;
     }
     
-    /* init video out *******************************************************************************************/
-    NSLog(@"Initializing session video output...");
-    //hessk: apple code stuffs
-    AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
-    [self.captureManager.session addOutput:videoOut];
-    videoOut.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
-    videoOut.minFrameDuration = CMTimeMake(1, [defaults integerForKey:@"kFPS"]);
-    
-    dispatch_queue_t queue = dispatch_queue_create("VideoOutQueue", NULL);
-    [videoOut setSampleBufferDelegate:self queue:queue];
-    /* finish video out init ************************************************************************************/
-    
-    /* init preview layer ***************************************************************************************/
-    AVCaptureVideoPreviewLayer *newCaptureVideoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.captureManager.session];
-    self.cameraView.backgroundColor = [UIColor clearColor];
-    UIView *view = self.cameraView;
-    CALayer *viewLayer = [view layer];
-    [viewLayer setMasksToBounds:YES];
-    CGRect bounds = [view bounds];
-    [newCaptureVideoPreviewLayer setFrame:bounds];
-    [newCaptureVideoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    [viewLayer addSublayer:newCaptureVideoPreviewLayer];
-    self.captureVideoPreviewLayer = newCaptureVideoPreviewLayer;
-    /* finish init preview layer ********************************************************************************/
-    
-    [self.captureManager.session startRunning];
-    NSLog(@"Camera started");
+    [self.captureManager initializeVideoOutWithFPS:[defaults integerForKey:@"kFPS"] usingDelegate:self];
+    [self.captureManager initializePreviewLayerUsingView:self.cameraView withLayer:self.captureVideoPreviewLayer];
+    [self.captureManager startSession];
 }
 
 - (void)didReceiveMemoryWarning
@@ -194,7 +169,7 @@ const float TIMER_STEP = 0.1;
 
 - (void)endProcessing {
     /* Camera shutdown */
-    [self.captureManager.session stopRunning];
+    [self.captureManager stopSession];
     [self.captureManager setSession: nil];
     
     [self.statusLabel setText:@"Done."];
@@ -225,12 +200,6 @@ const float TIMER_STEP = 0.1;
     }
 }
 
-#pragma mark UIAlertViewDelegate method
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self.alertSound stop];
-    [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showCalibrationResults"]) {
@@ -241,67 +210,23 @@ const float TIMER_STEP = 0.1;
     }
 }
 
-/* Apple's image conversion function */
-- (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer {
-    
-    // This example assumes the sample buffer came from an AVCaptureOutput,
-    // so its image buffer is known to be a pixel buffer.
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    // Lock the base address of the pixel buffer.
-    CVPixelBufferLockBaseAddress(imageBuffer,0);
-    
-    // Get the number of bytes per row for the pixel buffer.
-    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-    // Get the pixel buffer width and height.
-    size_t width = CVPixelBufferGetWidth(imageBuffer);
-    size_t height = CVPixelBufferGetHeight(imageBuffer);
-    
-    // Create a device-dependent RGB color space.
-    static CGColorSpaceRef colorSpace = NULL;
-    if (colorSpace == NULL) {
-        colorSpace = CGColorSpaceCreateDeviceRGB();
-        if (colorSpace == NULL) {
-            // Handle the error appropriately.
-            return nil;
-        }
-    }
-    
-    // Get the base address of the pixel buffer.
-    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-    // Get the data size for contiguous planes of the pixel buffer.
-    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
-    
-    // Create a Quartz direct-access data provider that uses data we supply.
-    CGDataProviderRef dataProvider =
-    CGDataProviderCreateWithData(NULL, baseAddress, bufferSize, NULL);
-    // Create a bitmap image from data supplied by the data provider.
-    CGImageRef cgImage =
-    CGImageCreate(width, height, 8, 32, bytesPerRow,
-                  colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little,
-                  dataProvider, NULL, true, kCGRenderingIntentDefault);
-    
-    CGDataProviderRelease(dataProvider);
-    
-    // Create and return an image object to represent the Quartz image.
-    UIImage *image = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    
-    return image;
+#pragma mark UIAlertViewDelegate method
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self.alertSound stop];
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
 }
 
 #pragma mark - Protocol AVCaptureVideoDataOutputSampleBufferDelegate
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    outputImage = [self imageFromSampleBuffer:sampleBuffer];
+    outputImage = [JKKCaptureManager imageFromSampleBuffer:sampleBuffer];
     
-    /* reverse x and y to account for difference between portrait/landscape discrepancy between camera view and preview view */
+    /* reverse x and y to account for portrait/landscape discrepancy between camera view and preview view */
     float scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
     float scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
     
     @autoreleasepool {
         if ([self state] == RUNNING) {
-            cv::Mat mat = [self cvMatFromUIImage:outputImage];
+            cv::Mat mat = [JKKCaptureManager cvMatFromUIImage:outputImage];
             cv::Scalar rgb = processor.process(mat);
             
             std::stringstream ss;
@@ -315,71 +240,6 @@ const float TIMER_STEP = 0.1;
     });
     
     outputImage = nil;
-}
-
-/* OpenCV tutorial code **************************************************************************************** */
-- (cv::Mat)cvMatFromUIImage:(UIImage *)image
-{
-    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
-    CGFloat cols = image.size.width;
-    CGFloat rows = image.size.height;
-    
-    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
-    
-    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
-                                                    cols,                       // Width of bitmap
-                                                    rows,                       // Height of bitmap
-                                                    8,                          // Bits per component
-                                                    cvMat.step[0],              // Bytes per row
-                                                    colorSpace,                 // Colorspace
-                                                    kCGImageAlphaNoneSkipLast |
-                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
-    
-    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
-    CGContextRelease(contextRef);
-    
-    
-    
-    cv::cvtColor(cvMat, cvMat, CV_RGBA2BGR);
-    
-    return cvMat;
-}
-
--(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
-{
-    NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
-    CGColorSpaceRef colorSpace;
-    
-    if (cvMat.elemSize() == 1) {
-        colorSpace = CGColorSpaceCreateDeviceGray();
-    } else {
-        colorSpace = CGColorSpaceCreateDeviceRGB();
-    }
-    
-    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
-    
-    // Creating CGImage from cv::Mat
-    CGImageRef imageRef = CGImageCreate(cvMat.cols,                                 //width
-                                        cvMat.rows,                                 //height
-                                        8,                                          //bits per component
-                                        8 * cvMat.elemSize(),                       //bits per pixel
-                                        cvMat.step[0],                            //bytesPerRow
-                                        colorSpace,                                 //colorspace
-                                        kCGImageAlphaNone|kCGBitmapByteOrderDefault,// bitmap info
-                                        provider,                                   //CGDataProviderRef
-                                        NULL,                                       //decode
-                                        false,                                      //should interpolate
-                                        kCGRenderingIntentDefault                   //intent
-                                        );
-    
-    
-    // Getting UIImage from CGImage
-    UIImage *finalImage = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    CGDataProviderRelease(provider);
-    CGColorSpaceRelease(colorSpace);
-    
-    return finalImage;
 }
 
 @end

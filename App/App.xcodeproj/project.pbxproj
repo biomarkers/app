@@ -57,7 +57,7 @@
 		0AE0311318D13001002B7D87 /* JKKCalibrationListViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AE0311218D13001002B7D87 /* JKKCalibrationListViewController.mm */; };
 		0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */; };
 		0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E2018A6ED70001A5FFC /* JKKComponent.mm */; };
-		0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */; };
+		0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,7 +235,7 @@
 		0AEF3E1F18A6ED70001A5FFC /* JKKComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKComponent.h; sourceTree = "<group>"; };
 		0AEF3E2018A6ED70001A5FFC /* JKKComponent.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKComponent.mm; sourceTree = "<group>"; };
 		0AFAC4431899EBF40029D0F2 /* JKKCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCaptureManager.h; sourceTree = "<group>"; };
-		0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKCaptureManager.m; sourceTree = "<group>"; };
+		0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCaptureManager.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,7 +582,7 @@
 			isa = PBXGroup;
 			children = (
 				0AFAC4431899EBF40029D0F2 /* JKKCaptureManager.h */,
-				0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.m */,
+				0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.mm */,
 				0A7412E618B46E42004E0D52 /* JKKDatabaseManager.h */,
 				0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */,
 			);
@@ -705,7 +705,7 @@
 				0A06637718D283C800CE6CBF /* JKKGraphViewController.mm in Sources */,
 				0A503B7318909C7C009BF78F /* main.mm in Sources */,
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
-				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.m in Sources */,
+				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.mm in Sources */,
 				0A06637D18D2C04500CE6CBF /* JKKNavigationController.m in Sources */,
 				0A8899AB18B81FB70097354E /* LinearRegression.cpp in Sources */,
 				0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */,
