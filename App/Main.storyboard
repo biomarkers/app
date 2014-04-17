@@ -1098,6 +1098,12 @@
                                             <action selector="unwindToSource:" destination="iqK-DG-DA3" id="EJf-h6-xa2"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hQz-hp-N8D"/>
+                                    <barButtonItem systemItem="action" id="L1B-hk-O4d">
+                                        <connections>
+                                            <action selector="sendMail:" destination="iqK-DG-DA3" id="0rB-ww-38g"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -1140,6 +1146,7 @@
                         <outlet property="dateLabel" destination="YBo-gB-aDB" id="xGW-5V-RFI"/>
                         <outlet property="deleteButton" destination="Slm-LB-qIe" id="Eus-Fb-YWM"/>
                         <outlet property="notesTextView" destination="uzc-af-q43" id="Jiv-cQ-guT"/>
+                        <outlet property="shareButton" destination="L1B-hk-O4d" id="GK2-g3-n5E"/>
                         <outlet property="subjectLabel" destination="5jz-JT-Muk" id="V2h-0W-QYk"/>
                         <outlet property="testLabel" destination="pv1-fS-p8J" id="D8G-VP-o9e"/>
                         <outlet property="valueLabel" destination="0Oe-03-94D" id="B6h-BS-XOx"/>

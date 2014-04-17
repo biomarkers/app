@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A021FD518FF45F900591BD0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A021FD418FF45F800591BD0 /* MessageUI.framework */; };
 		0A05457518A9517600BF2072 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05457418A9517600BF2072 /* boost.framework */; };
 		0A06637418D2818400CE6CBF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A06637318D2818300CE6CBF /* libCorePlot-CocoaTouch.a */; };
 		0A06637718D283C800CE6CBF /* JKKGraphViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A021FD418FF45F800591BD0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0A05457418A9517600BF2072 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = boost.framework; sourceTree = "<group>"; };
 		0A06632518D2818300CE6CBF /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
 		0A06632618D2818300CE6CBF /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A021FD518FF45F900591BD0 /* MessageUI.framework in Frameworks */,
 				0ACF780B18A9B2BD00134713 /* libsqlite3.0.dylib in Frameworks */,
 				0A05457518A9517600BF2072 /* boost.framework in Frameworks */,
 				0A503BCF1890A43D009BF78F /* AssetsLibrary.framework in Frameworks */,
@@ -401,6 +404,7 @@
 		0A503B6518909C7C009BF78F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A021FD418FF45F800591BD0 /* MessageUI.framework */,
 				0ACF780A18A9B2BD00134713 /* libsqlite3.0.dylib */,
 				0A05457418A9517600BF2072 /* boost.framework */,
 				0A503BC91890A43D009BF78F /* AssetsLibrary.framework */,

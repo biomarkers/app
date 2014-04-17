@@ -15,6 +15,8 @@
 
 @interface JKKResultsViewController ()
 
+@property MFMailComposeViewController *mailViewController;
+
 - (void)populateControls;
 
 @end
@@ -25,7 +27,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        //hessk: initialize view controller for sharing results through e-mail
+        
     }
     return self;
 }
@@ -87,6 +90,34 @@
     } else if ([self.sourceView isKindOfClass:[JKKCameraViewController class]]) {
         [self performSegueWithIdentifier:@"unwindToSetupFromResults" sender:sender];
     }
+}
+
+- (IBAction)sendMail:(id)sender {
+    if ([MFMailComposeViewController canSendMail]) {
+        self.mailViewController = [[MFMailComposeViewController alloc] init];
+        self.mailViewController.mailComposeDelegate = self;
+        
+        [self.mailViewController setSubject:@"test subject"];
+        [self.mailViewController setMessageBody:@"test subject" isHTML:NO];
+    } else {
+        NSLog(@"Unable to send mail on this device");
+    }
+    
+    if (self.mailViewController) {
+        [self presentViewController:self.mailViewController animated:YES completion:nil];
+    }
+}
+
+#pragma mark MFMailComposeViewControllerDelegate methods
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"Message sent");
+    } else if (result == MFMailComposeResultFailed) {
+        NSLog(@"Failed to send message");
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

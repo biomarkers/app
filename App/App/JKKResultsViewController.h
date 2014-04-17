@@ -7,9 +7,10 @@
 //
 #pragma once
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "JKKResult.h"
 
-@interface JKKResultsViewController : UIViewController
+@interface JKKResultsViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property JKKResult* result;
 
@@ -18,7 +19,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
 @property (strong, nonatomic) IBOutlet UITextView *notesTextView;
+
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 
 @property UIViewController* sourceView;
 
