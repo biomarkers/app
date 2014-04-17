@@ -8,14 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		0A021FD518FF45F900591BD0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A021FD418FF45F800591BD0 /* MessageUI.framework */; };
+		0A02200618FF548100591BD0 /* DataStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FF118FF548100591BD0 /* DataStore.cpp */; };
+		0A02200718FF548100591BD0 /* ExponentialRegression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FF318FF548100591BD0 /* ExponentialRegression.cpp */; };
+		0A02200818FF548100591BD0 /* LinearRegression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FF418FF548100591BD0 /* LinearRegression.cpp */; };
+		0A02200918FF548100591BD0 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FF518FF548100591BD0 /* ModelComponent.cpp */; };
+		0A02200A18FF548100591BD0 /* PointAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FF618FF548100591BD0 /* PointAnalysis.cpp */; };
+		0A02200B18FF548100591BD0 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FF718FF548100591BD0 /* RegressionFactory.cpp */; };
+		0A02200C18FF548100591BD0 /* RegressionModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FF818FF548100591BD0 /* RegressionModel.cpp */; };
+		0A02200D18FF548100591BD0 /* DataExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FFA18FF548100591BD0 /* DataExporter.cpp */; };
+		0A02200E18FF548100591BD0 /* SerializableMat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FFB18FF548100591BD0 /* SerializableMat.cpp */; };
+		0A02200F18FF548100591BD0 /* SerializableScalar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FFC18FF548100591BD0 /* SerializableScalar.cpp */; };
+		0A02201018FF548100591BD0 /* BiomarkerImageProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A021FFE18FF548100591BD0 /* BiomarkerImageProcessor.cpp */; };
 		0A05457518A9517600BF2072 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A05457418A9517600BF2072 /* boost.framework */; };
 		0A06637418D2818400CE6CBF /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A06637318D2818300CE6CBF /* libCorePlot-CocoaTouch.a */; };
 		0A06637718D283C800CE6CBF /* JKKGraphViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */; };
 		0A06637D18D2C04500CE6CBF /* JKKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
-		0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB818909F95009BF78F /* ModelComponent.cpp */; };
-		0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBA18909F95009BF78F /* RegressionFactory.cpp */; settings = {COMPILER_FLAGS = "-ftemplate-depth=1024"; }; };
-		0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BBB18909F95009BF78F /* RegressionModel.cpp */; };
 		0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */; };
 		0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */; };
 		0A503B6718909C7C009BF78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6618909C7C009BF78F /* Foundation.framework */; };
@@ -30,7 +38,6 @@
 		0A503B8218909C7C009BF78F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6A18909C7C009BF78F /* UIKit.framework */; };
 		0A503B8A18909C7C009BF78F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A503B8818909C7C009BF78F /* InfoPlist.strings */; };
 		0A503B8C18909C7C009BF78F /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A503B8B18909C7C009BF78F /* AppTests.m */; };
-		0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */; };
 		0A503BC61890A2A8009BF78F /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC51890A2A8009BF78F /* opencv2.framework */; };
 		0A503BC81890A402009BF78F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC71890A402009BF78F /* Accelerate.framework */; };
 		0A503BCF1890A43D009BF78F /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BC91890A43D009BF78F /* AssetsLibrary.framework */; };
@@ -40,15 +47,9 @@
 		0A503BD31890A43D009BF78F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCD1890A43D009BF78F /* CoreVideo.framework */; };
 		0A503BD41890A43D009BF78F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503BCE1890A43D009BF78F /* QuartzCore.framework */; };
 		0A7412E818B46E42004E0D52 /* JKKDatabaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */; };
-		0A8899AA18B81FB70097354E /* ExponentialRegression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A8899A718B81FB70097354E /* ExponentialRegression.cpp */; };
-		0A8899AB18B81FB70097354E /* LinearRegression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A8899A818B81FB70097354E /* LinearRegression.cpp */; };
-		0A8899AC18B81FB70097354E /* PointAnalysis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A8899A918B81FB70097354E /* PointAnalysis.cpp */; };
 		0A9CC7DF1894897E0035959E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9CC7DE1894897E0035959E /* Main.storyboard */; };
 		0A9CC7E5189576560035959E /* JKKResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7E4189576560035959E /* JKKResult.m */; };
 		0A9CC7EE1895911E0035959E /* JKKResultsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CC7ED1895911E0035959E /* JKKResultsViewController.mm */; };
-		0AB0BE1318B19F6700494DA3 /* DataStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0BE1218B19F6700494DA3 /* DataStore.cpp */; };
-		0AB0BE1618B19F7D00494DA3 /* SerializableMat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0BE1418B19F7D00494DA3 /* SerializableMat.cpp */; };
-		0AB0BE1718B19F7D00494DA3 /* SerializableScalar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AB0BE1518B19F7D00494DA3 /* SerializableScalar.cpp */; };
 		0ACB6C05189ACA89000E6DCB /* JKKTestViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C04189ACA89000E6DCB /* JKKTestViewController.mm */; };
 		0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C06189ACBFB000E6DCB /* JKKHomeViewController.mm */; };
 		0ACB6C09189AD08C000E6DCB /* JKKSetupViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB6C08189AD08C000E6DCB /* JKKSetupViewController.mm */; };
@@ -73,6 +74,31 @@
 
 /* Begin PBXFileReference section */
 		0A021FD418FF45F800591BD0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		0A021FDA18FF548100591BD0 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
+		0A021FDB18FF548100591BD0 /* ModelEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntry.h; sourceTree = "<group>"; };
+		0A021FDC18FF548100591BD0 /* ResultEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultEntry.h; sourceTree = "<group>"; };
+		0A021FDE18FF548100591BD0 /* ExponentialRegression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExponentialRegression.h; sourceTree = "<group>"; };
+		0A021FDF18FF548100591BD0 /* LinearRegression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearRegression.h; sourceTree = "<group>"; };
+		0A021FE018FF548100591BD0 /* ModelComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelComponent.h; sourceTree = "<group>"; };
+		0A021FE118FF548100591BD0 /* ModelComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelComponents.h; sourceTree = "<group>"; };
+		0A021FE218FF548100591BD0 /* PointAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointAnalysis.h; sourceTree = "<group>"; };
+		0A021FE318FF548100591BD0 /* RegressionFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegressionFactory.h; sourceTree = "<group>"; };
+		0A021FE418FF548100591BD0 /* RegressionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegressionModel.h; sourceTree = "<group>"; };
+		0A021FE618FF548100591BD0 /* DataExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataExporter.h; sourceTree = "<group>"; };
+		0A021FE718FF548100591BD0 /* SerializableMat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerializableMat.h; sourceTree = "<group>"; };
+		0A021FE818FF548100591BD0 /* SerializableScalar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerializableScalar.h; sourceTree = "<group>"; };
+		0A021FEA18FF548100591BD0 /* BiomarkerImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiomarkerImageProcessor.h; sourceTree = "<group>"; };
+		0A021FF118FF548100591BD0 /* DataStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStore.cpp; sourceTree = "<group>"; };
+		0A021FF318FF548100591BD0 /* ExponentialRegression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExponentialRegression.cpp; sourceTree = "<group>"; };
+		0A021FF418FF548100591BD0 /* LinearRegression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearRegression.cpp; sourceTree = "<group>"; };
+		0A021FF518FF548100591BD0 /* ModelComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelComponent.cpp; sourceTree = "<group>"; };
+		0A021FF618FF548100591BD0 /* PointAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PointAnalysis.cpp; sourceTree = "<group>"; };
+		0A021FF718FF548100591BD0 /* RegressionFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegressionFactory.cpp; sourceTree = "<group>"; };
+		0A021FF818FF548100591BD0 /* RegressionModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegressionModel.cpp; sourceTree = "<group>"; };
+		0A021FFA18FF548100591BD0 /* DataExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataExporter.cpp; sourceTree = "<group>"; };
+		0A021FFB18FF548100591BD0 /* SerializableMat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerializableMat.cpp; sourceTree = "<group>"; };
+		0A021FFC18FF548100591BD0 /* SerializableScalar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerializableScalar.cpp; sourceTree = "<group>"; };
+		0A021FFE18FF548100591BD0 /* BiomarkerImageProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BiomarkerImageProcessor.cpp; sourceTree = "<group>"; };
 		0A05457418A9517600BF2072 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = boost.framework; sourceTree = "<group>"; };
 		0A06632518D2818300CE6CBF /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
 		0A06632618D2818300CE6CBF /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
@@ -178,18 +204,6 @@
 		0A503B8718909C7C009BF78F /* AppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppTests-Info.plist"; sourceTree = "<group>"; };
 		0A503B8918909C7C009BF78F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A503B8B18909C7C009BF78F /* AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppTests.m; sourceTree = "<group>"; };
-		0A503BAC18909F95009BF78F /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		0A503BAE18909F95009BF78F /* BiomarkerImageProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiomarkerImageProcessor.h; sourceTree = "<group>"; };
-		0A503BAF18909F95009BF78F /* ModelComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelComponent.h; sourceTree = "<group>"; };
-		0A503BB018909F95009BF78F /* RegressionFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegressionFactory.h; sourceTree = "<group>"; };
-		0A503BB118909F95009BF78F /* RegressionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegressionModel.h; sourceTree = "<group>"; };
-		0A503BB218909F95009BF78F /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		0A503BB318909F95009BF78F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		0A503BB518909F95009BF78F /* plot.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = plot.py; sourceTree = "<group>"; };
-		0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BiomarkerImageProcessor.cpp; sourceTree = "<group>"; };
-		0A503BB818909F95009BF78F /* ModelComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelComponent.cpp; sourceTree = "<group>"; };
-		0A503BBA18909F95009BF78F /* RegressionFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegressionFactory.cpp; sourceTree = "<group>"; };
-		0A503BBB18909F95009BF78F /* RegressionModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegressionModel.cpp; sourceTree = "<group>"; };
 		0A503BC51890A2A8009BF78F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		0A503BC71890A402009BF78F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		0A503BC91890A43D009BF78F /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -200,12 +214,6 @@
 		0A503BCE1890A43D009BF78F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A7412E618B46E42004E0D52 /* JKKDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKDatabaseManager.h; sourceTree = "<group>"; };
 		0A7412E718B46E42004E0D52 /* JKKDatabaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKDatabaseManager.mm; sourceTree = "<group>"; };
-		0A8899A718B81FB70097354E /* ExponentialRegression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExponentialRegression.cpp; sourceTree = "<group>"; };
-		0A8899A818B81FB70097354E /* LinearRegression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinearRegression.cpp; sourceTree = "<group>"; };
-		0A8899A918B81FB70097354E /* PointAnalysis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PointAnalysis.cpp; sourceTree = "<group>"; };
-		0A8899AD18B81FD30097354E /* ExponentialRegression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExponentialRegression.h; sourceTree = "<group>"; };
-		0A8899AE18B81FD30097354E /* LinearRegression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinearRegression.h; sourceTree = "<group>"; };
-		0A8899AF18B81FD30097354E /* PointAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointAnalysis.h; sourceTree = "<group>"; };
 		0A9CC7DE1894897E0035959E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0A9CC7E01894919D0035959E /* JKKHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKHomeViewController.h; sourceTree = "<group>"; };
 		0A9CC7E3189576560035959E /* JKKResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKResult.h; sourceTree = "<group>"; };
@@ -214,14 +222,6 @@
 		0A9CC7ED1895911E0035959E /* JKKResultsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKResultsViewController.mm; sourceTree = "<group>"; };
 		0A9CC7EF1895D67C0035959E /* JKKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKTestViewController.h; sourceTree = "<group>"; };
 		0A9CC7F2189732560035959E /* JKKSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKSetupViewController.h; sourceTree = "<group>"; };
-		0AB0BE0E18B19F4F00494DA3 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
-		0AB0BE0F18B19F4F00494DA3 /* ModelEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelEntry.h; sourceTree = "<group>"; };
-		0AB0BE1018B19F4F00494DA3 /* ResultEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultEntry.h; sourceTree = "<group>"; };
-		0AB0BE1218B19F6700494DA3 /* DataStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataStore.cpp; sourceTree = "<group>"; };
-		0AB0BE1418B19F7D00494DA3 /* SerializableMat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerializableMat.cpp; sourceTree = "<group>"; };
-		0AB0BE1518B19F7D00494DA3 /* SerializableScalar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerializableScalar.cpp; sourceTree = "<group>"; };
-		0AB0BE1818B19F9300494DA3 /* SerializableMat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SerializableMat.h; sourceTree = "<group>"; };
-		0AB0BE1918B19F9300494DA3 /* SerializableScalar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SerializableScalar.h; sourceTree = "<group>"; };
 		0ACB6C04189ACA89000E6DCB /* JKKTestViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKTestViewController.mm; sourceTree = "<group>"; };
 		0ACB6C06189ACBFB000E6DCB /* JKKHomeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKHomeViewController.mm; sourceTree = "<group>"; };
 		0ACB6C08189AD08C000E6DCB /* JKKSetupViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKSetupViewController.mm; sourceTree = "<group>"; };
@@ -276,6 +276,119 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A021FD618FF548100591BD0 /* vision */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FD818FF548100591BD0 /* include */,
+				0A021FEF18FF548100591BD0 /* src */,
+			);
+			name = vision;
+			path = ../../vision;
+			sourceTree = "<group>";
+		};
+		0A021FD818FF548100591BD0 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FD918FF548100591BD0 /* persistence */,
+				0A021FDD18FF548100591BD0 /* regression */,
+				0A021FE518FF548100591BD0 /* serialization */,
+				0A021FE918FF548100591BD0 /* vision */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		0A021FD918FF548100591BD0 /* persistence */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FDA18FF548100591BD0 /* DataStore.h */,
+				0A021FDB18FF548100591BD0 /* ModelEntry.h */,
+				0A021FDC18FF548100591BD0 /* ResultEntry.h */,
+			);
+			path = persistence;
+			sourceTree = "<group>";
+		};
+		0A021FDD18FF548100591BD0 /* regression */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FDE18FF548100591BD0 /* ExponentialRegression.h */,
+				0A021FDF18FF548100591BD0 /* LinearRegression.h */,
+				0A021FE018FF548100591BD0 /* ModelComponent.h */,
+				0A021FE118FF548100591BD0 /* ModelComponents.h */,
+				0A021FE218FF548100591BD0 /* PointAnalysis.h */,
+				0A021FE318FF548100591BD0 /* RegressionFactory.h */,
+				0A021FE418FF548100591BD0 /* RegressionModel.h */,
+			);
+			path = regression;
+			sourceTree = "<group>";
+		};
+		0A021FE518FF548100591BD0 /* serialization */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FE618FF548100591BD0 /* DataExporter.h */,
+				0A021FE718FF548100591BD0 /* SerializableMat.h */,
+				0A021FE818FF548100591BD0 /* SerializableScalar.h */,
+			);
+			path = serialization;
+			sourceTree = "<group>";
+		};
+		0A021FE918FF548100591BD0 /* vision */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FEA18FF548100591BD0 /* BiomarkerImageProcessor.h */,
+			);
+			path = vision;
+			sourceTree = "<group>";
+		};
+		0A021FEF18FF548100591BD0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FF018FF548100591BD0 /* persistence */,
+				0A021FF218FF548100591BD0 /* regression */,
+				0A021FF918FF548100591BD0 /* serialization */,
+				0A021FFD18FF548100591BD0 /* vision */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		0A021FF018FF548100591BD0 /* persistence */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FF118FF548100591BD0 /* DataStore.cpp */,
+			);
+			path = persistence;
+			sourceTree = "<group>";
+		};
+		0A021FF218FF548100591BD0 /* regression */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FF318FF548100591BD0 /* ExponentialRegression.cpp */,
+				0A021FF418FF548100591BD0 /* LinearRegression.cpp */,
+				0A021FF518FF548100591BD0 /* ModelComponent.cpp */,
+				0A021FF618FF548100591BD0 /* PointAnalysis.cpp */,
+				0A021FF718FF548100591BD0 /* RegressionFactory.cpp */,
+				0A021FF818FF548100591BD0 /* RegressionModel.cpp */,
+			);
+			path = regression;
+			sourceTree = "<group>";
+		};
+		0A021FF918FF548100591BD0 /* serialization */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FFA18FF548100591BD0 /* DataExporter.cpp */,
+				0A021FFB18FF548100591BD0 /* SerializableMat.cpp */,
+				0A021FFC18FF548100591BD0 /* SerializableScalar.cpp */,
+			);
+			path = serialization;
+			sourceTree = "<group>";
+		};
+		0A021FFD18FF548100591BD0 /* vision */ = {
+			isa = PBXGroup;
+			children = (
+				0A021FFE18FF548100591BD0 /* BiomarkerImageProcessor.cpp */,
+			);
+			path = vision;
+			sourceTree = "<group>";
+		};
 		0A06632318D2814600CE6CBF /* CorePlot */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,8 +498,8 @@
 				0A9CC7DE1894897E0035959E /* Main.storyboard */,
 				0A503B6C18909C7C009BF78F /* App */,
 				0A503B8518909C7C009BF78F /* AppTests */,
+				0A021FD618FF548100591BD0 /* vision */,
 				0A06632318D2814600CE6CBF /* CorePlot */,
-				0A503BAB18909F95009BF78F /* vision */,
 				0A503B6518909C7C009BF78F /* Frameworks */,
 				0A503B6418909C7C009BF78F /* Products */,
 			);
@@ -468,62 +581,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0A503BAB18909F95009BF78F /* vision */ = {
-			isa = PBXGroup;
-			children = (
-				0A503BAC18909F95009BF78F /* .gitignore */,
-				0A503BAD18909F95009BF78F /* include */,
-				0A503BB218909F95009BF78F /* Makefile */,
-				0A503BB318909F95009BF78F /* README.md */,
-				0A503BB418909F95009BF78F /* scripts */,
-				0A503BB618909F95009BF78F /* src */,
-			);
-			name = vision;
-			path = ../../vision;
-			sourceTree = "<group>";
-		};
-		0A503BAD18909F95009BF78F /* include */ = {
-			isa = PBXGroup;
-			children = (
-				0A8899AD18B81FD30097354E /* ExponentialRegression.h */,
-				0A8899AE18B81FD30097354E /* LinearRegression.h */,
-				0A8899AF18B81FD30097354E /* PointAnalysis.h */,
-				0AB0BE1818B19F9300494DA3 /* SerializableMat.h */,
-				0AB0BE1918B19F9300494DA3 /* SerializableScalar.h */,
-				0AB0BE0D18B19F4F00494DA3 /* persist */,
-				0A503BAE18909F95009BF78F /* BiomarkerImageProcessor.h */,
-				0A503BAF18909F95009BF78F /* ModelComponent.h */,
-				0A503BB018909F95009BF78F /* RegressionFactory.h */,
-				0A503BB118909F95009BF78F /* RegressionModel.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		0A503BB418909F95009BF78F /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				0A503BB518909F95009BF78F /* plot.py */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
-		0A503BB618909F95009BF78F /* src */ = {
-			isa = PBXGroup;
-			children = (
-				0A8899A718B81FB70097354E /* ExponentialRegression.cpp */,
-				0A8899A818B81FB70097354E /* LinearRegression.cpp */,
-				0A8899A918B81FB70097354E /* PointAnalysis.cpp */,
-				0AB0BE1418B19F7D00494DA3 /* SerializableMat.cpp */,
-				0AB0BE1518B19F7D00494DA3 /* SerializableScalar.cpp */,
-				0AB0BE1118B19F6700494DA3 /* persist */,
-				0A503BB718909F95009BF78F /* BiomarkerImageProcessor.cpp */,
-				0A503BB818909F95009BF78F /* ModelComponent.cpp */,
-				0A503BBA18909F95009BF78F /* RegressionFactory.cpp */,
-				0A503BBB18909F95009BF78F /* RegressionModel.cpp */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		0A9CC7E7189576A80035959E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,24 +619,6 @@
 				0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		0AB0BE0D18B19F4F00494DA3 /* persist */ = {
-			isa = PBXGroup;
-			children = (
-				0AB0BE0E18B19F4F00494DA3 /* DataStore.h */,
-				0AB0BE0F18B19F4F00494DA3 /* ModelEntry.h */,
-				0AB0BE1018B19F4F00494DA3 /* ResultEntry.h */,
-			);
-			path = persist;
-			sourceTree = "<group>";
-		};
-		0AB0BE1118B19F6700494DA3 /* persist */ = {
-			isa = PBXGroup;
-			children = (
-				0AB0BE1218B19F6700494DA3 /* DataStore.cpp */,
-			);
-			path = persist;
 			sourceTree = "<group>";
 		};
 		0AFAC4421899EBB50029D0F2 /* Utilities */ = {
@@ -694,15 +733,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A8899AC18B81FB70097354E /* PointAnalysis.cpp in Sources */,
-				0A8899AA18B81FB70097354E /* ExponentialRegression.cpp in Sources */,
+				0A02200A18FF548100591BD0 /* PointAnalysis.cpp in Sources */,
+				0A02200D18FF548100591BD0 /* DataExporter.cpp in Sources */,
+				0A02200918FF548100591BD0 /* ModelComponent.cpp in Sources */,
+				0A02200718FF548100591BD0 /* ExponentialRegression.cpp in Sources */,
 				0ACB6C09189AD08C000E6DCB /* JKKSetupViewController.mm in Sources */,
+				0A02200E18FF548100591BD0 /* SerializableMat.cpp in Sources */,
+				0A02200618FF548100591BD0 /* DataStore.cpp in Sources */,
 				0ACF780318A9AFB300134713 /* JKKConfigViewController.m in Sources */,
-				0AB0BE1618B19F7D00494DA3 /* SerializableMat.cpp in Sources */,
-				0A110A9D18974D600098BEF2 /* ModelComponent.cpp in Sources */,
-				0A110A9E18974D600098BEF2 /* RegressionFactory.cpp in Sources */,
-				0A110A9F18974D600098BEF2 /* RegressionModel.cpp in Sources */,
+				0A02200F18FF548100591BD0 /* SerializableScalar.cpp in Sources */,
 				0A7412E818B46E42004E0D52 /* JKKDatabaseManager.mm in Sources */,
+				0A02200818FF548100591BD0 /* LinearRegression.cpp in Sources */,
 				0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */,
 				0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */,
 				0A9CC7EE1895911E0035959E /* JKKResultsViewController.mm in Sources */,
@@ -711,17 +752,16 @@
 				0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */,
 				0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.mm in Sources */,
 				0A06637D18D2C04500CE6CBF /* JKKNavigationController.m in Sources */,
-				0A8899AB18B81FB70097354E /* LinearRegression.cpp in Sources */,
+				0A02200B18FF548100591BD0 /* RegressionFactory.cpp in Sources */,
+				0A02200C18FF548100591BD0 /* RegressionModel.cpp in Sources */,
 				0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */,
 				0A9CC7E5189576560035959E /* JKKResult.m in Sources */,
 				0AE0311318D13001002B7D87 /* JKKCalibrationListViewController.mm in Sources */,
 				0ACB6C05189ACA89000E6DCB /* JKKTestViewController.mm in Sources */,
 				0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */,
 				0ACB6C0C189B04DD000E6DCB /* JKKModel.mm in Sources */,
-				0AB0BE1718B19F7D00494DA3 /* SerializableScalar.cpp in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,
-				0A503BC018909F95009BF78F /* BiomarkerImageProcessor.cpp in Sources */,
-				0AB0BE1318B19F6700494DA3 /* DataStore.cpp in Sources */,
+				0A02201018FF548100591BD0 /* BiomarkerImageProcessor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
