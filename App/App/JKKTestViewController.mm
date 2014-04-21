@@ -42,6 +42,9 @@ RegressionFactory factory;
     [self.componentsTable setDataSource:self];
     [self.componentsTable setDelegate:self];
     
+    [self.nameField setDelegate:self];
+    [self.unitsField setDelegate:self];
+    
     self.componentItems = [[NSMutableArray alloc] init];
     self.calibrationItems = [[NSMutableArray alloc] init];
     
@@ -154,6 +157,8 @@ RegressionFactory factory;
     UITouch *touch = [[event allTouches] anyObject];
     if ([self.nameField isFirstResponder] && [touch view] != self.nameField) {
         [self.nameField resignFirstResponder];
+    } else if ([self.unitsField isFirstResponder] && [touch view] != self.unitsField) {
+        [self.unitsField resignFirstResponder];
     }
     
     [super touchesBegan:touches withEvent:event];
@@ -213,6 +218,13 @@ RegressionFactory factory;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // hessk: react to row selection here
+}
+
+#pragma mark UITextFieldDelegate methods
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

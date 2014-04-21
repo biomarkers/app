@@ -12,10 +12,13 @@
 #import "JKKCameraViewController.h"
 
 #import "JKKDatabaseManager.h"
+#import "DataExporter.h"
 
 @interface JKKResultsViewController ()
 
 @property MFMailComposeViewController *mailViewController;
+@property NSString *resultData;
+@property NSString *resultText;
 
 - (void)populateControls;
 
@@ -56,11 +59,13 @@
 }
 
 - (void)populateControls {
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle: NSDateFormatterShortStyle];
-    
     DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
     ModelEntry model = p.findModelEntryByName([self.result.name UTF8String]);
+    ResultEntry resultEntry = p.findResultForIdWithExportdData(self.result.resultID);
+    p.close();
+    
+    self.resultData = [NSString stringWithUTF8String:resultEntry.exportedData.c_str()];
+    self.resultText = [NSString stringWithUTF8String:resultEntry.exportedMessage.c_str()];
     NSString *modelUnits = [NSString stringWithUTF8String:model.units.c_str()];
     
     self.testLabel.text = self.result.name;
@@ -72,17 +77,12 @@
 
 - (IBAction)unwindToSource:(id)sender {
     // if they pressed the delete button, go through delete process for result
-    
-    DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+
     if (sender == self.deleteButton) {
-        if (self.result.resultID != -1) p.deleteResultEntry(self.result.resultID);
-    } else if (self.result.resultID == -1) {
-        // write results to database
-        //TODO: replace empty strings with exported data, exported message...
-        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value, "", "");
-        p.insertResultEntry(entry);
+        DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
+        p.deleteResultEntry(self.result.resultID);
+        p.close();
     }
-    p.close();
     
     // perform unwind segue back from the source
     if ([self.sourceView isKindOfClass:[JKKHomeViewController class]]) {
@@ -97,8 +97,11 @@
         self.mailViewController = [[MFMailComposeViewController alloc] init];
         self.mailViewController.mailComposeDelegate = self;
         
-        [self.mailViewController setSubject:@"test subject"];
-        [self.mailViewController setMessageBody:@"test subject" isHTML:NO];
+        NSString *messageBody = [NSString stringWithFormat:@"Subject:%@\nNotes:%@\n\n%@", self.result.subject, self.result.notes, self.resultText];
+        
+        [self.mailViewController setSubject:@"Diagnostic Results"];
+        [self.mailViewController setMessageBody:messageBody isHTML:NO];
+        [self.mailViewController addAttachmentData:[self.resultData dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/csv" fileName:@"results.csv"];
     } else {
         NSLog(@"Unable to send mail on this device");
     }

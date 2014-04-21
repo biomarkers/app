@@ -10,7 +10,7 @@
 #import "JKKModel.h"
 #import "RegressionFactory.h"
 
-@interface JKKTestViewController : UIViewController <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface JKKTestViewController : UIViewController <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *nextButton;

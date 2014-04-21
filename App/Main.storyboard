@@ -1099,7 +1099,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="hQz-hp-N8D"/>
-                                    <barButtonItem systemItem="action" id="L1B-hk-O4d">
+                                    <barButtonItem title="Share" id="L1B-hk-O4d">
                                         <connections>
                                             <action selector="sendMail:" destination="iqK-DG-DA3" id="0rB-ww-38g"/>
                                         </connections>
