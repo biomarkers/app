@@ -209,7 +209,7 @@ const float TIMER_STEP = 0.1;
         exporter.exportDiagnosticRun();
         DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
         // write results to database
-        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.subject UTF8String], [self.result.date UTF8String], self.result.value, exporter.getCSVData(), exporter.getTextData());
+        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.notes UTF8String], [self.result.date UTF8String], self.result.value, exporter.getCSVData(), exporter.getTextData());
         
         self.result.resultID = p.insertResultEntry(entry);
         p.close();

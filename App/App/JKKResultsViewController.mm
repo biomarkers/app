@@ -97,7 +97,7 @@
         self.mailViewController = [[MFMailComposeViewController alloc] init];
         self.mailViewController.mailComposeDelegate = self;
         
-        NSString *messageBody = [NSString stringWithFormat:@"Subject:%@\nNotes:%@\n\n%@", self.result.subject, self.result.notes, self.resultText];
+        NSString *messageBody = [NSString stringWithFormat:@"Subject: %@\nNotes: %@\nModel: %@\n\n%@", self.result.subject, self.result.notes, self.result.name, self.resultText];
         
         [self.mailViewController setSubject:@"Diagnostic Results"];
         [self.mailViewController setMessageBody:messageBody isHTML:NO];
