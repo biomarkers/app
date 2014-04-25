@@ -14,9 +14,9 @@
 @interface JKKGraphViewController : UIViewController <CPTPlotDataSource>
 
 @property (strong, nonatomic) IBOutlet CPTGraphHostingView *hostView;
-
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *discardButton;
 
 @property JKKModel* test;
+@property (strong, nonatomic) NSMutableArray *plotArray;
 
 @end

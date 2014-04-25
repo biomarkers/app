@@ -26,7 +26,7 @@
     // Drawing code
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] CGColor]);
+    CGContextSetStrokeColorWithColor(context, [self.tintColor CGColor]);
     CGContextSetLineWidth(context, 2);
     CGContextStrokeEllipseInRect(context, self.circleBounds);
 }

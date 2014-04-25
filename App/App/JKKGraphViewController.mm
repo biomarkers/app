@@ -26,6 +26,8 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    self.plotArray = [[NSMutableArray alloc] init];
     [self initPlot];
 }
 
@@ -109,28 +111,6 @@
     CPTColor *redColor = [CPTColor redColor];
     [graph addPlot:redPlot toPlotSpace:plotSpace];
     
-    CPTScatterPlot *greenPlot = [[CPTScatterPlot alloc] init];
-    greenPlot.dataSource = self;
-    greenPlot.identifier = @"GREEN";
-    CPTColor *greenColor = [CPTColor greenColor];
-    [graph addPlot:greenPlot toPlotSpace:plotSpace];
-    
-    CPTScatterPlot *bluePlot = [[CPTScatterPlot alloc] init];
-    bluePlot.dataSource = self;
-    bluePlot.identifier = @"BLUE";
-    CPTColor *blueColor = [CPTColor blueColor];
-    [graph addPlot:bluePlot toPlotSpace:plotSpace];
-    
-    // 3 - Set up plot space
-    [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:redPlot, greenPlot, bluePlot, nil]];
-    CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
-    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
-    plotSpace.xRange = xRange;
-    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
-    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
-    plotSpace.yRange = yRange;
-    
-    // 4 - Create styles and symbols
     CPTMutableLineStyle *redLineStyle = [redPlot.dataLineStyle mutableCopy];
     redLineStyle.lineWidth = 2.5;
     redLineStyle.lineColor = redColor;
@@ -142,6 +122,12 @@
     redSymbol.lineStyle = redSymbolLineStyle;
     redSymbol.size = CGSizeMake(6.0f, 6.0f);
     redPlot.plotSymbol = redSymbol;
+    
+    CPTScatterPlot *greenPlot = [[CPTScatterPlot alloc] init];
+    greenPlot.dataSource = self;
+    greenPlot.identifier = @"GREEN";
+    CPTColor *greenColor = [CPTColor greenColor];
+    [graph addPlot:greenPlot toPlotSpace:plotSpace];
     
     CPTMutableLineStyle *greenLineStyle = [greenPlot.dataLineStyle mutableCopy];
     greenLineStyle.lineWidth = 1.0;
@@ -155,6 +141,12 @@
     greenSymbol.size = CGSizeMake(6.0f, 6.0f);
     greenPlot.plotSymbol = greenSymbol;
     
+    CPTScatterPlot *bluePlot = [[CPTScatterPlot alloc] init];
+    bluePlot.dataSource = self;
+    bluePlot.identifier = @"BLUE";
+    CPTColor *blueColor = [CPTColor blueColor];
+    [graph addPlot:bluePlot toPlotSpace:plotSpace];
+    
     CPTMutableLineStyle *blueLineStyle = [bluePlot.dataLineStyle mutableCopy];
     blueLineStyle.lineWidth = 2.0;
     blueLineStyle.lineColor = blueColor;
@@ -166,6 +158,25 @@
     blueSymbol.lineStyle = blueSymbolLineStyle;
     blueSymbol.size = CGSizeMake(6.0f, 6.0f);
     bluePlot.plotSymbol = blueSymbol;
+    
+    for (int i = 0; i < self.test.model->queryNumComponents(); i++) {
+        CPTScatterPlot *newPlot = [self makePlotWithID:[NSNumber numberWithInt:i]];
+        [self.plotArray addObject:newPlot];
+        [graph addPlot:newPlot];
+    }
+    
+    [self.plotArray addObject:redPlot];
+    [self.plotArray addObject:greenPlot];
+    [self.plotArray addObject:bluePlot];
+    
+    // 3 - Set up plot space
+    [plotSpace scaleToFitPlots:self.plotArray];
+    CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
+    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+    plotSpace.xRange = xRange;
+    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+    plotSpace.yRange = yRange;
 }
 
 -(void)configureAxes {
@@ -286,6 +297,31 @@
     y.minorTickLocations = yMinorLocations;
 }
 
+- (CPTScatterPlot *)makePlotWithID:(id)identifer {
+    
+    CPTScatterPlot *plot = [[CPTScatterPlot alloc] init];
+    //CPTScatterPlot *redPlot = [[CPTScatterPlot alloc] init];
+    plot.dataSource = self;
+    plot.identifier = identifer;
+    //hessk: TODO: black for now
+    CPTColor *plotColor = [CPTColor blackColor];
+    //[graph addPlot:redPlot toPlotSpace:plotSpace];
+    
+    CPTMutableLineStyle *plotLineStyle = [plot.dataLineStyle mutableCopy];
+    plotLineStyle.lineWidth = 2.5;
+    plotLineStyle.lineColor = plotColor;
+    plot.dataLineStyle = plotLineStyle;
+    CPTMutableLineStyle *plotSymbolLineStyle = [CPTMutableLineStyle lineStyle];
+    plotSymbolLineStyle.lineColor = plotColor;
+    CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
+    plotSymbol.fill = [CPTFill fillWithColor:plotColor];
+    plotSymbol.lineStyle = plotSymbolLineStyle;
+    plotSymbol.size = CGSizeMake(6.0f, 6.0f);
+    plot.plotSymbol = plotSymbol;
+    
+    return plot;
+}
+
 #pragma mark - CPTPlotDataSource methods
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
     // hessk:return number of points for this plot (red, green, or blue)
@@ -304,7 +340,16 @@
             break;
             
         case CPTScatterPlotFieldY:
-            if ([plot.identifier isEqual:@"RED"] == YES) {
+            if ([plot.identifier isEqual:[NSNumber numberWithInt:0]]) {
+                float graphResult = self.test.model->getRegressionPoint(0, index);
+                NSLog([NSString stringWithFormat:@"Result at index %d: %f", index, graphResult]);
+                
+                return [NSNumber numberWithFloat:self.test.model->getRegressionPoint(0, index)];
+            } else if ([plot.identifier isEqual:[NSNumber numberWithInt:1]]) {
+                return [NSNumber numberWithFloat:self.test.model->getRegressionPoint(1, index)];
+            } else if ([plot.identifier isEqual:[NSNumber numberWithInt:2]]) {
+                return [NSNumber numberWithFloat:self.test.model->getRegressionPoint(2, index)];
+            } else if ([plot.identifier isEqual:@"RED"] == YES) {
                 //hessk: return red plot y value for x index
                 return [NSNumber numberWithFloat:self.test.model->getRed(index)];
             } else if ([plot.identifier isEqual:@"GREEN"] == YES) {

@@ -25,6 +25,7 @@
 		0A06637D18D2C04500CE6CBF /* JKKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
 		0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */; };
+		0A43676819088FD200105EFF /* JKKROIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A43676719088FD200105EFF /* JKKROIViewController.mm */; };
 		0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */; };
 		0A503B6718909C7C009BF78F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6618909C7C009BF78F /* Foundation.framework */; };
 		0A503B6918909C7C009BF78F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A503B6818909C7C009BF78F /* CoreGraphics.framework */; };
@@ -186,6 +187,8 @@
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
 		0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultConfig.plist; sourceTree = "<group>"; };
+		0A43676619088FD200105EFF /* JKKROIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKROIViewController.h; sourceTree = "<group>"; };
+		0A43676719088FD200105EFF /* JKKROIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKROIViewController.mm; sourceTree = "<group>"; };
 		0A48363218C3F80300FB93E9 /* JKKCameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraOverlayView.h; sourceTree = "<group>"; };
 		0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKCameraOverlayView.m; sourceTree = "<group>"; };
 		0A503B6318909C7C009BF78F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -617,6 +620,8 @@
 				0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */,
 				0A06637B18D2C04500CE6CBF /* JKKNavigationController.h */,
 				0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */,
+				0A43676619088FD200105EFF /* JKKROIViewController.h */,
+				0A43676719088FD200105EFF /* JKKROIViewController.mm */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -759,6 +764,7 @@
 				0AE0311318D13001002B7D87 /* JKKCalibrationListViewController.mm in Sources */,
 				0ACB6C05189ACA89000E6DCB /* JKKTestViewController.mm in Sources */,
 				0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */,
+				0A43676819088FD200105EFF /* JKKROIViewController.mm in Sources */,
 				0ACB6C0C189B04DD000E6DCB /* JKKModel.mm in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,
 				0A02201018FF548100591BD0 /* BiomarkerImageProcessor.cpp in Sources */,

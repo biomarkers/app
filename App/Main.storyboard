@@ -330,6 +330,42 @@
             </objects>
             <point key="canvasLocation" x="1618" y="-807"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="aqa-P0-vb6">
+            <objects>
+                <viewController id="BGN-ja-vLk" customClass="JKKROIViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T7e-Jc-f5m"/>
+                        <viewControllerLayoutGuide type="bottom" id="nvb-km-hOo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w68-wY-2hp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H9j-mN-Q9O">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="487"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQb-ld-std" customClass="JKKCameraOverlayView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="487"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.011788656139999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraOverlayView" destination="JQb-ld-std" id="H6S-q0-DiR"/>
+                        <outlet property="cameraView" destination="H9j-mN-Q9O" id="Fmu-Ww-p93"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zHM-mP-i0f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2085" y="-571"/>
+        </scene>
         <!--Test View Controller - Test Detail-->
         <scene sceneID="vbM-bp-p0F">
             <objects>
@@ -737,7 +773,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="485"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1184,8 +1220,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1u0-kE-RYg"/>
-        <segue reference="09M-e8-hBx"/>
         <segue reference="4Q2-Gb-c0P"/>
+        <segue reference="09M-e8-hBx"/>
+        <segue reference="1u0-kE-RYg"/>
     </inferredMetricsTieBreakers>
 </document>
