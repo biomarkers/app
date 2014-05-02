@@ -106,7 +106,7 @@
 }
 
 - (void)stopSession {
-    NSLog(@"Camera manager: stopping camera");
+    NSLog(@"Capture manager: stopping camera");
     [self.session stopRunning];
 }
 

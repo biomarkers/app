@@ -340,16 +340,7 @@
             break;
             
         case CPTScatterPlotFieldY:
-            if ([plot.identifier isEqual:[NSNumber numberWithInt:0]]) {
-                float graphResult = self.test.model->getRegressionPoint(0, index);
-                NSLog([NSString stringWithFormat:@"Result at index %d: %f", index, graphResult]);
-                
-                return [NSNumber numberWithFloat:self.test.model->getRegressionPoint(0, index)];
-            } else if ([plot.identifier isEqual:[NSNumber numberWithInt:1]]) {
-                return [NSNumber numberWithFloat:self.test.model->getRegressionPoint(1, index)];
-            } else if ([plot.identifier isEqual:[NSNumber numberWithInt:2]]) {
-                return [NSNumber numberWithFloat:self.test.model->getRegressionPoint(2, index)];
-            } else if ([plot.identifier isEqual:@"RED"] == YES) {
+            if ([plot.identifier isEqual:@"RED"] == YES) {
                 //hessk: return red plot y value for x index
                 return [NSNumber numberWithFloat:self.test.model->getRed(index)];
             } else if ([plot.identifier isEqual:@"GREEN"] == YES) {
@@ -358,6 +349,14 @@
             } else if ([plot.identifier isEqual:@"BLUE"] == YES) {
                 //hessk: return blue plot y value for x index
                 return [NSNumber numberWithFloat:self.test.model->getBlue(index)];
+            } else {
+                float val = self.test.model->getRegressionPoint([(NSNumber *)plot.identifier integerValue], index);
+                
+                if (val != 0) {
+                    return [NSNumber numberWithFloat:val];
+                } else {
+                    return nil;
+                }
             }
             break;
     }

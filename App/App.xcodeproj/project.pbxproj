@@ -24,6 +24,8 @@
 		0A06637718D283C800CE6CBF /* JKKGraphViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637618D283C800CE6CBF /* JKKGraphViewController.mm */; };
 		0A06637D18D2C04500CE6CBF /* JKKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */; };
 		0A110A9918973F3C0098BEF2 /* JKKCameraViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */; };
+		0A1B2902190C88BA00E2C408 /* CircularSampleAreaDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B2900190C88BA00E2C408 /* CircularSampleAreaDetector.cpp */; };
+		0A1B2903190C88BA00E2C408 /* SampleAreaDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0A1B2901190C88BA00E2C408 /* SampleAreaDetector.cpp */; };
 		0A2AD05418AEE75C00064DC3 /* defaultConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */; };
 		0A43676819088FD200105EFF /* JKKROIViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A43676719088FD200105EFF /* JKKROIViewController.mm */; };
 		0A48363418C3F80300FB93E9 /* JKKCameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */; };
@@ -186,6 +188,10 @@
 		0A06637C18D2C04500CE6CBF /* JKKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKNavigationController.m; sourceTree = "<group>"; };
 		0A110A9718973F3C0098BEF2 /* JKKCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraViewController.h; sourceTree = "<group>"; };
 		0A110A9818973F3C0098BEF2 /* JKKCameraViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCameraViewController.mm; sourceTree = "<group>"; };
+		0A1B28FE190C88A400E2C408 /* CircularSampleAreaDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularSampleAreaDetector.h; sourceTree = "<group>"; };
+		0A1B28FF190C88A400E2C408 /* SampleAreaDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAreaDetector.h; sourceTree = "<group>"; };
+		0A1B2900190C88BA00E2C408 /* CircularSampleAreaDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircularSampleAreaDetector.cpp; sourceTree = "<group>"; };
+		0A1B2901190C88BA00E2C408 /* SampleAreaDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SampleAreaDetector.cpp; sourceTree = "<group>"; };
 		0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultConfig.plist; sourceTree = "<group>"; };
 		0A43676619088FD200105EFF /* JKKROIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKROIViewController.h; sourceTree = "<group>"; };
 		0A43676719088FD200105EFF /* JKKROIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKROIViewController.mm; sourceTree = "<group>"; };
@@ -337,6 +343,8 @@
 		0A021FE918FF548100591BD0 /* vision */ = {
 			isa = PBXGroup;
 			children = (
+				0A1B28FE190C88A400E2C408 /* CircularSampleAreaDetector.h */,
+				0A1B28FF190C88A400E2C408 /* SampleAreaDetector.h */,
 				0A021FEA18FF548100591BD0 /* BiomarkerImageProcessor.h */,
 			);
 			path = vision;
@@ -387,6 +395,8 @@
 		0A021FFD18FF548100591BD0 /* vision */ = {
 			isa = PBXGroup;
 			children = (
+				0A1B2900190C88BA00E2C408 /* CircularSampleAreaDetector.cpp */,
+				0A1B2901190C88BA00E2C408 /* SampleAreaDetector.cpp */,
 				0A021FFE18FF548100591BD0 /* BiomarkerImageProcessor.cpp */,
 			);
 			path = vision;
@@ -766,8 +776,10 @@
 				0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */,
 				0A43676819088FD200105EFF /* JKKROIViewController.mm in Sources */,
 				0ACB6C0C189B04DD000E6DCB /* JKKModel.mm in Sources */,
+				0A1B2903190C88BA00E2C408 /* SampleAreaDetector.cpp in Sources */,
 				0A503B7718909C7C009BF78F /* JKKAppDelegate.mm in Sources */,
 				0A02201018FF548100591BD0 /* BiomarkerImageProcessor.cpp in Sources */,
+				0A1B2902190C88BA00E2C408 /* CircularSampleAreaDetector.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

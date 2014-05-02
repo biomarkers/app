@@ -9,6 +9,7 @@
 #import "JKKTestViewController.h"
 #import "JKKCameraViewController.h"
 #import "JKKAddComponentViewController.h"
+#import "JKKROIViewController.h"
 
 @interface JKKTestViewController ()
 
@@ -16,6 +17,11 @@
 
 @property NSMutableArray* componentItems;
 @property NSMutableArray* calibrationItems;
+
+@property float roiX;
+@property float roiY;
+@property float roiR;
+@property BOOL roiSet;
 
 @end
 
@@ -69,6 +75,7 @@ RegressionFactory factory;
 - (void)populateControls {
     // hessk: TODO: really awkward button fiddling here - find a better system
     // hessk: interface manipulations must be done in the main queue (this allows setting of the "hidden" property)
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         // show components stuff
         [self.addComponentButton setHidden:NO];
@@ -76,6 +83,14 @@ RegressionFactory factory;
         [self.componentsLabel setHidden:NO];
         
         if ([[self componentItems] count] > 0) {
+            [[self setROIButton] setEnabled:YES];
+        } else {
+            [[self setROIButton] setEnabled:NO];
+        }
+        
+        if (self.roiSet) {
+            [self.roiLabel setText:[NSString stringWithFormat:@"Region of interest:\nX: %.0f\nY: %.0f\nRadius: %.0f", self.roiX, self.roiY, self.roiR]];
+            
             [[self nextButton] setEnabled:YES];
         } else {
             [[self nextButton] setEnabled:NO];
@@ -90,39 +105,52 @@ RegressionFactory factory;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // hessk: pass pointers on for calibration if a calibration is being run
-    if ([[segue identifier] isEqualToString:@"showCalibrationList"]) {
+    if ([[segue identifier] isEqualToString:@"showCalibrationList"] && !self.test) {
         // hessk: initialize a test if there isn't one
-        if (!self.test) {
-            NSLog(@"Creating a new model...");
-            std::string* modelName;
-            if (self.nameField.text.length > 0) {
-                modelName = new std::string([self.nameField.text UTF8String]);
-            } else {
-                modelName = new std::string([@"No name" UTF8String]);
-            }
-            
-            NSString *modelUnits;
-            if (self.unitsField.text.length > 0) {
-                modelUnits = self.unitsField.text;
-            } else {
-#warning TODO: user should not be able to continue without entering units
-                modelUnits = @"units";
-            }
-            
-            factory.createNew(*modelName, *modelName);
-            
-            JKKComponent* currentComponent;
-            for (int i = 0; i < [self.componentItems count]; i++) {
-                currentComponent = [self.componentItems objectAtIndex:i];
-                factory.addNewComponent([currentComponent modelType], [currentComponent startTime], [currentComponent endTime], [currentComponent varType]);
-            }
-            
-            self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel() units:modelUnits];
-            self.test.model->setIndices(3, 2, 1, 0, -1);
+        NSLog(@"Creating a new model...");
+        std::string* modelName;
+        if (self.nameField.text.length > 0) {
+            modelName = new std::string([self.nameField.text UTF8String]);
+        } else {
+            modelName = new std::string([@"No name" UTF8String]);
         }
         
+        NSString *modelUnits;
+        if (self.unitsField.text.length > 0) {
+            modelUnits = self.unitsField.text;
+        } else {
+#warning TODO: user should not be able to continue without entering units
+            modelUnits = @"units";
+        }
+        
+        factory.createNew(*modelName, *modelName);
+        
+        JKKComponent* currentComponent;
+        for (int i = 0; i < [self.componentItems count]; i++) {
+            currentComponent = [self.componentItems objectAtIndex:i];
+            factory.addNewComponent([currentComponent modelType], [currentComponent startTime], [currentComponent endTime], [currentComponent varType]);
+        }
+        
+        self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel() units:modelUnits];
+        self.test.model->setIndices(3, 2, 1, 0, -1);
+        
+        self.test.model->setCircle(self.roiX, self.roiY, self.roiR);
+        
         [[segue destinationViewController] setTest:self.test];
+    } else if ([[segue identifier] isEqualToString:@"showROI"]) {
+        if (self.roiSet) {
+            [[segue destinationViewController] setX:self.roiX];
+            [[segue destinationViewController] setY:self.roiY];
+            [[segue destinationViewController] setR:self.roiR];
+        } else {
+#warning Just used arbitrary numbers here
+            [[segue destinationViewController] setX:500];
+            [[segue destinationViewController] setY:500];
+            [[segue destinationViewController] setR:100];
+        }
     }
+    
+    
 }
 
 - (IBAction)unwindToTestView:(UIStoryboardSegue *)segue {
@@ -145,6 +173,14 @@ RegressionFactory factory;
         if (item != nil) {
             [self.calibrationItems addObject:item];
         }
+    } else if ([sourceController isKindOfClass:[JKKROIViewController class]]) {
+        JKKROIViewController* source = (JKKROIViewController*)sourceController;
+        
+        self.roiX = source.x;
+        self.roiY = source.y;
+        self.roiR = source.r;
+        
+        self.roiSet = YES;
     }
     
     [self populateControls];

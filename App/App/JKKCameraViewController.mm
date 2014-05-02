@@ -30,11 +30,6 @@
 @property AVAudioPlayer* alertSound;
 @property NSDate* timerStartDate;
 
-@property ROIMode roiMode;
-@property int roiX;
-@property int roiY;
-@property int roiR;
-
 @end
 
 NSUserDefaults* defaults;
@@ -75,22 +70,6 @@ const float TIMER_STEP = 0.1;
     // hessk: AVFoundation camera setup
     self.captureManager = [JKKCaptureManager new];
     [self.captureManager initializeSession];
-    
-    // hessk: region of interest setup
-    self.roiMode = (ROIMode)[defaults integerForKey:@"kROIMode"];
-    self.roiX = [defaults integerForKey:@"kROIX"];
-    self.roiY = [defaults integerForKey:@"kROIY"];
-    self.roiR = [defaults integerForKey:@"kROIR"];
-    
-    if (self.roiMode == AUTOMATIC) {
-        processor.setCircleDetectionEnabled(true);
-    } else if (self.roiMode == MANUAL) {
-        processor.setCircleDetectionEnabled(false);
-        
-        processor.setCircleCenterX(self.roiX);
-        processor.setCircleCenterY(self.roiY);
-        processor.setCircleRadius(self.roiR);
-    }
     
     // hessk: camera location setup
     CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
@@ -189,12 +168,12 @@ const float TIMER_STEP = 0.1;
      */
     
     if ([self isTakingCalibrationPoint]) {
-        self.test.model->calibrate(processor.getSamples(), self.calibrationValue);
+#warning TODO: multi circle support
+        self.test.model->calibrate(processor.getSamples()[0], self.calibrationValue);
         
-        //[self performSegueWithIdentifier:@"returnToTestView" sender:self];
         [self performSegueWithIdentifier:@"showCalibrationResults" sender:self];
     } else /* if (there are results) */ {
-        self.result.value = self.test.model->evaluate(processor.getSamples());
+        self.result.value = self.test.model->evaluate(processor.getSamples()[0]);
         
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
     }
@@ -232,20 +211,23 @@ const float TIMER_STEP = 0.1;
     /* reverse x and y to account for portrait/landscape discrepancy between camera view and preview view */
     float scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
     float scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
+    float minScale = MIN(scaleX, scaleY);
+    
+    std::vector<cv::Vec3f> circles;
+    circles.push_back(cv::Vec3f(self.test.model->getCircleCenterY(), self.test.model->getCircleCenterX(), self.test.model->getCircleRadius()));
     
     @autoreleasepool {
         if ([self state] == RUNNING) {
             cv::Mat mat = [JKKCaptureManager cvMatFromUIImage:outputImage];
-            cv::Scalar rgb = processor.process(mat);
-            
+            std::vector<cv::SerializableScalar> bgrtVector = processor.process(mat, circles);
             std::stringstream ss;
-            ss << rgb;
+            ss << bgrtVector[0];
             NSLog([NSString stringWithCString:ss.str().c_str()]);
         }
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.cameraOverlayView updateCircleWithCenterX:processor.getCircleCenterY() centerY:processor.getCircleCenterX() radius:processor.getCircleRadius() scaleX:scaleX scaleY:scaleY];
+        [self.cameraOverlayView updateCircleWithCenterX:circles[0][1] centerY:circles[0][0] radius:circles[0][2] scaleX:minScale scaleY:minScale];
     });
     
     outputImage = nil;

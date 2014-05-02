@@ -42,16 +42,17 @@
     
     NSInteger cameraLocation = [defaults integerForKey:@"kCameraLocation"];
     
+    /*
     ROIMode roiMode = (ROIMode)[defaults integerForKey:@"kROIMode"];
     NSInteger roiX = [defaults integerForKey:@"kROIX"];
     NSInteger roiY = [defaults integerForKey:@"kROIY"];
     NSInteger roiR = [defaults integerForKey:@"kROIR"];
     
-    
     [self.roiModeSegControl setSelectedSegmentIndex:roiMode];
     [self.roiXField setText:[NSString stringWithFormat:@"%ld", (long)roiX]];
     [self.roiYField setText:[NSString stringWithFormat:@"%ld", (long)roiY]];
     [self.roiRField setText:[NSString stringWithFormat:@"%ld", (long)roiR]];
+    
     
     if (roiMode == AUTOMATIC) {
         [self.roiXField setEnabled:NO];
@@ -64,6 +65,7 @@
     } else {
         NSLog(@"Undefined ROI mode.");
     }
+     */
     
     [self.locationSegControl setSelectedSegmentIndex:cameraLocation];
     [self.fpsStepper setValue:fps];
@@ -89,20 +91,7 @@
     
     if (sender == self.fpsStepper) {
         [self.fpsLabel setText:[NSString stringWithFormat:@"%.0f", [self.fpsStepper value]]];
-    } else if (sender == self.roiModeSegControl) {
-        if ([self.roiModeSegControl selectedSegmentIndex] == 0) {
-            [self.roiXField setEnabled:NO];
-            [self.roiYField setEnabled:NO];
-            [self.roiRField setEnabled:NO];
-        } else if ([self.roiModeSegControl selectedSegmentIndex] == 1) {
-            [self.roiXField setEnabled:YES];
-            [self.roiYField setEnabled:YES];
-            [self.roiRField setEnabled:YES];
-        } else {
-            NSLog(@"Undefined ROI mode.");
-        }
     }
-        
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
