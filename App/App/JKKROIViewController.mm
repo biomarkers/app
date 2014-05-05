@@ -52,21 +52,29 @@ bool autoCircleDetection = NO;
     
     // hessk: camera location setup
     CameraLocation location = (CameraLocation)[self.defaults integerForKey:@"kCameraLocation"];
-    switch (location) {
-        case FRONT:
-            [self.captureManager initializeDevice:YES];
-            break;
-        case BACK:
-        default:
-            [self.captureManager initializeDevice:NO];
-            break;
+    
+    @try {
+        switch (location) {
+            case FRONT:
+                [self.captureManager initializeDevice:YES];
+                break;
+            case BACK:
+            default:
+                [self.captureManager initializeDevice:NO];
+                break;
+        }
+        
+        roiProcessor.reset();
+        
+        [self.captureManager initializeVideoOutWithFPS:[self.defaults integerForKey:@"kFPS"] usingDelegate:self];
+        [self.captureManager initializePreviewLayerUsingView:self.cameraView withLayer:self.captureVideoPreviewLayer];
+        [self startProcessing];
+    } @catch(NSException *exception) {
+        UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:[exception name] message:[exception reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        calibrationValueAlert.alertViewStyle = UIAlertViewStyleDefault;
+        
+        [calibrationValueAlert show];
     }
-    
-    roiProcessor.reset();
-    
-    [self.captureManager initializeVideoOutWithFPS:[self.defaults integerForKey:@"kFPS"] usingDelegate:self];
-    [self.captureManager initializePreviewLayerUsingView:self.cameraView withLayer:self.captureVideoPreviewLayer];
-    [self startProcessing];
 }
 
 - (void)startProcessing {

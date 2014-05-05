@@ -28,6 +28,10 @@
         newDevice = [self getBackCamera];
     }
     
+    if (!newDevice) {
+        throw [NSException exceptionWithName:@"CameraInitializationException" reason:nil userInfo:nil];
+    }
+    
     NSLog(@"Capture manager: changing camera settings...");
     //hessk: change various camera settings
     //white balance
@@ -37,7 +41,7 @@
             [newDevice unlockForConfiguration];
         } else {
             //TODO: handle error
-            NSLog(@"Capture manager: error setting white balance");
+            NSLog(@"Capture manager: lock error occurred while trying to set white balance.");
         }
     }
     
@@ -48,7 +52,7 @@
             [newDevice unlockForConfiguration];
         } else {
             //TODO: handle error
-            NSLog(@"Capture manager: error setting exposure mode");
+            NSLog(@"Capture manager: lock error occurred while trying to set exposure mode");
         }
     }
     
@@ -59,7 +63,7 @@
             [newDevice unlockForConfiguration];
         } else {
             //TODO: handle error
-            NSLog(@"Capture manager: error setting focus mode");
+            NSLog(@"Capture manager: lock error occurred while trying to set focus mode");
         }
     }
     

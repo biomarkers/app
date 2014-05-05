@@ -67,25 +67,32 @@ const float TIMER_STEP = 0.1;
     self.timer = [NSTimer timerWithTimeInterval:TIMER_STEP target:self selector:@selector(updateProgress:) userInfo:NULL repeats:YES];
     self.timerCount = 0;
     
-    // hessk: AVFoundation camera setup
-    self.captureManager = [JKKCaptureManager new];
-    [self.captureManager initializeSession];
-    
-    // hessk: camera location setup
-    CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
-    switch (location) {
-        case FRONT:
-            [self.captureManager initializeDevice:YES];
-            break;
-        case BACK:
-        default:
-            [self.captureManager initializeDevice:NO];
-            break;
+    @try {
+        // hessk: AVFoundation camera setup
+        self.captureManager = [JKKCaptureManager new];
+        [self.captureManager initializeSession];
+        
+        // hessk: camera location setup
+        CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
+        switch (location) {
+            case FRONT:
+                [self.captureManager initializeDevice:YES];
+                break;
+            case BACK:
+            default:
+                [self.captureManager initializeDevice:NO];
+                break;
+        }
+        
+        [self.captureManager initializeVideoOutWithFPS:[defaults integerForKey:@"kFPS"] usingDelegate:self];
+        [self.captureManager initializePreviewLayerUsingView:self.cameraView withLayer:self.captureVideoPreviewLayer];
+        [self.captureManager startSession];
+    } @catch (NSException *exception) {
+        UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:[exception name] message:[exception reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        calibrationValueAlert.alertViewStyle = UIAlertViewStyleDefault;
+        
+        [calibrationValueAlert show];
     }
-    
-    [self.captureManager initializeVideoOutWithFPS:[defaults integerForKey:@"kFPS"] usingDelegate:self];
-    [self.captureManager initializePreviewLayerUsingView:self.cameraView withLayer:self.captureVideoPreviewLayer];
-    [self.captureManager startSession];
 }
 
 - (void)didReceiveMemoryWarning
