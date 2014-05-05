@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *componentsLabel;
 @property (strong, nonatomic) IBOutlet UITableView *componentsTable;
 @property (strong, nonatomic) IBOutlet UIButton *addComponentButton;
+@property (strong, nonatomic) IBOutlet UIButton *removeComponentButton;
 
 - (IBAction)unwindToTestView:(UIStoryboardSegue *)segue;
 

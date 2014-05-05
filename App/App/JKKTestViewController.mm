@@ -16,7 +16,7 @@
 @property float calibrationValue;
 
 @property NSMutableArray* componentItems;
-@property NSMutableArray* calibrationItems;
+@property int selectedComponentIndex;
 
 @property float roiX;
 @property float roiY;
@@ -52,7 +52,8 @@ RegressionFactory factory;
     [self.unitsField setDelegate:self];
     
     self.componentItems = [[NSMutableArray alloc] init];
-    self.calibrationItems = [[NSMutableArray alloc] init];
+    
+    self.roiSet = NO;
     
     [self populateControls];
 }
@@ -73,29 +74,41 @@ RegressionFactory factory;
 
 // hessk: called initially to match interface to current JKKModel and do other UI config
 - (void)populateControls {
-    // hessk: TODO: really awkward button fiddling here - find a better system
-    // hessk: interface manipulations must be done in the main queue (this allows setting of the "hidden" property)
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // show components stuff
-        [self.addComponentButton setHidden:NO];
-        [self.componentsTable setHidden:NO];
-        [self.componentsLabel setHidden:NO];
-        
-        if ([[self componentItems] count] > 0) {
-            [[self setROIButton] setEnabled:YES];
-        } else {
-            [[self setROIButton] setEnabled:NO];
-        }
-        
-        if (self.roiSet) {
-            [self.roiLabel setText:[NSString stringWithFormat:@"Region of interest:\nX: %.0f\nY: %.0f\nRadius: %.0f", self.roiX, self.roiY, self.roiR]];
-            
-            [[self nextButton] setEnabled:YES];
-        } else {
-            [[self nextButton] setEnabled:NO];
-        }
-    });
+    // hessk: user can only add components if they've set the region of interest
+    if (self.roiSet) {
+        [self.roiLabel setText:[NSString stringWithFormat:@"X: %.0f  Y: %.0f  Radius: %.0f", self.roiX, self.roiY, self.roiR]];
+        [self.setROIButton setTitle:@"Change" forState:UIControlStateNormal];
+        [self.addComponentButton setEnabled:YES];
+    } else {
+        [self.setROIButton setTitle:@"Set" forState:UIControlStateNormal];
+        [self.addComponentButton setEnabled:NO];
+    }
+    
+    // hessk: user can only remove components/move onto the next step if there are components
+    
+    if (self.selectedComponentIndex <= 0 && [self.componentItems count] > 0) {
+        [self.removeComponentButton setEnabled:YES];
+    } else {
+        [self.removeComponentButton setEnabled:NO];
+    }
+    
+    if ([self.componentItems count] > 0) {
+        [self.nextButton setEnabled:YES];
+    } else {
+        [self.nextButton setEnabled:NO];
+    }
+    
+}
+
+- (IBAction)removeComponent:(id)sender {
+    [self.componentItems removeObjectAtIndex:self.selectedComponentIndex];
+    [self.componentsTable reloadData];
+    
+    NSIndexPath *lastItemPath = [NSIndexPath indexPathForRow:[self.componentItems count] - 1 inSection:0];
+    [self.componentsTable selectRowAtIndexPath:lastItemPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    [self populateControls];
 }
 
 - (IBAction)updateTitle:(id)sender {
@@ -157,22 +170,18 @@ RegressionFactory factory;
     UIViewController* sourceController = segue.sourceViewController;
     
     if ([sourceController isKindOfClass:[JKKAddComponentViewController class]]) {
-        // Add new component to component items
+        // hessk: add new component to component items
         JKKAddComponentViewController* source = (JKKAddComponentViewController*)sourceController;
         JKKComponent* item = [source component];
         
         if (item != nil) {
-            NSLog(@"Adding component");
+            // hessk: add new component to components table and make sure it's selected
+            NSIndexPath *itemPath = [NSIndexPath indexPathForRow:[self.componentItems count] inSection:0];
             [self.componentItems addObject:item];
             [self.componentsTable reloadData];
+            [self.componentsTable selectRowAtIndexPath:itemPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
-    } else if ([sourceController isKindOfClass:[JKKCameraViewController class]]) {
-        JKKCameraViewController* source = (JKKCameraViewController*)sourceController;
-        NSNumber* item = [NSNumber numberWithFloat:[source calibrationValue]];
         
-        if (item != nil) {
-            [self.calibrationItems addObject:item];
-        }
     } else if ([sourceController isKindOfClass:[JKKROIViewController class]]) {
         JKKROIViewController* source = (JKKROIViewController*)sourceController;
         
@@ -254,6 +263,14 @@ RegressionFactory factory;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // hessk: react to row selection here
+    self.selectedComponentIndex = indexPath.row;
+    [self populateControls];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedComponentIndex = -1;
+    [self populateControls];
 }
 
 #pragma mark UITextFieldDelegate methods
