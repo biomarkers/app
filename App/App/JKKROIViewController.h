@@ -26,6 +26,8 @@
 @property float x;
 @property float y;
 @property float r;
+@property float scaleX;
+@property float scaleY;
 
 @property (strong, nonatomic) IBOutlet UILabel *xLabel;
 @property (strong, nonatomic) IBOutlet UILabel *yLabel;
