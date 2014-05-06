@@ -12,6 +12,9 @@
 #import "BiomarkerImageProcessor.h"
 #import "CircularSampleAreaDetector.h"
 
+#define MAX_MANUAL_RADIUS 500
+#define MIN_MANUAL_RADIUS 1
+
 @interface JKKROIViewController ()
 
 @property NSUserDefaults *defaults;
@@ -46,9 +49,6 @@ bool autoCircleDetection = NO;
     [self.captureManager initializeSession];
     
     self.defaults = [NSUserDefaults standardUserDefaults];
-    
-    // hessk: image processor setup
-    roiProcessor.setCircleDetectionEnabled(true);
     
     // hessk: camera location setup
     CameraLocation location = (CameraLocation)[self.defaults integerForKey:@"kCameraLocation"];
@@ -117,15 +117,21 @@ bool autoCircleDetection = NO;
 - (IBAction)updateCirclePosition:(UITapGestureRecognizer *)sender {
     CGPoint location = [sender locationInView:self.cameraOverlayView];
     
-    self.x = location.x / self.minScale;
-    self.y = location.y / self.minScale;
+    
+    float max = MAX(self.scaleX, self.scaleY);
+    float min = MIN(self.scaleX, self.scaleY);
+    
+    float offset = ((max - min) * location.x);
+    
+    self.x = (location.x / max) + offset;
+    self.y = (location.y / max);
 }
 
 - (IBAction)updateCircleRadius:(UIPinchGestureRecognizer *)sender {
     float originalRadius = self.r;
     float newRadius = originalRadius * [sender scale];
     
-    if (newRadius < 500 && newRadius > 1) {
+    if (newRadius < MAX_MANUAL_RADIUS && newRadius > MIN_MANUAL_RADIUS) {
         self.r = newRadius;
     }
     
@@ -138,9 +144,8 @@ bool autoCircleDetection = NO;
     UIImage *outputImage = [JKKCaptureManager imageFromSampleBuffer:sampleBuffer];
     
     /* reverse x and y to account for portrait/landscape discrepancy between camera view and preview view */
-    float scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
-    float scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
-    self.minScale = MIN(scaleX, scaleY);
+    self.scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
+    self.scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
 
     if (autoCircleDetection) {
         CircularSampleAreaDetector detector;
@@ -168,7 +173,7 @@ bool autoCircleDetection = NO;
         [self.yLabel setText:[NSString stringWithFormat:@"y:%.0f", self.y]];
         [self.rLabel setText:[NSString stringWithFormat:@"r:%.0f", self.r]];
         
-        [self.cameraOverlayView updateCircleWithCenterX:self.x centerY:self.y radius:self.r scaleX:scaleX scaleY:scaleY];
+        [self.cameraOverlayView updateCircleWithCenterX:self.x centerY:self.y radius:self.r scaleX:self.scaleX scaleY:self.scaleY];
     });
     
     outputImage = nil;
