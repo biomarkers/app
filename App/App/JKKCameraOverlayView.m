@@ -32,7 +32,8 @@
 }
 
 - (void)updateCircleWithCenterX:(float)x centerY:(float)y radius:(float)r scaleX:(float)sx scaleY:(float)sy {
-    CGRect boundingRectangle = CGRectMake((x - r) * sx, (y - r) * sy, (r * 2) * sx, (r * 2) * sy);
+    float ms = MIN(sx, sy);
+    CGRect boundingRectangle = CGRectMake((x - r) * sx, (y - r) * sy, (r * 2) * ms, (r * 2) * ms);
     self.circleBounds = boundingRectangle;
     [self setNeedsDisplay];
 }

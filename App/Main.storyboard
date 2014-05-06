@@ -1126,12 +1126,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Calibration plot" id="1O9-rN-X62">
-                                        <barButtonItem key="leftBarButtonItem" title="Discard Point" id="yUP-12-cst">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="yUP-12-cst">
                                             <connections>
                                                 <segue destination="GZk-R6-SIj" kind="unwind" unwindAction="unwindToCalibrationList:" id="Q3q-AJ-OUe"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Keep Point" id="Ega-uI-Y5N">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Ega-uI-Y5N">
                                             <connections>
                                                 <segue destination="GZk-R6-SIj" kind="unwind" unwindAction="unwindToCalibrationList:" id="NOP-di-DOw"/>
                                             </connections>

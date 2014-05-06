@@ -218,7 +218,7 @@ const float TIMER_STEP = 0.1;
     /* reverse x and y to account for portrait/landscape discrepancy between camera view and preview view */
     float scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
     float scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
-    float minScale = MIN(scaleX, scaleY);
+    //float minScale = MIN(scaleX, scaleY);
     
     std::vector<cv::Vec3f> circles;
     circles.push_back(cv::Vec3f(self.test.model->getCircleCenterY(), self.test.model->getCircleCenterX(), self.test.model->getCircleRadius()));
@@ -234,7 +234,7 @@ const float TIMER_STEP = 0.1;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.cameraOverlayView updateCircleWithCenterX:circles[0][1] centerY:circles[0][0] radius:circles[0][2] scaleX:minScale scaleY:minScale];
+        [self.cameraOverlayView updateCircleWithCenterX:circles[0][1] centerY:circles[0][0] radius:circles[0][2] scaleX:scaleX scaleY:scaleY];
     });
     
     outputImage = nil;

@@ -154,7 +154,7 @@ bool autoCircleDetection = NO;
         if (circles.size() > 0) {
             [self.cameraOverlayView setTintColor:[UIColor greenColor]];
             self.y = circles[0][0];
-            self.x = circles[0][1];
+            self.x = outputImage.size.height - circles[0][1];
             self.r = circles[0][2];
         } else {
             [self.cameraOverlayView setTintColor:[UIColor whiteColor]];
@@ -168,7 +168,7 @@ bool autoCircleDetection = NO;
         [self.yLabel setText:[NSString stringWithFormat:@"y:%.0f", self.y]];
         [self.rLabel setText:[NSString stringWithFormat:@"r:%.0f", self.r]];
         
-        [self.cameraOverlayView updateCircleWithCenterX:self.x centerY:self.y radius:self.r scaleX:self.minScale scaleY:self.minScale];
+        [self.cameraOverlayView updateCircleWithCenterX:self.x centerY:self.y radius:self.r scaleX:scaleX scaleY:scaleY];
     });
     
     outputImage = nil;

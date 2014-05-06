@@ -12,6 +12,12 @@
 
 - (void)initializeSession {
     self.session = [[AVCaptureSession alloc] init];
+    
+    if ([self.session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
+        self.session.sessionPreset = AVCaptureSessionPreset640x480;
+    } else {
+        throw [NSException exceptionWithName:@"SessionInitializationException" reason:@"640x480 session preset not available" userInfo:nil];
+    }
 }
 
 - (void)initializeDevice:(BOOL) useFront {
@@ -81,6 +87,7 @@
     AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
     [self.session addOutput:videoOut];
     videoOut.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
+    
     [self setFrameRate:fps];
     
     dispatch_queue_t queue = dispatch_queue_create("VideoOutQueue", NULL);
