@@ -110,6 +110,8 @@
     [[self.calibrationAlert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDecimalPad];
     [[self.calibrationAlert textFieldAtIndex:0] becomeFirstResponder];
     
+    [[self.calibrationAlert textFieldAtIndex:0] setText:@""];
+    
     [self.calibrationAlert show];
 }
 

@@ -109,7 +109,7 @@
     CGPoint point;
     
 #warning magic numbers
-    float step = 0.1;
+    float step = 1.0;
     
     self.test.model->getPCASpaceRange(minX, maxX);
     

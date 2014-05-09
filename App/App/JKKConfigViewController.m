@@ -99,14 +99,7 @@
     
     [defaults setInteger:[self.locationSegControl selectedSegmentIndex] forKey:@"kCameraLocation"];
     [defaults setInteger:[self.fpsStepper value] forKey:@"kFPS"];
-    
-    [defaults setInteger:[self.roiModeSegControl selectedSegmentIndex] forKey:@"kROIMode"];
-    [defaults setInteger:[[self.roiXField text] integerValue] forKey:@"kROIX"];
-    [defaults setInteger:[[self.roiYField text] integerValue] forKey:@"kROIY"];
-    [defaults setInteger:[[self.roiRField text] integerValue] forKey:@"kROIR"];
-    
 }
-
 
 #pragma mark - Table view data source
 
@@ -121,7 +114,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 3;
+    return 2;
 }
 
 /*
