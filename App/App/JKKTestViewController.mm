@@ -145,7 +145,7 @@ RegressionFactory factory;
         }
         
         self.test = [[JKKModel alloc] initWithModel:factory.getCreatedModel() units:modelUnits];
-        self.test.model->setIndices(3, 2, 1, 0, -1);
+        self.test.model->setIndices(3, 2, 1, 0);
         
         self.test.model->setCircle(self.roiX, self.roiY, self.roiR);
         
