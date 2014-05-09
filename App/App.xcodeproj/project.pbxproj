@@ -60,6 +60,7 @@
 		0ACF780318A9AFB300134713 /* JKKConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACF780218A9AFB300134713 /* JKKConfigViewController.m */; };
 		0ACF780B18A9B2BD00134713 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ACF780A18A9B2BD00134713 /* libsqlite3.0.dylib */; };
 		0AE0311318D13001002B7D87 /* JKKCalibrationListViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AE0311218D13001002B7D87 /* JKKCalibrationListViewController.mm */; };
+		0AE6D85B1919B04800174ADD /* QuadraticRegression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AE6D85A1919B04800174ADD /* QuadraticRegression.cpp */; };
 		0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */; };
 		0AEF3E2118A6ED70001A5FFC /* JKKComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AEF3E2018A6ED70001A5FFC /* JKKComponent.mm */; };
 		0AFAC4451899EBF40029D0F2 /* JKKCaptureManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0AFAC4441899EBF40029D0F2 /* JKKCaptureManager.mm */; };
@@ -241,6 +242,8 @@
 		0ACF780A18A9B2BD00134713 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		0AE0311118D13001002B7D87 /* JKKCalibrationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCalibrationListViewController.h; sourceTree = "<group>"; };
 		0AE0311218D13001002B7D87 /* JKKCalibrationListViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKCalibrationListViewController.mm; sourceTree = "<group>"; };
+		0AE6D8591919B03800174ADD /* QuadraticRegression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadraticRegression.h; sourceTree = "<group>"; };
+		0AE6D85A1919B04800174ADD /* QuadraticRegression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QuadraticRegression.cpp; sourceTree = "<group>"; };
 		0AEF3E0718A6E6D0001A5FFC /* JKKAddComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKAddComponentViewController.h; sourceTree = "<group>"; };
 		0AEF3E0818A6E6D0001A5FFC /* JKKAddComponentViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKAddComponentViewController.mm; sourceTree = "<group>"; };
 		0AEF3E1F18A6ED70001A5FFC /* JKKComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKComponent.h; sourceTree = "<group>"; };
@@ -319,6 +322,7 @@
 		0A021FDD18FF548100591BD0 /* regression */ = {
 			isa = PBXGroup;
 			children = (
+				0AE6D8591919B03800174ADD /* QuadraticRegression.h */,
 				0A021FDE18FF548100591BD0 /* ExponentialRegression.h */,
 				0A021FDF18FF548100591BD0 /* LinearRegression.h */,
 				0A021FE018FF548100591BD0 /* ModelComponent.h */,
@@ -372,6 +376,7 @@
 		0A021FF218FF548100591BD0 /* regression */ = {
 			isa = PBXGroup;
 			children = (
+				0AE6D85A1919B04800174ADD /* QuadraticRegression.cpp */,
 				0A021FF318FF548100591BD0 /* ExponentialRegression.cpp */,
 				0A021FF418FF548100591BD0 /* LinearRegression.cpp */,
 				0A021FF518FF548100591BD0 /* ModelComponent.cpp */,
@@ -759,6 +764,7 @@
 				0A02200F18FF548100591BD0 /* SerializableScalar.cpp in Sources */,
 				0A7412E818B46E42004E0D52 /* JKKDatabaseManager.mm in Sources */,
 				0A02200818FF548100591BD0 /* LinearRegression.cpp in Sources */,
+				0AE6D85B1919B04800174ADD /* QuadraticRegression.cpp in Sources */,
 				0ACB6C07189ACBFB000E6DCB /* JKKHomeViewController.mm in Sources */,
 				0AEF3E0918A6E6D0001A5FFC /* JKKAddComponentViewController.mm in Sources */,
 				0A9CC7EE1895911E0035959E /* JKKResultsViewController.mm in Sources */,
@@ -898,7 +904,7 @@
 		0A503B9018909C7C009BF78F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -914,6 +920,7 @@
 					"$(inherited)",
 					/Users/kevin/Development/app/App,
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -925,7 +932,7 @@
 		0A503B9118909C7C009BF78F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

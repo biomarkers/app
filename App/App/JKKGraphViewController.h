@@ -19,4 +19,9 @@
 @property JKKModel* test;
 @property (strong, nonatomic) NSMutableArray *plotArray;
 
+@property BOOL pca;
+@property int numCalibrationValues;
+
+@property RegressionModel::RegressionType regressionType;
+
 @end

@@ -87,7 +87,7 @@ RegressionFactory factory;
     
     // hessk: user can only remove components/move onto the next step if there are components
     
-    if (self.selectedComponentIndex <= 0 && [self.componentItems count] > 0) {
+    if (self.selectedComponentIndex >= 0 && [self.componentItems count] > 0) {
         [self.removeComponentButton setEnabled:YES];
     } else {
         [self.removeComponentButton setEnabled:NO];

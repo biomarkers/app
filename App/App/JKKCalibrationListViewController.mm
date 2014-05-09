@@ -7,13 +7,18 @@
 //
 
 #import "JKKCalibrationListViewController.h"
-
+#import "JKKGraphViewController.h"
 #import "JKKCameraViewController.h"
 
 @interface JKKCalibrationListViewController ()
 
 @property float newCalibrationValue;
-@property NSMutableArray* calibrationItems;
+@property NSMutableArray *calibrationItems;
+
+@property UIAlertView *calibrationAlert;
+@property UIAlertView *graphModelAlert;
+
+@property RegressionModel::RegressionType graphRegressionType;
 
 @end
 
@@ -36,6 +41,13 @@
     [self.calibrationTable setDelegate:self];
     [self.calibrationTable setDataSource:self];
     self.calibrationItems = [[NSMutableArray alloc] init];
+    
+    self.calibrationAlert = [[UIAlertView alloc] initWithTitle:@"Calibration value" message:[NSString stringWithFormat:@"Please enter the value of this sample in %@", self.test.units] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+    self.calibrationAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    // hessk: TODO: use enumeration for button titles
+    self.graphModelAlert = [[UIAlertView alloc] initWithTitle:@"Graph model" message:@"Please select a regression mode." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Planar", @"PCA Linear", @"PCA Quadratic", @"PCA Exponential", nil];
+    self.graphModelAlert.alertViewStyle = UIAlertViewStyleDefault;
     
     [self updateControls];
 }
@@ -65,6 +77,12 @@
         [[segue destinationViewController] setTest:nil];
     } else if ([[segue identifier] isEqualToString:@"showGraphFromList"]) {
         [[segue destinationViewController] setTest:self.test];
+        [[segue destinationViewController] setPca:NO];
+    } else if ([[segue identifier] isEqualToString:@"showModelGraphFromList"]) {
+        [[segue destinationViewController] setTest:self.test];
+        [[segue destinationViewController] setRegressionType:self.graphRegressionType];
+        [[segue destinationViewController] setPca:YES];
+        [[segue destinationViewController] setNumCalibrationValues:[self.calibrationItems count]];
     }
 }
 
@@ -84,25 +102,49 @@
     [self.finishButton setEnabled:self.test.model->isCalibrated()];
     
     [self.showGraphButton setEnabled:(self.calibrationItems.count > 0)];
+    [self.graphModelButton setEnabled:(self.calibrationItems.count > 0)];
 }
 
 - (IBAction)addCalibrationPoint:(id)sender {
-    UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:@"Calibration value" message:[NSString stringWithFormat:@"Please enter the value of this sample in %@", self.test.units] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
-    calibrationValueAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [[self.calibrationAlert textFieldAtIndex:0] resignFirstResponder];
+    [[self.calibrationAlert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDecimalPad];
+    [[self.calibrationAlert textFieldAtIndex:0] becomeFirstResponder];
     
-    [[calibrationValueAlert textFieldAtIndex:0] resignFirstResponder];
-    [[calibrationValueAlert textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDecimalPad];
-    [[calibrationValueAlert textFieldAtIndex:0] becomeFirstResponder];
-    
-    [calibrationValueAlert show];
+    [self.calibrationAlert show];
 }
+
+- (IBAction)graphModel:(id)sender {
+    [self.graphModelAlert show];
+}
+
+
 
 #pragma mark UIAlertViewDelegate methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.firstOtherButtonIndex) {
-        NSLog(@"Calibration val entered: %@", [[alertView textFieldAtIndex:0] text]);
-        [self setNewCalibrationValue:[[[alertView textFieldAtIndex:0] text] floatValue]];
-        [self performSegueWithIdentifier:@"showCameraForCalibration" sender:self];
+    if (alertView == self.calibrationAlert) {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            NSLog(@"Calibration val entered: %@", [[alertView textFieldAtIndex:0] text]);
+            [self setNewCalibrationValue:[[[alertView textFieldAtIndex:0] text] floatValue]];
+            [self performSegueWithIdentifier:@"showCameraForCalibration" sender:self];
+        }
+    } else if (alertView == self.graphModelAlert) {
+        if (buttonIndex != alertView.cancelButtonIndex) {
+            NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+            
+            if ([title isEqualToString:@"Planar"]) {
+                self.graphRegressionType = RegressionModel::PLANAR;
+            } else if ([title isEqualToString:@"PCA Linear"]) {
+                self.graphRegressionType = RegressionModel::PCA_LINEAR;
+            } else if ([title isEqualToString:@"PCA Quadratic"]) {
+                self.graphRegressionType = RegressionModel::PCA_QUADRATIC;
+            } else if ([title isEqualToString:@"PCA Exponential"]) {
+                self.graphRegressionType = RegressionModel::PCA_EXPONENTIAL;
+            } else {
+                self.graphRegressionType = RegressionModel::INVALID_TYPE;
+            }
+            
+            [self performSegueWithIdentifier:@"showModelGraphFromList" sender:self];
+        }
     }
 }
 
