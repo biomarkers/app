@@ -57,6 +57,8 @@ const float TIMER_STEP = 0.1;
     
     defaults = [NSUserDefaults standardUserDefaults];
     
+    self.cameraOverlayView.frame = self.cameraView.frame;
+    
     if (!self.test) NSLog(@"No test loaded.");
 
     [self setState: POSITIONING];
@@ -180,6 +182,7 @@ const float TIMER_STEP = 0.1;
         
         [self performSegueWithIdentifier:@"showCalibrationResults" sender:self];
     } else /* if (there are results) */ {
+        self.test.model->setRegressionType(RegressionModel::PCA_EXPONENTIAL);
         self.result.value = self.test.model->evaluate(processor.getSamples()[0]);
         
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
