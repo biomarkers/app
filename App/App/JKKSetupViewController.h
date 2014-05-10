@@ -7,11 +7,14 @@
 //
 #pragma once
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
 #import "JKKCameraViewController.h"
 #import "RegressionFactory.h"
-#import "JkkModel.h"
+#import "JKKModel.h"
+#import "DataExporter.h"
 
-@interface JKKSetupViewController : UIViewController <UIAlertViewDelegate>
+@interface JKKSetupViewController : UIViewController <UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *subjectField;
 @property (strong, nonatomic) IBOutlet UITextView *notesField;
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;

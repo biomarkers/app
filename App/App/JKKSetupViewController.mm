@@ -13,6 +13,10 @@
 
 @interface JKKSetupViewController ()
 
+@property MFMailComposeViewController *mailViewController;
+@property NSString *calibrationData;
+@property NSString *calibrationText;
+
 @end
 
 @implementation JKKSetupViewController
@@ -82,6 +86,8 @@
         DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
         p.deleteModelEntry(self.test.model->getModelName());
         p.close();
+    } else if ([[segue identifier] isEqualToString:@"showListFromSetup"]) {
+        [[segue destinationViewController] setTest:self.test];
     }
 }
 
@@ -95,11 +101,49 @@
     [deleteConfirmationAlert show];
 }
 
+- (IBAction)sendMail:(id)sender {
+    if ([MFMailComposeViewController canSendMail]) {
+        
+        self.mailViewController = [[MFMailComposeViewController alloc] init];
+        self.mailViewController.mailComposeDelegate = self;
+        
+        DataExporter exporter = DataExporter(self.test.model);
+        exporter.exportCalibration();
+        
+        self.calibrationData = [NSString stringWithUTF8String:exporter.getCSVData().c_str()];
+        self.calibrationText = [NSString stringWithUTF8String:exporter.getTextData().c_str()];
+        
+        NSString *messageBody = [NSString stringWithFormat:@"Model: %@\n\n%@", self.test.getModelName, self.calibrationText];
+        
+        [self.mailViewController setSubject:@"Calibration Data"];
+        [self.mailViewController setMessageBody:messageBody isHTML:NO];
+        [self.mailViewController addAttachmentData:[self.calibrationData dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/csv" fileName:@"calibration.csv"];
+    } else {
+        NSLog(@"Unable to send mail on this device");
+    }
+    
+    if (self.mailViewController) {
+        [self presentViewController:self.mailViewController animated:YES completion:nil];
+    }
+}
+
 #pragma mark UIAlertViewDelegate methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == alertView.firstOtherButtonIndex) {
         [self performSegueWithIdentifier:@"deleteModelSegue" sender:self];
     }
+}
+
+#pragma mark MFMailComposeViewControllerDelegate methods
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"Message sent");
+    } else if (result == MFMailComposeResultFailed) {
+        NSLog(@"Failed to send message");
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -37,7 +37,7 @@
         
         [self.discardButton setEnabled:NO];
         
-        self.test.model->setRegressionType(self.regressionType);
+        self.test.model->setRegressionGraphType(self.regressionType);
         
         self.pcaData = [[NSMutableArray alloc] init];
         self.pcaFitData = [[NSMutableArray alloc] init];
@@ -107,11 +107,11 @@
     float maxX;
     
     CGPoint point;
-    
-#warning magic numbers
-    float step = 1.0;
+
+    float step;
     
     self.test.model->getPCASpaceRange(minX, maxX);
+    step = (maxX - minX) / 100.0;
     
     minX = floorf(minX);
     maxX = ceilf(maxX);

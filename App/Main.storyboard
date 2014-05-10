@@ -355,13 +355,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H9j-mN-Q9O">
-                                <rect key="frame" x="0.0" y="20" width="320" height="493"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="485"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <rect key="contentStretch" x="0.050000000000000003" y="0.050000000000000003" width="1" height="0.94999999999999996"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQb-ld-std" customClass="JKKCameraOverlayView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQb-ld-std" customClass="JKKCameraOverlayView">
                                 <rect key="frame" x="0.0" y="20" width="320" height="493"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -419,26 +419,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JQb-ld-std" firstAttribute="height" secondItem="H9j-mN-Q9O" secondAttribute="height" id="0Qh-mq-Gph"/>
                             <constraint firstItem="nvb-km-hOo" firstAttribute="top" secondItem="ITv-Bd-3rt" secondAttribute="bottom" constant="5" id="1pC-KV-u44"/>
                             <constraint firstItem="x6Q-Db-Zua" firstAttribute="leading" secondItem="s9U-Qd-3Wb" secondAttribute="trailing" constant="8" id="4Py-90-gUW"/>
-                            <constraint firstItem="H9j-mN-Q9O" firstAttribute="top" secondItem="T7e-Jc-f5m" secondAttribute="bottom" id="5r2-wf-IgI"/>
                             <constraint firstItem="s9U-Qd-3Wb" firstAttribute="leading" secondItem="jxl-go-gBp" secondAttribute="trailing" constant="8" id="88A-2A-NIi"/>
                             <constraint firstItem="jxl-go-gBp" firstAttribute="leading" secondItem="w68-wY-2hp" secondAttribute="leading" constant="20" id="Bs2-bu-4qt"/>
                             <constraint firstItem="ITv-Bd-3rt" firstAttribute="top" secondItem="TQf-Q3-Wgg" secondAttribute="bottom" constant="-1" id="GR7-Qu-83e"/>
                             <constraint firstItem="Uy0-dW-wBf" firstAttribute="leading" secondItem="ITv-Bd-3rt" secondAttribute="trailing" constant="23" id="Ha6-YV-mNe"/>
-                            <constraint firstItem="JQb-ld-std" firstAttribute="width" secondItem="H9j-mN-Q9O" secondAttribute="width" id="IYx-Ev-DtO"/>
-                            <constraint firstItem="nvb-km-hOo" firstAttribute="top" secondItem="H9j-mN-Q9O" secondAttribute="bottom" constant="55" id="bRv-II-aFn"/>
+                            <constraint firstItem="nvb-km-hOo" firstAttribute="top" secondItem="H9j-mN-Q9O" secondAttribute="bottom" constant="63" id="bRv-II-aFn"/>
                             <constraint firstItem="H9j-mN-Q9O" firstAttribute="leading" secondItem="w68-wY-2hp" secondAttribute="leading" id="cFO-n6-YCs"/>
                             <constraint firstItem="nvb-km-hOo" firstAttribute="top" secondItem="Uy0-dW-wBf" secondAttribute="bottom" constant="12" id="dI1-yq-OL1"/>
-                            <constraint firstItem="JQb-ld-std" firstAttribute="top" secondItem="H9j-mN-Q9O" secondAttribute="bottom" constant="-493" id="eDD-r7-C1r"/>
                             <constraint firstAttribute="trailing" secondItem="H9j-mN-Q9O" secondAttribute="trailing" id="mdk-xP-CJc"/>
                             <constraint firstItem="nvb-km-hOo" firstAttribute="top" secondItem="x6Q-Db-Zua" secondAttribute="bottom" constant="17" id="mx3-yL-umL"/>
                             <constraint firstAttribute="trailing" secondItem="Uy0-dW-wBf" secondAttribute="trailing" constant="15" id="o4d-8U-Gwg"/>
                             <constraint firstItem="ITv-Bd-3rt" firstAttribute="centerX" secondItem="TQf-Q3-Wgg" secondAttribute="centerX" constant="0.5" id="oVt-u3-J2q"/>
-                            <constraint firstItem="JQb-ld-std" firstAttribute="leading" secondItem="H9j-mN-Q9O" secondAttribute="trailing" constant="-320" id="tMF-pA-cc4"/>
                             <constraint firstItem="nvb-km-hOo" firstAttribute="top" secondItem="jxl-go-gBp" secondAttribute="bottom" constant="17" id="wer-hB-ypu"/>
                             <constraint firstItem="nvb-km-hOo" firstAttribute="top" secondItem="s9U-Qd-3Wb" secondAttribute="bottom" constant="17" id="ws9-80-fyQ"/>
+                            <constraint firstItem="H9j-mN-Q9O" firstAttribute="top" secondItem="w68-wY-2hp" secondAttribute="top" constant="20" symbolic="YES" id="xjS-cg-aQp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -818,6 +814,18 @@
                                     <barButtonItem systemItem="trash" id="FTc-q0-ZpN">
                                         <connections>
                                             <action selector="deleteTestWithConfirmation:" destination="jXv-ef-bTX" id="pjq-CX-iXr"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="eC4-pC-Qk2"/>
+                                    <barButtonItem title="Edit (dev)" id="1M2-IC-2fB">
+                                        <connections>
+                                            <segue destination="f4e-CD-yQz" kind="push" identifier="showListFromSetup" id="Lub-By-4XQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="KFE-dq-Y1z"/>
+                                    <barButtonItem title="Share" id="kbn-6Z-a2F">
+                                        <connections>
+                                            <action selector="sendMail:" destination="jXv-ef-bTX" id="Pfl-xG-Km4"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -1291,7 +1299,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="uaq-hR-d9G"/>
+        <segue reference="Lub-By-4XQ"/>
+        <segue reference="wjR-gm-Iqe"/>
         <segue reference="1u0-kE-RYg"/>
-        <segue reference="PhJ-bR-ugw"/>
     </inferredMetricsTieBreakers>
 </document>

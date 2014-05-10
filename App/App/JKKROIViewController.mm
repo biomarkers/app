@@ -53,6 +53,8 @@ bool autoCircleDetection = NO;
     // hessk: camera location setup
     CameraLocation location = (CameraLocation)[self.defaults integerForKey:@"kCameraLocation"];
     
+    self.cameraOverlayView.frame = self.cameraView.frame;
+    
     @try {
         switch (location) {
             case FRONT:
