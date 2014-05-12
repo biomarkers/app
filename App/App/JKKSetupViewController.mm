@@ -38,6 +38,13 @@
     if (self.test) {
         [self.navBar setTitle:[[self.test getModelName] stringByAppendingString:@" Setup"]];
     }
+    
+#ifndef dev
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.editButton setEnabled:NO];
+    });
+#endif
+    
 }
 
 - (void)didReceiveMemoryWarning

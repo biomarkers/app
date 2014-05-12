@@ -100,9 +100,9 @@
     
     //enable finish button depending on whether they've done enough calibrations
     [self.finishButton setEnabled:self.test.model->isCalibrated()];
+    [self.graphModelButton setEnabled:self.test.model->isCalibrated()];
     
     [self.showGraphButton setEnabled:(self.calibrationItems.count > 0)];
-    [self.graphModelButton setEnabled:(self.calibrationItems.count > 0)];
 }
 
 - (IBAction)addCalibrationPoint:(id)sender {

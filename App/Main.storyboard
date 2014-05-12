@@ -862,6 +862,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="deleteButton" destination="FTc-q0-ZpN" id="2uq-8t-1zU"/>
+                        <outlet property="editButton" destination="1M2-IC-2fB" id="8Wc-Z7-mfh"/>
                         <outlet property="navBar" destination="35q-cL-Clc" id="Y8F-ZN-hc8"/>
                         <outlet property="notesField" destination="zfn-wb-vlg" id="ULB-KT-02s"/>
                         <outlet property="subjectField" destination="CzT-lN-TWH" id="0mg-jX-MmP"/>
