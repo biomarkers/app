@@ -181,7 +181,6 @@ const float TIMER_STEP = 0.1;
         self.test.model->calibrate(processor.getSamples()[0], self.calibrationValue, processor.getAverageStdDev());
         [self performSegueWithIdentifier:@"showCalibrationResults" sender:self];
     } else /* if (there are results) */ {
-        self.test.model->setRegressionType(RegressionModel::PCA_EXPONENTIAL);
         self.result.value = self.test.model->evaluate(processor.getSamples()[0], processor.getAverageStdDev());
         
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];

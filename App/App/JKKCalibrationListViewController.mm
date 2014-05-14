@@ -17,6 +17,7 @@
 
 @property UIAlertView *calibrationAlert;
 @property UIAlertView *graphModelAlert;
+@property UIAlertView *selectTypeAlert;
 
 @property RegressionModel::RegressionType graphRegressionType;
 
@@ -48,6 +49,9 @@
     // hessk: TODO: use enumeration for button titles
     self.graphModelAlert = [[UIAlertView alloc] initWithTitle:@"Graph model" message:@"Please select a regression mode." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Planar", @"PCA Linear", @"PCA Quadratic", @"PCA Exponential", nil];
     self.graphModelAlert.alertViewStyle = UIAlertViewStyleDefault;
+    
+    self.selectTypeAlert = [[UIAlertView alloc] initWithTitle:@"Select regression type" message:@"Please select a regression mode." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Planar", @"PCA Linear", @"PCA Quadratic", @"PCA Exponential", nil];
+    self.selectTypeAlert.alertViewStyle = UIAlertViewStyleDefault;
     
     [self updateControls];
 }
@@ -101,8 +105,11 @@
     //enable finish button depending on whether they've done enough calibrations
     [self.finishButton setEnabled:self.test.model->isCalibrated()];
     [self.graphModelButton setEnabled:self.test.model->isCalibrated()];
+    [self.setTypeButton setEnabled:self.test.model->isCalibrated()];
     
     [self.showGraphButton setEnabled:(self.calibrationItems.count > 0)];
+    
+    //hessk: TODO: update regression type text based on model
 }
 
 - (IBAction)addCalibrationPoint:(id)sender {
@@ -119,7 +126,9 @@
     [self.graphModelAlert show];
 }
 
-
+- (IBAction)setModelType:(id)sender {
+    [self.selectTypeAlert show];
+}
 
 #pragma mark UIAlertViewDelegate methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -147,7 +156,26 @@
             
             [self performSegueWithIdentifier:@"showModelGraphFromList" sender:self];
         }
+    } else if (alertView == self.selectTypeAlert) {
+        if (buttonIndex != alertView.cancelButtonIndex) {
+            NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+            
+            if ([title isEqualToString:@"Planar"]) {
+                self.test.model->setRegressionType(RegressionModel::PLANAR);
+            } else if ([title isEqualToString:@"PCA Linear"]) {
+                self.test.model->setRegressionType(RegressionModel::PCA_LINEAR);
+            } else if ([title isEqualToString:@"PCA Quadratic"]) {
+                self.test.model->setRegressionType(RegressionModel::PCA_QUADRATIC);
+            } else if ([title isEqualToString:@"PCA Exponential"]) {
+                self.test.model->setRegressionType(RegressionModel::PCA_EXPONENTIAL);
+            } else {
+                self.test.model->setRegressionType(RegressionModel::INVALID_TYPE);
+            }
+            
+            [self.typeLabel setText:title];
+        }
     }
+    
 }
 
 #pragma mark UITableViewDelegate/DataSource methods

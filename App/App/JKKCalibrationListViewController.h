@@ -20,6 +20,8 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *finishButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *showGraphButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *graphModelButton;
+@property (strong, nonatomic) IBOutlet UIButton *setTypeButton;
+@property (strong, nonatomic) IBOutlet UILabel *typeLabel;
 
 @property JKKModel* test;
 
