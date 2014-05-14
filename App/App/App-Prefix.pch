@@ -19,6 +19,8 @@
     #import <Foundation/Foundation.h>
 #endif
 
+#define dev
+
 typedef enum {
     POSITIONING,
     RUNNING,

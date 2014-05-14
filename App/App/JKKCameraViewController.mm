@@ -178,12 +178,11 @@ const float TIMER_STEP = 0.1;
     
     if ([self isTakingCalibrationPoint]) {
 #warning TODO: multi circle support
-        self.test.model->calibrate(processor.getSamples()[0], self.calibrationValue);
-        
+        self.test.model->calibrate(processor.getSamples()[0], self.calibrationValue, processor.getAverageStdDev());
         [self performSegueWithIdentifier:@"showCalibrationResults" sender:self];
     } else /* if (there are results) */ {
         self.test.model->setRegressionType(RegressionModel::PCA_EXPONENTIAL);
-        self.result.value = self.test.model->evaluate(processor.getSamples()[0]);
+        self.result.value = self.test.model->evaluate(processor.getSamples()[0], processor.getAverageStdDev());
         
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
     }
