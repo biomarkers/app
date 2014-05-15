@@ -198,20 +198,20 @@
 		0A43676719088FD200105EFF /* JKKROIViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKROIViewController.mm; sourceTree = "<group>"; };
 		0A48363218C3F80300FB93E9 /* JKKCameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKKCameraOverlayView.h; sourceTree = "<group>"; };
 		0A48363318C3F80300FB93E9 /* JKKCameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKKCameraOverlayView.m; sourceTree = "<group>"; };
-		0A503B6318909C7C009BF78F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A503B6318909C7C009BF78F /* OccuChrome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OccuChrome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A503B6618909C7C009BF78F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0A503B6818909C7C009BF78F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0A503B6A18909C7C009BF78F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		0A503B6E18909C7C009BF78F /* App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "App-Info.plist"; sourceTree = "<group>"; };
+		0A503B6E18909C7C009BF78F /* OccuChrome-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OccuChrome-Info.plist"; sourceTree = "<group>"; };
 		0A503B7018909C7C009BF78F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A503B7218909C7C009BF78F /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		0A503B7418909C7C009BF78F /* App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "App-Prefix.pch"; sourceTree = "<group>"; };
+		0A503B7418909C7C009BF78F /* OccuChrome-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OccuChrome-Prefix.pch"; sourceTree = "<group>"; };
 		0A503B7518909C7C009BF78F /* JKKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JKKAppDelegate.h; sourceTree = "<group>"; };
 		0A503B7618909C7C009BF78F /* JKKAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = JKKAppDelegate.mm; sourceTree = "<group>"; };
 		0A503B7818909C7C009BF78F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0A503B7E18909C7C009BF78F /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A503B7E18909C7C009BF78F /* OccuChromeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OccuChromeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A503B7F18909C7C009BF78F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		0A503B8718909C7C009BF78F /* AppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppTests-Info.plist"; sourceTree = "<group>"; };
+		0A503B8718909C7C009BF78F /* OccuChromeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OccuChromeTests-Info.plist"; sourceTree = "<group>"; };
 		0A503B8918909C7C009BF78F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A503B8B18909C7C009BF78F /* AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppTests.m; sourceTree = "<group>"; };
 		0A503BC51890A2A8009BF78F /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
@@ -526,8 +526,8 @@
 		0A503B6418909C7C009BF78F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A503B6318909C7C009BF78F /* App.app */,
-				0A503B7E18909C7C009BF78F /* AppTests.xctest */,
+				0A503B6318909C7C009BF78F /* OccuChrome.app */,
+				0A503B7E18909C7C009BF78F /* OccuChromeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -573,10 +573,10 @@
 			isa = PBXGroup;
 			children = (
 				0A2AD05318AEE75C00064DC3 /* defaultConfig.plist */,
-				0A503B6E18909C7C009BF78F /* App-Info.plist */,
+				0A503B6E18909C7C009BF78F /* OccuChrome-Info.plist */,
 				0A503B6F18909C7C009BF78F /* InfoPlist.strings */,
 				0A503B7218909C7C009BF78F /* main.mm */,
-				0A503B7418909C7C009BF78F /* App-Prefix.pch */,
+				0A503B7418909C7C009BF78F /* OccuChrome-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -593,7 +593,7 @@
 		0A503B8618909C7C009BF78F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0A503B8718909C7C009BF78F /* AppTests-Info.plist */,
+				0A503B8718909C7C009BF78F /* OccuChromeTests-Info.plist */,
 				0A503B8818909C7C009BF78F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -655,9 +655,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A503B6218909C7C009BF78F /* App */ = {
+		0A503B6218909C7C009BF78F /* OccuChrome */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A503B8F18909C7C009BF78F /* Build configuration list for PBXNativeTarget "App" */;
+			buildConfigurationList = 0A503B8F18909C7C009BF78F /* Build configuration list for PBXNativeTarget "OccuChrome" */;
 			buildPhases = (
 				0A503B5F18909C7C009BF78F /* Sources */,
 				0A503B6018909C7C009BF78F /* Frameworks */,
@@ -667,14 +667,14 @@
 			);
 			dependencies = (
 			);
-			name = App;
+			name = OccuChrome;
 			productName = App;
-			productReference = 0A503B6318909C7C009BF78F /* App.app */;
+			productReference = 0A503B6318909C7C009BF78F /* OccuChrome.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0A503B7D18909C7C009BF78F /* AppTests */ = {
+		0A503B7D18909C7C009BF78F /* OccuChromeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A503B9218909C7C009BF78F /* Build configuration list for PBXNativeTarget "AppTests" */;
+			buildConfigurationList = 0A503B9218909C7C009BF78F /* Build configuration list for PBXNativeTarget "OccuChromeTests" */;
 			buildPhases = (
 				0A503B7A18909C7C009BF78F /* Sources */,
 				0A503B7B18909C7C009BF78F /* Frameworks */,
@@ -685,9 +685,9 @@
 			dependencies = (
 				0A503B8418909C7C009BF78F /* PBXTargetDependency */,
 			);
-			name = AppTests;
+			name = OccuChromeTests;
 			productName = AppTests;
-			productReference = 0A503B7E18909C7C009BF78F /* AppTests.xctest */;
+			productReference = 0A503B7E18909C7C009BF78F /* OccuChromeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -708,7 +708,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0A503B5E18909C7C009BF78F /* Build configuration list for PBXProject "App" */;
+			buildConfigurationList = 0A503B5E18909C7C009BF78F /* Build configuration list for PBXProject "OccuChrome" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -720,8 +720,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A503B6218909C7C009BF78F /* App */,
-				0A503B7D18909C7C009BF78F /* AppTests */,
+				0A503B6218909C7C009BF78F /* OccuChrome */,
+				0A503B7D18909C7C009BF78F /* OccuChromeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -802,7 +802,7 @@
 /* Begin PBXTargetDependency section */
 		0A503B8418909C7C009BF78F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0A503B6218909C7C009BF78F /* App */;
+			target = 0A503B6218909C7C009BF78F /* OccuChrome */;
 			targetProxy = 0A503B8318909C7C009BF78F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -914,15 +914,15 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
-				INFOPLIST_FILE = "App/App-Info.plist";
+				GCC_PREFIX_HEADER = "App/OccuChrome-Prefix.pch";
+				INFOPLIST_FILE = "App/OccuChrome-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OccuChrome;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -942,15 +942,15 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
-				INFOPLIST_FILE = "App/App-Info.plist";
+				GCC_PREFIX_HEADER = "App/OccuChrome-Prefix.pch";
+				INFOPLIST_FILE = "App/OccuChrome-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = OccuChrome;
 				PROVISIONING_PROFILE = "";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "\"$(PROJECT_DIR)/../../vision/include\"";
 				VALID_ARCHS = "armv7 armv7s";
@@ -973,8 +973,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "AppTests/AppTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "AppTests/OccuChromeTests-Info.plist";
+				PRODUCT_NAME = OccuChromeTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -991,8 +991,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "App/App-Prefix.pch";
-				INFOPLIST_FILE = "AppTests/AppTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "AppTests/OccuChromeTests-Info.plist";
+				PRODUCT_NAME = OccuChromeTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1001,7 +1001,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A503B5E18909C7C009BF78F /* Build configuration list for PBXProject "App" */ = {
+		0A503B5E18909C7C009BF78F /* Build configuration list for PBXProject "OccuChrome" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A503B8D18909C7C009BF78F /* Debug */,
@@ -1010,7 +1010,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A503B8F18909C7C009BF78F /* Build configuration list for PBXNativeTarget "App" */ = {
+		0A503B8F18909C7C009BF78F /* Build configuration list for PBXNativeTarget "OccuChrome" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A503B9018909C7C009BF78F /* Debug */,
@@ -1019,7 +1019,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A503B9218909C7C009BF78F /* Build configuration list for PBXNativeTarget "AppTests" */ = {
+		0A503B9218909C7C009BF78F /* Build configuration list for PBXNativeTarget "OccuChromeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A503B9318909C7C009BF78F /* Debug */,
