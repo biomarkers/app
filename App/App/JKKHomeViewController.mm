@@ -122,7 +122,7 @@ RegressionFactory homeFactory;
     
     JKKResult* currentResult;
     int resultID;
-    NSString *name, *subject, *notes, *date;
+    NSString *name, *subject, *notes, *date, *stats;
     float value;
     // hessk: TODO: dates
     
@@ -132,6 +132,7 @@ RegressionFactory homeFactory;
         subject = [NSString stringWithUTF8String:results[i].subjectName.c_str()];
         notes = [NSString stringWithUTF8String:results[i].notes.c_str()];
         date = [NSString stringWithUTF8String:results[i].date.c_str()];
+        stats = [NSString stringWithUTF8String:results[i].statistics.c_str()];
         
         value = results[i].value;
 
@@ -140,7 +141,8 @@ RegressionFactory homeFactory;
                                                                    name:name
                                                                 subject:subject
                                                                   notes:notes
-                                                                  value:value];
+                                                                  value:value
+                                                                stats:stats];
          
         
         [self.historyItems addObject:currentResult];

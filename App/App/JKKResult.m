@@ -29,13 +29,14 @@
     return self;
 }
 
-- (id)initResultFromDatabaseWithID:(int)resultID date:(NSString *)date name:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes value:(float)value{
+- (id)initResultFromDatabaseWithID:(int)resultID date:(NSString *)date name:(NSString *)name subject:(NSString *)subject notes:(NSString *)notes value:(float)value stats:(NSString *)statsString{
     self = [self initNewResultWithName:name subject:subject notes:notes];
     
     if (self) {
         self.resultID = resultID;
         self.value = value;
         self.date = date;
+        self.stats = statsString;
     }
     
     return self;

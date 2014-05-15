@@ -57,7 +57,7 @@ const float TIMER_STEP = 0.1;
     
     defaults = [NSUserDefaults standardUserDefaults];
     
-    self.cameraOverlayView.frame = self.cameraView.frame;
+    
     
     if (!self.test) NSLog(@"No test loaded.");
 
@@ -177,11 +177,14 @@ const float TIMER_STEP = 0.1;
      */
     
     if ([self isTakingCalibrationPoint]) {
-#warning TODO: multi circle support
+    //hessk: TODO: multi circle support
         self.test.model->calibrate(processor.getSamples()[0], self.calibrationValue, processor.getAverageStdDev());
         [self performSegueWithIdentifier:@"showCalibrationResults" sender:self];
     } else /* if (there are results) */ {
         self.result.value = self.test.model->evaluate(processor.getSamples()[0], processor.getAverageStdDev());
+        self.result.stats = [NSString stringWithUTF8String:self.test.model->getStatData().c_str()];
+        
+        NSLog(self.result.stats);
         
         [self performSegueWithIdentifier:@"showResultsFromCamera" sender:self];
     }
@@ -196,7 +199,7 @@ const float TIMER_STEP = 0.1;
         exporter.exportDiagnosticRun();
         DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
         // write results to database
-        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.notes UTF8String], [self.result.date UTF8String], self.result.value, exporter.getCSVData(), exporter.getTextData());
+        ResultEntry entry(-1, [self.result.name UTF8String], [self.result.subject UTF8String], [self.result.notes UTF8String], [self.result.date UTF8String], self.result.value, exporter.getCSVData(), exporter.getTextData(), [self.result.stats UTF8String]);
         
         self.result.resultID = p.insertResultEntry(entry);
         p.close();

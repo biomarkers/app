@@ -72,6 +72,7 @@
     self.dateLabel.text = self.result.date;
     self.valueLabel.text = [NSString stringWithFormat:@"%.0f %@", roundf(self.result.value), modelUnits];
     self.subjectLabel.text = self.result.subject;
+    self.statsTextView.text = self.result.stats;
     self.notesTextView.text = self.result.notes;
 }
 
