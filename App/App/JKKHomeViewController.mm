@@ -242,7 +242,7 @@ RegressionFactory homeFactory;
         UILabel* detail = (UILabel *)[cell.contentView viewWithTag:11];
         
         title.text = historyItem.name;
-        detail.text = [NSString stringWithFormat:@"%.2f", historyItem.value];
+        detail.text = [NSString stringWithFormat:@"Result: %.0f", historyItem.value];
     } else {
         //error
     }

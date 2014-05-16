@@ -109,7 +109,29 @@
     
     [self.showGraphButton setEnabled:(self.calibrationItems.count > 0)];
     
-    //hessk: TODO: update regression type text based on model
+    RegressionModel::RegressionType type = self.test.model->getCurrentRegressionType();
+    NSString *regressionString;
+    
+    switch (type) {
+        case RegressionModel::PLANAR:
+            regressionString = @"Planar";
+            break;
+        case RegressionModel::PCA_LINEAR:
+            regressionString = @"PCA Linear";
+            break;
+        case RegressionModel::PCA_QUADRATIC:
+            regressionString = @"PCA Quadratic";
+            break;
+        case RegressionModel::PCA_EXPONENTIAL:
+            regressionString = @"PCA Exponential";
+            break;
+        case RegressionModel::INVALID_TYPE:
+        default:
+            regressionString = @"Invalid type";
+            break;
+    }
+    
+    [self.typeLabel setText:regressionString];
 }
 
 - (IBAction)addCalibrationPoint:(id)sender {
@@ -172,7 +194,7 @@
                 self.test.model->setRegressionType(RegressionModel::INVALID_TYPE);
             }
             
-            [self.typeLabel setText:title];
+            [self updateControls];
         }
     }
     
