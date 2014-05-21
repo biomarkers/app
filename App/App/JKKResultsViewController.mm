@@ -60,13 +60,21 @@
 
 - (void)populateControls {
     DataStore p = [[JKKDatabaseManager sharedInstance] openDatabase];
-    ModelEntry model = p.findModelEntryByName([self.result.name UTF8String]);
+    NSString *modelUnits;
+    
+    try {
+        ModelEntry model = p.findModelEntryByName([self.result.name UTF8String]);
+        modelUnits = [NSString stringWithUTF8String:model.units.c_str()];
+    }
+    catch (std::runtime_error ex){
+        modelUnits = @"units";
+    }
+    
     ResultEntry resultEntry = p.findResultForIdWithExportdData(self.result.resultID);
     p.close();
     
     self.resultData = [NSString stringWithUTF8String:resultEntry.exportedData.c_str()];
     self.resultText = [NSString stringWithUTF8String:resultEntry.exportedMessage.c_str()];
-    NSString *modelUnits = [NSString stringWithUTF8String:model.units.c_str()];
     
     self.testLabel.text = self.result.name;
     self.dateLabel.text = self.result.date;
