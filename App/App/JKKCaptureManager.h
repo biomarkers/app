@@ -2,7 +2,7 @@
 //  JKKCaptureManager.h
 //  CameraControl
 //
-//  Created by Kevin on 11/15/13.
+//  Created by Kevin Hess on 11/15/13.
 //  Copyright (c) 2013 Koalas. All rights reserved.
 //
 #pragma once
