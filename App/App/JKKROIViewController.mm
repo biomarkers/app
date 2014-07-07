@@ -1,22 +1,24 @@
 //
 //  JKKROIViewController.m
-//  OccuChrome
+//  App
 //
-//  Created by Kevin Hess on 4/23/14.
-//  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
+//  Created by Kevin on 4/23/14.
+/* ========================================================================
+ *  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde, Chadd Armstrong, Chris Heist
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ========================================================================
+ */
 
 #import "JKKROIViewController.h"
 #import "JKKCalibrationListViewController.h"
@@ -126,19 +128,28 @@ bool autoCircleDetection = NO;
     autoCircleDetection = [(UISwitch *)sender isOn];
 }
 
-- (IBAction)updateCirclePosition:(UITapGestureRecognizer *)sender {
-    CGPoint location = [sender locationInView:self.cameraOverlayView];
+- (IBAction)updateCirclePosition:(UIPanGestureRecognizer *)gesture {
     
     
-    float max = MAX(self.scaleX, self.scaleY);
-    float min = MIN(self.scaleX, self.scaleY);
+    if(gesture.state == UIGestureRecognizerStateBegan)
+    {
+        //NSLog(@"Received a pan gesture");
+        self.panCoord = [gesture locationInView:gesture.view];
+    }else if(gesture.state == UIGestureRecognizerStateEnded){
+        CGPoint newCoord = [gesture locationInView:gesture.view];
     
-    float offset = ((max - min) * location.x);
+        int dX = newCoord.x-self.panCoord.x;
+        int dY = newCoord.y-self.panCoord.y;
+        
+        self.x = (self.x+dX);
+        self.y = (self.y+dY);
+        
+        //[gesture setTranslation:CGPointMake(0, 0) inView:self.view];
+    }
     
-    self.x = (location.x / max) + offset;
-    self.y = (location.y / max);
+    
+    
 }
-
 - (IBAction)updateCircleRadius:(UIPinchGestureRecognizer *)sender {
     float originalRadius = self.r;
     float newRadius = originalRadius * [sender scale];
@@ -152,26 +163,45 @@ bool autoCircleDetection = NO;
 
 #pragma mark - Protocol AVCaptureVideoDataOutputSampleBufferDelegate
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    /*
+     * who owns this memory object(circles)? should it be defined in a broader scope? strarm 7.2.14
+     */
+    std::vector<cv::Vec3f> circles;
+
     
-    UIImage *outputImage = [JKKCaptureManager imageFromSampleBuffer:sampleBuffer];
     
-    /* reverse x and y to account for portrait/landscape discrepancy between camera view and preview view */
-    self.scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
-    self.scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
+    /* Begin parseBuffer() from https://gist.github.com/jebai/8108287
+     *
+     */
+    CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    
+    CVPixelBufferLockBaseAddress( pixelBuffer, 0 );
+    
+    
+    //Processing here
+    int bufferWidth = CVPixelBufferGetWidth(pixelBuffer);
+    int bufferHeight = CVPixelBufferGetHeight(pixelBuffer);
+    
+    self.scaleX = self.cameraOverlayView.frame.size.width / bufferHeight;
+    self.scaleY = self.cameraOverlayView.frame.size.height / bufferWidth;
+    int centerX = 0;
+    int centerY = 0;
+    int radius = 0;
+
+    unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    cv::Mat mat = cv::Mat(bufferHeight,bufferWidth,CV_8UC4,pixel);
+    
+    // put buffer in open cv, no memory copied
 
     if (autoCircleDetection) {
         CircularSampleAreaDetector detector;
+        circles = detector.detect(mat);
         
-        std::vector<cv::Vec3f> circles;
-        @autoreleasepool {
-            cv::Mat mat = [JKKCaptureManager cvMatFromUIImage:outputImage];
-            circles = detector.detect(mat);
-        }
         
         if (circles.size() > 0) {
             [self.cameraOverlayView setTintColor:[UIColor greenColor]];
             self.y = circles[0][0];
-            self.x = outputImage.size.height - circles[0][1];
+            self.x = bufferHeight - circles[0][1];
             self.r = circles[0][2];
         } else {
             [self.cameraOverlayView setTintColor:[UIColor whiteColor]];
@@ -179,7 +209,7 @@ bool autoCircleDetection = NO;
     } else {
         [self.cameraOverlayView setTintColor:[UIColor blueColor]];
     }
-
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.xLabel setText:[NSString stringWithFormat:@"x:%.0f", self.x]];
         [self.yLabel setText:[NSString stringWithFormat:@"y:%.0f", self.y]];
@@ -187,8 +217,36 @@ bool autoCircleDetection = NO;
         
         [self.cameraOverlayView updateCircleWithCenterX:self.x centerY:self.y radius:self.r scaleX:self.scaleX scaleY:self.scaleY];
     });
+#warning ROI method not yet camera orientation aware
+    /*
+     * Begin Occuchrome processing
+    if ([self state] == RUNNING) {
+        CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
+        switch (location) {
+            case FRONT:
+                centerX = (self.cameraOverlayView.frame.size.width-self.test.model->getCircleCenterX());
+                centerY = (self.cameraOverlayView.frame.size.height-self.test.model->getCircleCenterY());
+                break;
+            case BACK:
+                centerX = (self.cameraOverlayView.frame.size.width-self.test.model->getCircleCenterX());
+                centerY = self.test.model->getCircleCenterY();
+            default:
+                centerX = self.test.model->getCircleCenterX();
+                centerY = self.test.model->getCircleCenterY();
+                break;
+        }
+        radius = self.test.model->getCircleRadius();
+    }
+     */
+    /*  End processing
+     */
     
-    outputImage = nil;
+    
+    CVPixelBufferUnlockBaseAddress( pixelBuffer, 0 );
+    /* End parseBuffer()
+     */
+    
+    
 }
 
 @end

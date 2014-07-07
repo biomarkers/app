@@ -1,22 +1,24 @@
 //
 //  JKKCameraViewController.m
-//  OccuChrome
+//  App
 //
-//  Created by Kevin Hess on 1/27/14.
-//  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
+//  Created by Kevin on 1/27/14.
+/* ========================================================================
+ *  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde, Chadd Armstrong, Chris Heist
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ========================================================================
+ */
 
 #import "JKKCameraViewController.h"
 
@@ -100,7 +102,7 @@ const float TIMER_STEP = 0.1;
         
         [self.captureManager initializeVideoOutWithFPS:[defaults integerForKey:@"kFPS"] usingDelegate:self];
         [self.captureManager initializePreviewLayerUsingView:self.cameraView withLayer:self.captureVideoPreviewLayer];
-        [self.captureManager startSession];
+        [self.captureManager startSession]; //AVCaptureSession begin capture
     } @catch (NSException *exception) {
         UIAlertView* calibrationValueAlert = [[UIAlertView alloc] initWithTitle:[exception name] message:[exception reason] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         calibrationValueAlert.alertViewStyle = UIAlertViewStyleDefault;
@@ -128,10 +130,12 @@ const float TIMER_STEP = 0.1;
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
         [runLoop addTimer:self.timer forMode:NSDefaultRunLoopMode];
     }
-
+    //[self.captureManager turnTorchOn:true];
+    [self.captureManager toggleTorch];
     [self.captureManager toggleAutoExposure];
     [self.captureManager toggleAutoFocus];
     [self.captureManager toggleAutoWB];
+    
 
     [self.startButton setEnabled:NO];
     [self.startButton setHidden:YES];
@@ -169,8 +173,9 @@ const float TIMER_STEP = 0.1;
 
 - (void)endProcessing {
     /* Camera shutdown */
-    [self.captureManager stopSession];
+    [self.captureManager stopSession]; //AVCaptureSession stop capture
     [self.captureManager setSession: nil];
+    [self.captureManager turnTorchOn:false];
     
     [self.statusLabel setText:@"Done."];
 
@@ -229,31 +234,75 @@ const float TIMER_STEP = 0.1;
 
 #pragma mark - Protocol AVCaptureVideoDataOutputSampleBufferDelegate
 - (void) captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    outputImage = [JKKCaptureManager imageFromSampleBuffer:sampleBuffer];
     
-    /* reverse x and y to account for portrait/landscape discrepancy between camera view and preview view */
-    float scaleX = self.cameraOverlayView.frame.size.width / outputImage.size.height;
-    float scaleY = self.cameraOverlayView.frame.size.height / outputImage.size.width;
-    //float minScale = MIN(scaleX, scaleY);
-    
+    /*
+     * who owns this memory object(circles)? should it be defined in a broader scope? strarm 7.2.14
+     */
     std::vector<cv::Vec3f> circles;
-    circles.push_back(cv::Vec3f(self.test.model->getCircleCenterY(), self.test.model->getCircleCenterX(), self.test.model->getCircleRadius()));
     
-    @autoreleasepool {
-        if ([self state] == RUNNING) {
-            cv::Mat mat = [JKKCaptureManager cvMatFromUIImage:outputImage];
-            std::vector<cv::SerializableScalar> bgrtVector = processor.process(mat, circles);
-            std::stringstream ss;
-            ss << bgrtVector[0];
-            NSLog([NSString stringWithCString:ss.str().c_str()]);
+    
+    
+    /* Begin parseBuffer() from https://gist.github.com/jebai/8108287
+     *
+     */
+    CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    
+    CVPixelBufferLockBaseAddress( pixelBuffer, 0 );
+    
+    
+    //Processing here
+    int bufferWidth = CVPixelBufferGetWidth(pixelBuffer);
+    int bufferHeight = CVPixelBufferGetHeight(pixelBuffer);
+    
+    float scaleX = bufferWidth / self.cameraOverlayView.frame.size.height; //short dimension [480/320=1.5] camera is rotated 90 from display axis
+    float scaleY = bufferHeight / self.cameraOverlayView.frame.size.width; //long dimension
+    int centerX = 0;
+    int centerY = 0;
+    int radius = 0;
+    
+
+    
+    unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    
+    // put buffer in open cv, no memory copied
+    cv::Mat mat = cv::Mat(bufferHeight,bufferWidth,CV_8UC4,pixel);
+    
+    /* 
+     * Begin Occuchrome processing 
+     */
+    if ([self state] == RUNNING) {
+        CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
+        switch (location) {
+            case FRONT:
+                centerX = self.test.model->getCircleCenterY()*scaleX;
+                centerY = self.test.model->getCircleCenterX()*scaleY;
+                break;
+            case BACK:
+                centerX = (self.test.model->getCircleCenterY()*scaleX);
+                centerY = bufferHeight-(self.test.model->getCircleCenterX()*scaleY); //mirrored axis for some reason
+                break;
+            default:
+                centerX = self.test.model->getCircleCenterY()*scaleX;
+                centerY = self.test.model->getCircleCenterX()*scaleY;
+                break;
         }
+        radius = self.test.model->getCircleRadius()*(MIN(scaleX,scaleY));
+        circles.push_back(cv::Vec3f(centerX, centerY, radius));
+        //cv::cvtColor(mat, mat, CV_RGBA2BGR); //Is this really necessary? strarm 7.2.14
+        processor.process(mat, circles);
     }
+    /*  End processing 
+     */
+    
+    
+    CVPixelBufferUnlockBaseAddress( pixelBuffer, 0 );
+    /* End parseBuffer()
+     */
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.cameraOverlayView updateCircleWithCenterX:circles[0][1] centerY:circles[0][0] radius:circles[0][2] scaleX:scaleX scaleY:scaleY];
+        //[self.cameraOverlayView updateCircleWithCenterX:circles[0][1] centerY:circles[0][0] radius:circles[0][2] scaleX:scaleX scaleY:scaleY];
+        [self.cameraOverlayView updateCircleWithCenterX:self.test.model->getCircleCenterX() centerY:self.test.model->getCircleCenterY() radius:self.test.model->getCircleRadius() scaleX:1/scaleX scaleY:1/scaleY];
     });
-    
-    outputImage = nil;
-}
 
+}
 @end

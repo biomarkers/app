@@ -1,22 +1,24 @@
 //
 //  JKKTestViewController.m
-//  OccuChrome
+//  App
 //
-//  Created by Kevin Hess on 1/26/14.
-//  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
+//  Created by Kevin on 1/26/14.
+/* ========================================================================
+ *  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde, Chadd Armstrong, Chris Heist
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ========================================================================
+ */
 
 #import "JKKTestViewController.h"
 #import "JKKCameraViewController.h"
@@ -160,6 +162,7 @@ RegressionFactory factory;
         self.test.model->setIndices(3, 2, 1, 0);
         
         self.test.model->setCircle(self.roiX, self.roiY, self.roiR);
+    
         
         [[segue destinationViewController] setTest:self.test];
     } else if ([[segue identifier] isEqualToString:@"showROI"]) {
@@ -169,8 +172,8 @@ RegressionFactory factory;
             [[segue destinationViewController] setR:self.roiR];
         } else {
 #warning Just used arbitrary numbers here
-            [[segue destinationViewController] setX:500];
-            [[segue destinationViewController] setY:500];
+            [[segue destinationViewController] setX:250];
+            [[segue destinationViewController] setY:250];
             [[segue destinationViewController] setR:100];
         }
     }

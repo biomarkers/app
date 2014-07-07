@@ -1,22 +1,24 @@
 //
 //  JKKConfigViewController.m
-//  OccuChrome
+//  App
 //
-//  Created by Kevin Hess on 2/10/14.
-//  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
+//  Created by Kevin on 2/10/14.
+/* ========================================================================
+ *  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde, Chadd Armstrong, Chris Heist
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ========================================================================
+ */
 
 #import "JKKConfigViewController.h"
 
@@ -53,7 +55,7 @@
     NSInteger fps = [defaults integerForKey:@"kFPS"];
     
     NSInteger cameraLocation = [defaults integerForKey:@"kCameraLocation"];
-    
+    NSInteger cameraLighting = [defaults integerForKey:@"kCameraLighting"];
     /*
     ROIMode roiMode = (ROIMode)[defaults integerForKey:@"kROIMode"];
     NSInteger roiX = [defaults integerForKey:@"kROIX"];
@@ -78,10 +80,11 @@
         NSLog(@"Undefined ROI mode.");
     }
      */
-    
+    [self.lightingSegControl setSelectedSegmentIndex:cameraLighting];
     [self.locationSegControl setSelectedSegmentIndex:cameraLocation];
     [self.fpsStepper setValue:fps];
     [self updateGUI:self.fpsStepper];
+    [self updateGUI:self.lightingSegControl];
     
 }
 
@@ -108,7 +111,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
+    [defaults setInteger:[self.lightingSegControl selectedSegmentIndex] forKey:@"kCameraLighting"];
     [defaults setInteger:[self.locationSegControl selectedSegmentIndex] forKey:@"kCameraLocation"];
     [defaults setInteger:[self.fpsStepper value] forKey:@"kFPS"];
 }
@@ -126,7 +129,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 2;
+    return 4;
 }
 
 /*

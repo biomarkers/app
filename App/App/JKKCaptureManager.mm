@@ -2,9 +2,23 @@
 //  JKKCaptureManager.m
 //  CameraControl
 //
-//  Created by Kevin Hess on 11/15/13.
-//  Copyright (c) 2013 Koalas. All rights reserved.
-//
+//  Created by Kevin on 11/15/13.
+/* ========================================================================
+ *  Copyright 2014 Kyle Cesare, Kevin Hess, Joe Runde, Chadd Armstrong, Chris Heist
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ * ========================================================================
+ */
 
 #import "JKKCaptureManager.h"
 
@@ -12,7 +26,10 @@
 
 - (void)initializeSession {
     self.session = [[AVCaptureSession alloc] init];
-    
+    /*      @strarm June 20, 2014
+     * Consider cost trade off of low rez/high framerate vs high rez/low framerate
+     * Processing overhead is a consideration -- benchmarking needed to declare ideal combo
+     */
     if ([self.session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
         self.session.sessionPreset = AVCaptureSessionPreset640x480;
     } else {
@@ -73,6 +90,7 @@
         }
     }
     
+    
     self.device = newDevice;
     
     NSLog(@"Capture manager: initializing session video input...");
@@ -86,6 +104,17 @@
     //hessk: apple code stuffs
     AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
     [self.session addOutput:videoOut];
+    
+    /*      @strarm -- June 20, 2014
+     *  From various references online, 32BGRA is a reasonable pixel format to choose, YUV may be "faster"
+     *  unless of course you just convert it again once you get it, might as well ask for the dest format now.
+     *  Also, to futureproof -- might consider the following:
+     *      videoOutput.videoSettings = nil;
+     *      
+     *  and then the following to determine the format picked:
+     *      CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(source);
+     *      CGColorSpaceRef cref = CVImageBufferGetColorSpace(imageBuffer);
+     */
     videoOut.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
     
     [self setFrameRate:fps];
@@ -113,12 +142,12 @@
 
 - (void)startSession {
     NSLog(@"Capture manager: starting camera...");
-    [self.session startRunning];
+    [self.session startRunning]; //AVCaptureSession begin capture
 }
 
 - (void)stopSession {
     NSLog(@"Capture manager: stopping camera");
-    [self.session stopRunning];
+    [self.session stopRunning]; //AVCaptureSession end capture
 }
 
 - (NSError*)setFrameRate: (int)fps {
@@ -188,6 +217,38 @@
     }
 }
 
+- (void) turnTorchOn: (bool) on {    
+    NSError *error;
+    if ([self.device hasTorch] && [self.device hasFlash]){
+        if ([self.device lockForConfiguration:&error]) {
+            if (on) {
+                [self.device setTorchMode:AVCaptureTorchModeOn];
+                //[self.device setFlashMode:AVCaptureFlashModeOn];
+                //torchIsOn = YES;
+            } else {
+                [self.device setTorchMode:AVCaptureTorchModeOff];
+                //[self.device setFlashMode:AVCaptureFlashModeOff];
+                //torchIsOn = NO;
+            }
+            [self.device unlockForConfiguration];
+        }else {
+            NSLog(@"Capture manager: lock error occurred while trying to set torch mode");
+        }
+    }
+}
+
+- (void)toggleTorch {
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+ 
+    //LED / Flash
+    if ([defaults integerForKey:@"kCameraLighting"]){
+        [self turnTorchOn:true];
+    }else {
+        [self turnTorchOn:false];
+    }
+}
+
+
 - (AVCaptureDevice *)getFrontCamera {
     NSArray* devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     
@@ -210,121 +271,6 @@
     }
     
     return nil;
-}
-
-/* Apple's image conversion function */
-+ (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer {
-    
-    // This example assumes the sample buffer came from an AVCaptureOutput,
-    // so its image buffer is known to be a pixel buffer.
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    // Lock the base address of the pixel buffer.
-    CVPixelBufferLockBaseAddress(imageBuffer,0);
-    
-    // Get the number of bytes per row for the pixel buffer.
-    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-    // Get the pixel buffer width and height.
-    size_t width = CVPixelBufferGetWidth(imageBuffer);
-    size_t height = CVPixelBufferGetHeight(imageBuffer);
-    
-    // Create a device-dependent RGB color space.
-    static CGColorSpaceRef colorSpace = NULL;
-    if (colorSpace == NULL) {
-        colorSpace = CGColorSpaceCreateDeviceRGB();
-        if (colorSpace == NULL) {
-            // Handle the error appropriately.
-            return nil;
-        }
-    }
-    
-    // Get the base address of the pixel buffer.
-    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-    // Get the data size for contiguous planes of the pixel buffer.
-    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
-    
-    // Create a Quartz direct-access data provider that uses data we supply.
-    CGDataProviderRef dataProvider =
-    CGDataProviderCreateWithData(NULL, baseAddress, bufferSize, NULL);
-    // Create a bitmap image from data supplied by the data provider.
-    CGImageRef cgImage =
-    CGImageCreate(width, height, 8, 32, bytesPerRow,
-                  colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little,
-                  dataProvider, NULL, true, kCGRenderingIntentDefault);
-    
-    CGDataProviderRelease(dataProvider);
-    
-    // Create and return an image object to represent the Quartz image.
-    UIImage *image = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    
-    return image;
-}
-
-/* OpenCV tutorial code **************************************************************************************** */
-+ (cv::Mat)cvMatFromUIImage:(UIImage *)image
-{
-    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
-    CGFloat cols = image.size.width;
-    CGFloat rows = image.size.height;
-    
-    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
-    
-    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
-                                                    cols,                       // Width of bitmap
-                                                    rows,                       // Height of bitmap
-                                                    8,                          // Bits per component
-                                                    cvMat.step[0],              // Bytes per row
-                                                    colorSpace,                 // Colorspace
-                                                    kCGImageAlphaNoneSkipLast |
-                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
-    
-    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
-    CGContextRelease(contextRef);
-    
-    
-    
-    cv::cvtColor(cvMat, cvMat, CV_RGBA2BGR);
-    
-    return cvMat;
-}
-
-+ (UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
-{
-    NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize()*cvMat.total()];
-    CGColorSpaceRef colorSpace;
-    
-    if (cvMat.elemSize() == 1) {
-        colorSpace = CGColorSpaceCreateDeviceGray();
-    } else {
-        colorSpace = CGColorSpaceCreateDeviceRGB();
-    }
-    
-    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
-    
-    // Creating CGImage from cv::Mat
-    CGImageRef imageRef = CGImageCreate(cvMat.cols,                                 //width
-                                        cvMat.rows,                                 //height
-                                        8,                                          //bits per component
-                                        8 * cvMat.elemSize(),                       //bits per pixel
-                                        cvMat.step[0],                            //bytesPerRow
-                                        colorSpace,                                 //colorspace
-                                        kCGImageAlphaNone|kCGBitmapByteOrderDefault,// bitmap info
-                                        provider,                                   //CGDataProviderRef
-                                        NULL,                                       //decode
-                                        false,                                      //should interpolate
-                                        kCGRenderingIntentDefault                   //intent
-                                        );
-    
-    
-    // Getting UIImage from CGImage
-    UIImage *finalImage = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    CGDataProviderRelease(provider);
-    CGColorSpaceRelease(colorSpace);
-    
-    return finalImage;
 }
 
 @end
