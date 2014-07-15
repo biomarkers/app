@@ -17,5 +17,6 @@ DerivedData
 *.hmap
 *.xccheckout
 App/boost.framework
+App/opencv2.framework
 #CocoaPods
 Pods

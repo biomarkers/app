@@ -182,12 +182,8 @@ bool autoCircleDetection = NO;
     int bufferWidth = CVPixelBufferGetWidth(pixelBuffer);
     int bufferHeight = CVPixelBufferGetHeight(pixelBuffer);
     
-    self.scaleX = self.cameraOverlayView.frame.size.width / bufferHeight;
-    self.scaleY = self.cameraOverlayView.frame.size.height / bufferWidth;
-    int centerX = 0;
-    int centerY = 0;
-    int radius = 0;
-
+    self.scaleX = bufferHeight / self.cameraOverlayView.frame.size.width;
+    self.scaleY = bufferWidth / self.cameraOverlayView.frame.size.height;
     unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(pixelBuffer);
     cv::Mat mat = cv::Mat(bufferHeight,bufferWidth,CV_8UC4,pixel);
     
@@ -211,35 +207,12 @@ bool autoCircleDetection = NO;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.xLabel setText:[NSString stringWithFormat:@"x:%.0f", self.x]];
-        [self.yLabel setText:[NSString stringWithFormat:@"y:%.0f", self.y]];
-        [self.rLabel setText:[NSString stringWithFormat:@"r:%.0f", self.r]];
+        [self.xLabel setText:[NSString stringWithFormat:@"x:%.0f", self.x*self.scaleY]];  //adding scale# here feels hackish, this should be a call to a camera object method
+        [self.yLabel setText:[NSString stringWithFormat:@"y:%.0f", self.y*self.scaleX]]; // reminder, axis of camera rotated 90deg wrt display in portrait mode
+        [self.rLabel setText:[NSString stringWithFormat:@"A:%.0f", (3.1415*self.r*self.r*MIN(self.scaleX,self.scaleY)*MIN(self.scaleX,self.scaleY))]]; //underestimate numpts.
         
-        [self.cameraOverlayView updateCircleWithCenterX:self.x centerY:self.y radius:self.r scaleX:self.scaleX scaleY:self.scaleY];
+        [self.cameraOverlayView updateCircleWithCenterX:self.x centerY:self.y radius:self.r ];
     });
-#warning ROI method not yet camera orientation aware
-    /*
-     * Begin Occuchrome processing
-    if ([self state] == RUNNING) {
-        CameraLocation location = (CameraLocation)[defaults integerForKey:@"kCameraLocation"];
-        switch (location) {
-            case FRONT:
-                centerX = (self.cameraOverlayView.frame.size.width-self.test.model->getCircleCenterX());
-                centerY = (self.cameraOverlayView.frame.size.height-self.test.model->getCircleCenterY());
-                break;
-            case BACK:
-                centerX = (self.cameraOverlayView.frame.size.width-self.test.model->getCircleCenterX());
-                centerY = self.test.model->getCircleCenterY();
-            default:
-                centerX = self.test.model->getCircleCenterX();
-                centerY = self.test.model->getCircleCenterY();
-                break;
-        }
-        radius = self.test.model->getCircleRadius();
-    }
-     */
-    /*  End processing
-     */
     
     
     CVPixelBufferUnlockBaseAddress( pixelBuffer, 0 );

@@ -51,12 +51,14 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.lightingSlider.maximumValue = 1.0f;
+    self.lightingSlider.minimumValue = 0.0f;
+    [self.lightingSlider setContinuous:YES];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSInteger fps = [defaults integerForKey:@"kFPS"];
-    
+    NSInteger lightingLevel = [defaults floatForKey:@"kLightingLevel"];
     NSInteger cameraLocation = [defaults integerForKey:@"kCameraLocation"];
-    NSInteger cameraLighting = [defaults integerForKey:@"kCameraLighting"];
-    /*
+    NSInteger cameraLighting = [defaults integerForKey:@"kCameraLighting"];    /*
     ROIMode roiMode = (ROIMode)[defaults integerForKey:@"kROIMode"];
     NSInteger roiX = [defaults integerForKey:@"kROIX"];
     NSInteger roiY = [defaults integerForKey:@"kROIY"];
@@ -82,10 +84,11 @@
      */
     [self.lightingSegControl setSelectedSegmentIndex:cameraLighting];
     [self.locationSegControl setSelectedSegmentIndex:cameraLocation];
+    [self.lightingSlider setValue:lightingLevel];\
+    [self.lightingLevelLabel setText:[NSString stringWithFormat:@"%.1f", [self.lightingSlider value]]];
     [self.fpsStepper setValue:fps];
     [self updateGUI:self.fpsStepper];
     [self updateGUI:self.lightingSegControl];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,8 +106,11 @@
 }
 
 - (IBAction)updateGUI:(id)sender {
-    
-    if (sender == self.fpsStepper) {
+    if (sender == self.lightingSlider) {
+        float tmp = [self.lightingSlider value];
+        [self.lightingLevelLabel setText:[NSString stringWithFormat:@"%.1f", [self.lightingSlider value]]];
+    }
+    else if (sender == self.fpsStepper) {
         [self.fpsLabel setText:[NSString stringWithFormat:@"%.0f", [self.fpsStepper value]]];
     }
 }
@@ -114,7 +120,14 @@
     [defaults setInteger:[self.lightingSegControl selectedSegmentIndex] forKey:@"kCameraLighting"];
     [defaults setInteger:[self.locationSegControl selectedSegmentIndex] forKey:@"kCameraLocation"];
     [defaults setInteger:[self.fpsStepper value] forKey:@"kFPS"];
+    [defaults setFloat:[self.lightingSlider value] forKey:@"kLightingLevel"];
 }
+
+- (void)sliderDidChange:(UISlider *)slider
+{
+    
+}
+
 
 #pragma mark - Table view data source
 

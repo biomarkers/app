@@ -1041,33 +1041,47 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lightingCell" id="oP3-lT-61C">
-                                        <rect key="frame" x="0.0" y="108" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lightingCell" rowHeight="71" id="oP3-lT-61C">
+                                        <rect key="frame" x="0.0" y="108" width="320" height="71"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oP3-lT-61C" id="1kV-YI-V1r">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Back LED Lighting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9v2-hz-xNX">
-                                                    <rect key="frame" x="20" y="11" width="142" height="21"/>
+                                                    <rect key="frame" x="20" y="8" width="142" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="9t9-Zu-PJQ">
-                                                    <rect key="frame" x="177" y="8" width="123" height="29"/>
+                                                    <rect key="frame" x="177" y="20" width="123" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <segments>
                                                         <segment title="Off"/>
                                                         <segment title="On"/>
                                                     </segments>
                                                 </segmentedControl>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-IO-DUb">
+                                                    <rect key="frame" x="18" y="32" width="105" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="updateGUI:" destination="ymU-KZ-4Kn" eventType="valueChanged" id="zU0-5A-SJi"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkz-9M-1jc">
+                                                    <rect key="frame" x="136" y="34" width="39" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="D8F-eR-xd9">
-                                        <rect key="frame" x="0.0" y="152" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="179" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D8F-eR-xd9" id="mwm-46-MeG">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1080,7 +1094,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zT3-8p-dUl">
-                                                    <rect key="frame" x="110" y="11" width="42" height="21"/>
+                                                    <rect key="frame" x="113" y="11" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -1096,14 +1110,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="194" id="D0n-xf-37k">
-                                        <rect key="frame" x="0.0" y="196" width="320" height="194"/>
+                                        <rect key="frame" x="0.0" y="223" width="320" height="194"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D0n-xf-37k" id="xwg-q1-Wpl">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="194"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OCCUCHROME 1.0BETA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02b-mM-RmT">
-                                                    <rect key="frame" x="59" y="26" width="195" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OCCUCHROME 1.0.1 BETA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02b-mM-RmT">
+                                                    <rect key="frame" x="59" y="26" width="214" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1166,7 +1180,9 @@
                     <connections>
                         <outlet property="fpsLabel" destination="zT3-8p-dUl" id="wju-5S-DrP"/>
                         <outlet property="fpsStepper" destination="pwQ-xJ-CUZ" id="qFO-EK-DVF"/>
+                        <outlet property="lightingLevelLabel" destination="zkz-9M-1jc" id="q1Y-hR-odu"/>
                         <outlet property="lightingSegControl" destination="9t9-Zu-PJQ" id="ETh-Hv-Vm6"/>
+                        <outlet property="lightingSlider" destination="YK7-IO-DUb" id="CXs-HY-PXV"/>
                         <outlet property="locationSegControl" destination="gq2-Gy-tzW" id="839-Op-SjJ"/>
                     </connections>
                 </tableViewController>
@@ -1431,8 +1447,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="T03-si-de6"/>
-        <segue reference="uaq-hR-d9G"/>
-        <segue reference="wjR-gm-Iqe"/>
         <segue reference="lE6-RP-Bi2"/>
+        <segue reference="09M-e8-hBx"/>
+        <segue reference="dUj-XG-hKm"/>
     </inferredMetricsTieBreakers>
 </document>

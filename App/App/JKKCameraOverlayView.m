@@ -45,18 +45,13 @@
     CGContextStrokeEllipseInRect(context, self.circleBounds);
 }
 
-- (void)updateCircleWithCenterX:(float)x centerY:(float)y radius:(float)r scaleX:(float)sx scaleY:(float)sy {
-    float max = MAX(sx, sy);
-    float min = MIN(sx, sy);
-    
-    float offset = ((max - min) * x);
+- (void)updateCircleWithCenterX:(float)x centerY:(float)y radius:(float)r  {
     
     CGRect boundingRectangle = CGRectMake((x - r), (y - r), (r * 2), (r * 2)) ;
-    
-    //CGRect boundingRectangle = CGRectMake(((x - r) * max) - offset, (y - r) * max, (r * 2) * max, (r * 2) * max);
     
     self.circleBounds = boundingRectangle;
     [self setNeedsDisplay];
 }
+
 
 @end

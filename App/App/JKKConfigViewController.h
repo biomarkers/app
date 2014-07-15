@@ -25,13 +25,14 @@
 @interface JKKConfigViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UILabel *fpsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *lightingLevelLabel;
 @property (strong, nonatomic) IBOutlet UIStepper *fpsStepper;
+@property (strong, nonatomic) IBOutlet UISlider *lightingSlider;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *locationSegControl;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *lightingSegControl;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *roiModeSegControl;
 @property (strong, nonatomic) IBOutlet UITextField *roiXField;
 @property (strong, nonatomic) IBOutlet UITextField *roiYField;
 @property (strong, nonatomic) IBOutlet UITextField *roiRField;
-
 
 @end

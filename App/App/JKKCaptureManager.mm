@@ -217,12 +217,15 @@
     }
 }
 
-- (void) turnTorchOn: (bool) on {    
+- (void) turnTorchOn: (float) level {
     NSError *error;
     if ([self.device hasTorch] && [self.device hasFlash]){
         if ([self.device lockForConfiguration:&error]) {
-            if (on) {
-                [self.device setTorchMode:AVCaptureTorchModeOn];
+            if (level) {
+                NSError* outError;
+                [self.device setTorchModeOnWithLevel:level error:&outError];
+                NSLog(@"Capture manager: setting lighting %f", level);
+                //[self.device setTorchMode:AVCaptureTorchModeOn];
                 //[self.device setFlashMode:AVCaptureFlashModeOn];
                 //torchIsOn = YES;
             } else {
@@ -239,10 +242,10 @@
 
 - (void)toggleTorch {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
- 
+    
     //LED / Flash
     if ([defaults integerForKey:@"kCameraLighting"]){
-        [self turnTorchOn:true];
+        [self turnTorchOn:[defaults floatForKey:@"kLightingLevel"]];
     }else {
         [self turnTorchOn:false];
     }

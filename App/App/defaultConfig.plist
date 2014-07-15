@@ -14,6 +14,8 @@
 	<integer>318</integer>
 	<key>kROIY</key>
 	<integer>238</integer>
+	<key>kLightingLevel</key>
+	<integer>1</integer>
 	<key>kFPS</key>
 	<integer>30</integer>
 </dict>

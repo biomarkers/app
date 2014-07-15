@@ -41,6 +41,6 @@
 - (void)toggleAutoWB;
 - (void)toggleAutoFocus;
 - (void)toggleTorch;
-- (void)turnTorchOn: (bool) on;
+- (void)turnTorchOn: (float) level;
 
 @end

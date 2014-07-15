@@ -168,10 +168,11 @@
 
 #pragma mark UIAlertViewDelegate methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView == self.calibrationAlert) {
+    if (alertView == self.calibrationAlert) { //executed after values entered in the popup window and "continue" pressed  -- strarm
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             NSLog(@"Calibration val entered: %@", [[alertView textFieldAtIndex:0] text]);
             [self setNewCalibrationValue:[[[alertView textFieldAtIndex:0] text] floatValue]];
+            // Dont want to go to the camera just yet -- save for after the full calibration set is defined.
             [self performSegueWithIdentifier:@"showCameraForCalibration" sender:self];
         }
     } else if (alertView == self.graphModelAlert) {

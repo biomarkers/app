@@ -25,6 +25,6 @@
 
 @property (nonatomic, assign) CGRect circleBounds;
 
-- (void)updateCircleWithCenterX:(float)x centerY:(float)y radius:(float)r scaleX:(float)sx scaleY:(float)sy;
+- (void)updateCircleWithCenterX:(float)x centerY:(float)y radius:(float)r ;
 
 @end

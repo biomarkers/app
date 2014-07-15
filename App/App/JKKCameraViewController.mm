@@ -300,8 +300,7 @@ const float TIMER_STEP = 0.1;
      */
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        //[self.cameraOverlayView updateCircleWithCenterX:circles[0][1] centerY:circles[0][0] radius:circles[0][2] scaleX:scaleX scaleY:scaleY];
-        [self.cameraOverlayView updateCircleWithCenterX:self.test.model->getCircleCenterX() centerY:self.test.model->getCircleCenterY() radius:self.test.model->getCircleRadius() scaleX:1/scaleX scaleY:1/scaleY];
+        [self.cameraOverlayView updateCircleWithCenterX:self.test.model->getCircleCenterX() centerY:self.test.model->getCircleCenterY() radius:self.test.model->getCircleRadius() ];
     });
 
 }
